@@ -54,6 +54,29 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
 size = Vector2(70, 133)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_drsw1"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"up",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D" unique_id=600283651]
 script = ExtResource("1_cvnsp")
 
@@ -68,7 +91,14 @@ sprite_frames = SubResource("SpriteFrames_8upip")
 animation = &"attack"
 
 [node name="Sword" type="Area2D" parent="." unique_id=1950725448]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword" unique_id=1884888141]
 position = Vector2(155, -10.5)
 shape = SubResource("RectangleShape2D_3owqy")
+
+[node name="Shield" type="AnimatedSprite2D" parent="." unique_id=1240300641]
+sprite_frames = SubResource("SpriteFrames_drsw1")
+animation = &"down"
+
+[connection signal="body_entered" from="Sword" to="." method="_on_sword_body_entered"]

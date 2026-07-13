@@ -53,7 +53,7 @@ func movedecide():
 				end += Vector2(240,0)
 	$PlayerAnim.play("Face"+direction)
 	##sets which action to do
-	match rng.randi_range(1,3):
+	match rng.randi_range(3,3):
 		1:
 			move = "attack"
 		2:
@@ -66,8 +66,18 @@ func movedecide():
 func movedo():
 	match move:
 		"move":
-			velocity = (end-get_position())
+			velocity = end-get_position() #sets velocity
 		"attack":
-			pass
+			#turns on and then off the sword hitbox
+			$Sword.monitoring = true
+			await get_tree().create_timer(.5).timeout
+			$Sword.monitoring = false
 		"defend":
+			#places shield
+			$Shield.play(direction)
 			pass
+
+
+#calls killed() if it touches a body
+func _on_sword_body_entered(body: Node2D) -> void:
+	body.killed()

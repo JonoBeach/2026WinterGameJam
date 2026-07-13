@@ -1,24 +1,30 @@
 extends CharacterBody2D
 @onready var spots = get_parent().get_node("TileMapLayer").get_used_cells()
-@onready var pos = get_position()
 var rng = RandomNumberGenerator.new()
 var direction
 var move
 var end = Vector2.ZERO
-
+var pushend = Vector2.ZERO
+var pushdirection = ""
 
 # Called when the node enters the scene tree for the first time.
 ##gets available tiles and prepares array of them
 func _ready() -> void:
-	print(Vector2(240, 1100) >= Vector2(240,360))
 	for x in range(0,len(spots)):
 		spots[x] *=120
-	set_position(spots[0])
+	set_position(spots[10])
+	Global.spots = spots
+	Global.tama_move.connect(_on_move_finish)
+
 
 ##move if need to
 func _physics_process(_delta):
-	if ((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end):
+	if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 		velocity = Vector2.ZERO
+		direction = ""
+	if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
+		velocity = Vector2.ZERO
+		pushdirection = ""
 	move_and_slide()
 	
 
@@ -53,7 +59,7 @@ func movedecide():
 				end += Vector2(240,0)
 	$PlayerAnim.play("Face"+direction)
 	##sets which action to do
-	match rng.randi_range(3,3):
+	match rng.randi_range(1,3):
 		1:
 			move = "attack"
 		2:
@@ -66,18 +72,74 @@ func movedecide():
 func movedo():
 	match move:
 		"move":
-			velocity = end-get_position() #sets velocity
+			if end in spots:
+				velocity = end-get_position() #sets velocity
 		"attack":
 			#turns on and then off the sword hitbox
 			$Sword.monitoring = true
+			$Sword.set_position(end-get_position())
 			await get_tree().create_timer(.5).timeout
 			$Sword.monitoring = false
 		"defend":
 			#places shield
-			$Shield.play(direction)
+			#$Shield.play(direction)
 			pass
 
+func push(finalPos,value):
+	pushend = get_position() + finalPos
+	if pushend in spots:
+		velocity = pushend-get_position()
+		pushdirection=value
+		end += finalPos
 
 #calls killed() if it touches a body
 func _on_sword_body_entered(body: Node2D) -> void:
 	body.killed()
+
+func killed():
+	queue_free()
+
+func defend():
+	$Defend.show()
+	for node in $Defend.get_children():
+		node.hide()
+		if (node.get_position()+get_position()) in spots:
+			node.show()
+		
+
+func _on_right_pressed() -> void:
+	Global.tama_move.emit()
+	pass # Replace with function body.
+
+
+func _on_left_pressed() -> void:
+	Global.tama_move.emit()
+	pass # Replace with function body.
+
+
+func _on_up_pressed() -> void:
+	Global.tama_move.emit()
+	pass # Replace with function body.
+
+
+func _on_down_pressed() -> void:
+	Global.tama_move.emit()
+	pass # Replace with function body.
+
+func Gust():
+	$Gust.show()
+	Global.playerpos = get_position()
+	Global.gust_check.emit()
+
+func _on_move_finish():
+	$Defend.hide()
+	$Gust.hide()
+	$Spike.hide()
+	$Tamadachi.play("Action")
+	await get_tree().create_timer(1).timeout
+	$Tamadachi.play("Idle")
+
+func Spike():
+	$Spike.show()
+	Global.playerpos = get_position()
+	Global.gust_check.emit()

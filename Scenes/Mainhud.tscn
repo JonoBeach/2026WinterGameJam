@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cve7epwq3d2cy" path="res://Scripts/mainhud.gd" id="1_h7rvc"]
 [ext_resource type="Texture2D" uid="uid://i32wcyjchk1w" path="res://Art/button.png" id="2_3vmv3"]
 [ext_resource type="Texture2D" uid="uid://bll7bd124q80g" path="res://Art/tileholder.png" id="3_3vmv3"]
+[ext_resource type="SpriteFrames" uid="uid://c4whn8g1p3nkl" path="res://Scenes/new_sprite_frames.tres" id="4_s710e"]
 
 [node name="Mainhud" type="CanvasLayer" unique_id=1191797521]
 script = ExtResource("1_h7rvc")
@@ -12,9 +13,45 @@ offset_left = 1776.0
 offset_top = 549.0
 offset_right = 1896.0
 offset_bottom = 669.0
-toggle_mode = true
 action_mode = 0
 texture_normal = ExtResource("2_3vmv3")
 texture_pressed = ExtResource("3_3vmv3")
 
+[node name="0" type="Button" parent="." unique_id=1197133805]
+offset_left = 701.0
+offset_top = 47.0
+offset_right = 821.0
+offset_bottom = 167.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="0" unique_id=191811329]
+position = Vector2(60, 60)
+sprite_frames = ExtResource("4_s710e")
+animation = &"spike"
+autoplay = "defend"
+
+[node name="1" type="Button" parent="." unique_id=820298994]
+offset_left = 886.0
+offset_top = 51.0
+offset_right = 1006.0
+offset_bottom = 171.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="1" unique_id=519097795]
+position = Vector2(60, 60)
+sprite_frames = ExtResource("4_s710e")
+animation = &"defend"
+
+[node name="2" type="Button" parent="." unique_id=528059288]
+offset_left = 1083.0
+offset_top = 59.0
+offset_right = 1203.0
+offset_bottom = 179.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="2" unique_id=2094305291]
+position = Vector2(60, 60)
+sprite_frames = ExtResource("4_s710e")
+animation = &"gust"
+
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
+[connection signal="pressed" from="0" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="1" to="." method="_on_one_pressed"]
+[connection signal="pressed" from="2" to="." method="_on_two_pressed"]

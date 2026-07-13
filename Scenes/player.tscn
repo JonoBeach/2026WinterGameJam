@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://jn7c5bnom0n1"]
+
+[ext_resource type="Script" uid="uid://c3xwdvakdhncw" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://5ymixwflhm0t" path="res://Art/player-placeholder.png" id="1_v0iea"]
+[ext_resource type="Texture2D" uid="uid://cm7aiotewp57" path="res://Art/playerleft.png" id="2_6t5aa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3owqy"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"Facedown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6t5aa")
+}],
+"loop": 1,
+"name": &"Faceleft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_v0iea")
+}],
+"loop": 1,
+"name": &"Faceright",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Faceup",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8upip"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"defend",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" unique_id=600283651]
+script = ExtResource("1_cvnsp")
+
+[node name="PlayerAnim" type="AnimatedSprite2D" parent="." unique_id=1249637971]
+position = Vector2(60, -5)
+sprite_frames = SubResource("SpriteFrames_3owqy")
+animation = &"Faceright"
+autoplay = "Faceright"
+
+[node name="MoveChoice" type="AnimatedSprite2D" parent="." unique_id=2126882180]
+sprite_frames = SubResource("SpriteFrames_8upip")
+animation = &"attack"

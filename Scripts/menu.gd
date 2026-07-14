@@ -19,3 +19,7 @@ func _on_play_pressed() -> void:
 	Global.Moves = ["defend","defend","defend","gust","gust","spike"]
 	Global.coin = 0
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+
+
+func _on_theme_finished() -> void:
+	$Theme.play()

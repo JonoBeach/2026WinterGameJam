@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bbxjgth6dj1nf"
+path="res://.godot/imported/Game Jam MENU THEME Export 2.mp3-ebf8d724f91a1a2060e70f1dbac194ee.mp3str"
+
+[deps]
+
+source_file="res://Music/Game Jam MENU THEME Export 2.mp3"
+dest_files=["res://.godot/imported/Game Jam MENU THEME Export 2.mp3-ebf8d724f91a1a2060e70f1dbac194ee.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,9 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://b57n317sxc3e7" path="res://Art/arena-placeholder.png" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://bouxxj2a30uu" path="res://Scripts/main.gd" id="1_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://81g043i6l1hq" path="res://Art/background.png" id="2_6bp64"]
 [ext_resource type="Texture2D" uid="uid://bll7bd124q80g" path="res://Art/tileholder.png" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://jn7c5bnom0n1" path="res://Scenes/player.tscn" id="3_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://y6qkru5k5j7f" path="res://Scenes/Mainhud.tscn" id="5_kry3j"]
+[ext_resource type="Texture2D" uid="uid://b1w0d8mxg8n8i" path="res://Art/decorations.png" id="7_344ge"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
 texture = ExtResource("2_8gbba")
@@ -17,6 +19,11 @@ sources/0 = SubResource("TileSetAtlasSource_kry3j")
 
 [node name="Main" type="Node" unique_id=310977077]
 script = ExtResource("1_jjvhh")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=86869140]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_6bp64")
 
 [node name="Arena" type="Sprite2D" parent="." unique_id=1327617618]
 position = Vector2(960, 540)
@@ -31,3 +38,7 @@ tile_set = SubResource("TileSet_3owqy")
 position = Vector2(240, 360)
 
 [node name="Mainhud" parent="." unique_id=1191797521 instance=ExtResource("5_kry3j")]
+
+[node name="Deco" type="Sprite2D" parent="." unique_id=405265155]
+position = Vector2(960, 540)
+texture = ExtResource("7_344ge")

@@ -1,8 +1,18 @@
-[gd_scene format=3 uid="uid://jn7c5bnom0n1"]
+[gd_scene format=4 uid="uid://jn7c5bnom0n1"]
 
 [ext_resource type="Script" uid="uid://c3xwdvakdhncw" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://5ymixwflhm0t" path="res://Art/player-placeholder.png" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://cm7aiotewp57" path="res://Art/playerleft.png" id="2_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://b11lmkjeybhnc" path="res://Art/tama_action.png" id="4_fkybt"]
+[ext_resource type="Texture2D" uid="uid://bfm8ouaqy0bhb" path="res://Art/tamaIdle.png" id="5_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://cuaec2dolf5wj" path="res://Art/defend rect.png" id="6_x3wgy"]
+[ext_resource type="PackedScene" uid="uid://bjnnm4k2y4ivv" path="res://Scenes/gust_button.tscn" id="7_3smsa"]
+[ext_resource type="PackedScene" uid="uid://bludk5xs1qs2x" path="res://Scenes/spike button.tscn" id="8_8erm5"]
+[ext_resource type="PackedScene" uid="uid://df3sx3k6718i3" path="res://Scenes/FireballButton.tscn" id="9_f1ek2"]
+[ext_resource type="PackedScene" uid="uid://bkjt64xm4wepd" path="res://Scenes/HorizonButton.tscn" id="10_tx1dd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8upip"]
+size = Vector2(100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3owqy"]
 animations = [{
@@ -52,33 +62,120 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
-size = Vector2(70, 133)
+size = Vector2(120, 120)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_drsw1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3smsa"]
+atlas = ExtResource("4_fkybt")
+region = Rect2(0, 0, 70, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8erm5"]
+atlas = ExtResource("4_fkybt")
+region = Rect2(70, 0, 70, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ek2"]
+atlas = ExtResource("4_fkybt")
+region = Rect2(140, 0, 70, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx1dd"]
+atlas = ExtResource("4_fkybt")
+region = Rect2(210, 0, 70, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
+atlas = ExtResource("4_fkybt")
+region = Rect2(280, 0, 70, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
+atlas = ExtResource("5_x3wgy")
+region = Rect2(0, 0, 70, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
+atlas = ExtResource("5_x3wgy")
+region = Rect2(70, 0, 70, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dp3o"]
+atlas = ExtResource("5_x3wgy")
+region = Rect2(140, 0, 70, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4iuc"]
+atlas = ExtResource("5_x3wgy")
+region = Rect2(210, 0, 70, 88)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dpga7"]
 animations = [{
-"frames": [],
-"loop": 1,
-"name": &"down",
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3smsa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8erm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ek2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gymyn")
+}],
+"loop": 0,
+"name": &"Action",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": 1,
-"name": &"left",
-"speed": 5.0
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu2lt")
 }, {
-"frames": [],
-"loop": 1,
-"name": &"right",
-"speed": 5.0
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukyrk")
 }, {
-"frames": [],
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dp3o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4iuc")
+}],
 "loop": 1,
-"name": &"up",
+"name": &"Idle",
 "speed": 5.0
 }]
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_8erm5"]
+scenes/1/scene = ExtResource("7_3smsa")
+
+[sub_resource type="TileSet" id="TileSet_3owqy"]
+tile_size = Vector2i(120, 120)
+sources/0 = SubResource("TileSetScenesCollectionSource_8erm5")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_f1ek2"]
+scenes/1/scene = ExtResource("8_8erm5")
+
+[sub_resource type="TileSet" id="TileSet_8upip"]
+tile_size = Vector2i(120, 120)
+sources/0 = SubResource("TileSetScenesCollectionSource_f1ek2")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_tx1dd"]
+scenes/1/scene = ExtResource("9_f1ek2")
+
+[sub_resource type="TileSet" id="TileSet_drsw1"]
+tile_size = Vector2i(120, 120)
+sources/0 = SubResource("TileSetScenesCollectionSource_tx1dd")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_gymyn"]
+scenes/1/scene = ExtResource("10_tx1dd")
+
+[sub_resource type="TileSet" id="TileSet_dpga7"]
+tile_size = Vector2i(120, 120)
+sources/0 = SubResource("TileSetScenesCollectionSource_gymyn")
+
 [node name="Player" type="CharacterBody2D" unique_id=600283651]
+collision_mask = 0
 script = ExtResource("1_cvnsp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=745773039]
+position = Vector2(60, 60)
+shape = SubResource("RectangleShape2D_8upip")
+debug_color = Color(0.9366923, 1.7808377e-05, 0.63324153, 0.41960785)
 
 [node name="PlayerAnim" type="AnimatedSprite2D" parent="." unique_id=1249637971]
 position = Vector2(60, -5)
@@ -91,14 +188,72 @@ sprite_frames = SubResource("SpriteFrames_8upip")
 animation = &"attack"
 
 [node name="Sword" type="Area2D" parent="." unique_id=1950725448]
+collision_layer = 2
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword" unique_id=1884888141]
-position = Vector2(155, -10.5)
+position = Vector2(60, 60)
 shape = SubResource("RectangleShape2D_3owqy")
 
-[node name="Shield" type="AnimatedSprite2D" parent="." unique_id=1240300641]
-sprite_frames = SubResource("SpriteFrames_drsw1")
-animation = &"down"
+[node name="Tamadachi" type="AnimatedSprite2D" parent="." unique_id=1855722968]
+position = Vector2(-22, -86)
+sprite_frames = SubResource("SpriteFrames_dpga7")
+animation = &"Action"
+autoplay = "Idle"
+frame = 4
+frame_progress = 1.0
+
+[node name="Defend" type="Node2D" parent="." unique_id=1664773301]
+visible = false
+
+[node name="right" type="TextureButton" parent="Defend" unique_id=2071800838]
+visible = false
+offset_left = 120.0
+offset_right = 240.0
+offset_bottom = 120.0
+texture_normal = ExtResource("6_x3wgy")
+
+[node name="left" type="TextureButton" parent="Defend" unique_id=1155193400]
+visible = false
+offset_left = -120.0
+offset_bottom = 120.0
+texture_normal = ExtResource("6_x3wgy")
+
+[node name="up" type="TextureButton" parent="Defend" unique_id=104060520]
+visible = false
+offset_top = -120.0
+offset_right = 120.0
+texture_normal = ExtResource("6_x3wgy")
+
+[node name="down" type="TextureButton" parent="Defend" unique_id=1517125892]
+visible = false
+offset_top = 120.0
+offset_right = 120.0
+offset_bottom = 240.0
+texture_normal = ExtResource("6_x3wgy")
+
+[node name="Gust" type="TileMapLayer" parent="." unique_id=1591265188]
+visible = false
+tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAAAAIAAAAAAAAAAQAAAAMAAAAAAAAAAQD//wAAAAAAAAAAAQD+/wAAAAAAAAAAAQD9/wAAAAAAAAAAAQAAAP//AAAAAAAAAQAAAP7/AAAAAAAAAQAAAP3/AAAAAAAAAQABAP//AAAAAAAAAQD/////AAAAAAAAAQD//wEAAAAAAAAAAQABAAEAAAAAAAAAAQAAAAEAAAAAAAAAAQA=")
+tile_set = SubResource("TileSet_3owqy")
+
+[node name="Spike" type="TileMapLayer" parent="." unique_id=952783182]
+visible = false
+tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQD//wAAAAAAAAAAAQAAAP//AAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQD+/wAAAAAAAAAAAQD9/wAAAAAAAAAAAQAAAAIAAAAAAAAAAQAAAAMAAAAAAAAAAQD+/wEAAAAAAAAAAQD//wEAAAAAAAAAAQD//wIAAAAAAAAAAQABAP7/AAAAAAAAAQABAP//AAAAAAAAAQABAAEAAAAAAAAAAQABAAIAAAAAAAAAAQAAAP3/AAAAAAAAAQAAAP7/AAAAAAAAAQACAP//AAAAAAAAAQACAAEAAAAAAAAAAQD///7/AAAAAAAAAQD/////AAAAAAAAAQD+////AAAAAAAAAQA=")
+tile_set = SubResource("TileSet_8upip")
+
+[node name="Fireball" type="TileMapLayer" parent="." unique_id=1968157856]
+visible = false
+tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQD//wAAAAAAAAAAAQAAAP//AAAAAAAAAQAAAP3/AAAAAAAAAQAAAP7/AAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAAAAIAAAAAAAAAAQAAAAMAAAAAAAAAAQD9/wAAAAAAAAAAAQD+/wAAAAAAAAAAAQD8/wAAAAAAAAAAAQAAAAQAAAAAAAAAAQAEAAAAAAAAAAAAAQAAAPz/AAAAAAAAAQA=")
+tile_set = SubResource("TileSet_drsw1")
+
+[node name="Horizon" type="TileMapLayer" parent="." unique_id=2096812169]
+visible = false
+tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQD//wAAAAAAAAAAAQAAAP//AAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQABAP//AAAAAAAAAQACAP//AAAAAAAAAQABAP7/AAAAAAAAAQAAAP7/AAAAAAAAAQAAAP3/AAAAAAAAAQD/////AAAAAAAAAQD///7/AAAAAAAAAQD+////AAAAAAAAAQD+/wAAAAAAAAAAAQD9/wAAAAAAAAAAAQD//wEAAAAAAAAAAQD+/wEAAAAAAAAAAQAAAAIAAAAAAAAAAQABAAEAAAAAAAAAAQD//wIAAAAAAAAAAQABAAIAAAAAAAAAAQAAAAMAAAAAAAAAAQACAAEAAAAAAAAAAQD8/wAAAAAAAAAAAQAAAPz/AAAAAAAAAQAEAAAAAAAAAAAAAQAAAAQAAAAAAAAAAQA=")
+tile_set = SubResource("TileSet_dpga7")
 
 [connection signal="body_entered" from="Sword" to="." method="_on_sword_body_entered"]
+[connection signal="pressed" from="Defend/right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Defend/left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Defend/up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="Defend/down" to="." method="_on_down_pressed"]

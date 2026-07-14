@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bcdix717f6ei2" path="res://Art/enemy_placeholder.png" id="1_4gyqm"]
 [ext_resource type="Script" uid="uid://we4fyn7jki2m" path="res://components/enemy_attack_and_movement_patterns.gd" id="1_7k104"]
-[ext_resource type="Script" uid="uid://daa2l6q1xx08g" path="res://enemy.gd" id="1_qi2p4"]
+[ext_resource type="Script" uid="uid://daa2l6q1xx08g" path="res://Scripts/enemy.gd" id="1_qi2p4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0yxg5"]
 animations = [{

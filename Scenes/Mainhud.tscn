@@ -51,6 +51,12 @@ position = Vector2(60, 60)
 sprite_frames = ExtResource("4_s710e")
 animation = &"gust"
 
+[node name="Energy" type="Label" parent="." unique_id=2020904708]
+offset_left = 104.0
+offset_top = 509.0
+offset_right = 144.0
+offset_bottom = 532.0
+
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
 [connection signal="pressed" from="0" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="1" to="." method="_on_one_pressed"]

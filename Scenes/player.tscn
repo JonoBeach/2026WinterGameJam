@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cuaec2dolf5wj" path="res://Art/defend rect.png" id="6_x3wgy"]
 [ext_resource type="PackedScene" uid="uid://bjnnm4k2y4ivv" path="res://Scenes/gust_button.tscn" id="7_3smsa"]
 [ext_resource type="PackedScene" uid="uid://bludk5xs1qs2x" path="res://Scenes/spike button.tscn" id="8_8erm5"]
+[ext_resource type="PackedScene" uid="uid://df3sx3k6718i3" path="res://Scenes/FireballButton.tscn" id="9_f1ek2"]
+[ext_resource type="PackedScene" uid="uid://bkjt64xm4wepd" path="res://Scenes/HorizonButton.tscn" id="10_tx1dd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8upip"]
 size = Vector2(100, 100)
@@ -152,6 +154,20 @@ scenes/1/scene = ExtResource("8_8erm5")
 tile_size = Vector2i(120, 120)
 sources/0 = SubResource("TileSetScenesCollectionSource_f1ek2")
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_tx1dd"]
+scenes/1/scene = ExtResource("9_f1ek2")
+
+[sub_resource type="TileSet" id="TileSet_drsw1"]
+tile_size = Vector2i(120, 120)
+sources/0 = SubResource("TileSetScenesCollectionSource_tx1dd")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_gymyn"]
+scenes/1/scene = ExtResource("10_tx1dd")
+
+[sub_resource type="TileSet" id="TileSet_dpga7"]
+tile_size = Vector2i(120, 120)
+sources/0 = SubResource("TileSetScenesCollectionSource_gymyn")
+
 [node name="Player" type="CharacterBody2D" unique_id=600283651]
 collision_mask = 0
 script = ExtResource("1_cvnsp")
@@ -226,48 +242,18 @@ visible = false
 tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQD//wAAAAAAAAAAAQAAAP//AAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQD+/wAAAAAAAAAAAQD9/wAAAAAAAAAAAQAAAAIAAAAAAAAAAQAAAAMAAAAAAAAAAQD+/wEAAAAAAAAAAQD//wEAAAAAAAAAAQD//wIAAAAAAAAAAQABAP7/AAAAAAAAAQABAP//AAAAAAAAAQABAAEAAAAAAAAAAQABAAIAAAAAAAAAAQAAAP3/AAAAAAAAAQAAAP7/AAAAAAAAAQACAP//AAAAAAAAAQACAAEAAAAAAAAAAQD///7/AAAAAAAAAQD/////AAAAAAAAAQD+////AAAAAAAAAQA=")
 tile_set = SubResource("TileSet_8upip")
 
+[node name="Fireball" type="TileMapLayer" parent="." unique_id=1968157856]
+visible = false
+tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQD//wAAAAAAAAAAAQAAAP//AAAAAAAAAQAAAP3/AAAAAAAAAQAAAP7/AAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQAAAAIAAAAAAAAAAQAAAAMAAAAAAAAAAQD9/wAAAAAAAAAAAQD+/wAAAAAAAAAAAQD8/wAAAAAAAAAAAQAAAAQAAAAAAAAAAQAEAAAAAAAAAAAAAQAAAPz/AAAAAAAAAQA=")
+tile_set = SubResource("TileSet_drsw1")
+
+[node name="Horizon" type="TileMapLayer" parent="." unique_id=2096812169]
+visible = false
+tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQD//wAAAAAAAAAAAQAAAP//AAAAAAAAAQACAAAAAAAAAAAAAQADAAAAAAAAAAAAAQABAP//AAAAAAAAAQACAP//AAAAAAAAAQABAP7/AAAAAAAAAQAAAP7/AAAAAAAAAQAAAP3/AAAAAAAAAQD/////AAAAAAAAAQD///7/AAAAAAAAAQD+////AAAAAAAAAQD+/wAAAAAAAAAAAQD9/wAAAAAAAAAAAQD//wEAAAAAAAAAAQD+/wEAAAAAAAAAAQAAAAIAAAAAAAAAAQABAAEAAAAAAAAAAQD//wIAAAAAAAAAAQABAAIAAAAAAAAAAQAAAAMAAAAAAAAAAQACAAEAAAAAAAAAAQD8/wAAAAAAAAAAAQAAAPz/AAAAAAAAAQAEAAAAAAAAAAAAAQAAAAQAAAAAAAAAAQA=")
+tile_set = SubResource("TileSet_dpga7")
+
 [connection signal="body_entered" from="Sword" to="." method="_on_sword_body_entered"]
 [connection signal="pressed" from="Defend/right" to="." method="_on_right_pressed"]
 [connection signal="pressed" from="Defend/left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="Defend/up" to="." method="_on_up_pressed"]
 [connection signal="pressed" from="Defend/down" to="." method="_on_down_pressed"]
-[connection signal="pressed" from="Gust/GustButton" to="Gust/GustButton" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404782" to="Gust/@TextureButton@404782" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404783" to="Gust/@TextureButton@404783" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404784" to="Gust/@TextureButton@404784" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404785" to="Gust/@TextureButton@404785" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404786" to="Gust/@TextureButton@404786" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404787" to="Gust/@TextureButton@404787" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404788" to="Gust/@TextureButton@404788" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404789" to="Gust/@TextureButton@404789" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404790" to="Gust/@TextureButton@404790" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404791" to="Gust/@TextureButton@404791" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404792" to="Gust/@TextureButton@404792" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404793" to="Gust/@TextureButton@404793" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404794" to="Gust/@TextureButton@404794" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404795" to="Gust/@TextureButton@404795" method="_on_pressed"]
-[connection signal="pressed" from="Gust/@TextureButton@404796" to="Gust/@TextureButton@404796" method="_on_pressed"]
-[connection signal="pressed" from="Spike/SpikeButton" to="Spike/SpikeButton" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404797" to="Spike/@TextureButton@404797" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404798" to="Spike/@TextureButton@404798" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404799" to="Spike/@TextureButton@404799" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404800" to="Spike/@TextureButton@404800" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404801" to="Spike/@TextureButton@404801" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404802" to="Spike/@TextureButton@404802" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404803" to="Spike/@TextureButton@404803" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404804" to="Spike/@TextureButton@404804" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404805" to="Spike/@TextureButton@404805" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404806" to="Spike/@TextureButton@404806" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404807" to="Spike/@TextureButton@404807" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404808" to="Spike/@TextureButton@404808" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404809" to="Spike/@TextureButton@404809" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404810" to="Spike/@TextureButton@404810" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404811" to="Spike/@TextureButton@404811" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404812" to="Spike/@TextureButton@404812" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404813" to="Spike/@TextureButton@404813" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404814" to="Spike/@TextureButton@404814" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404815" to="Spike/@TextureButton@404815" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404816" to="Spike/@TextureButton@404816" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404817" to="Spike/@TextureButton@404817" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404818" to="Spike/@TextureButton@404818" method="_on_pressed"]
-[connection signal="pressed" from="Spike/@TextureButton@404819" to="Spike/@TextureButton@404819" method="_on_pressed"]

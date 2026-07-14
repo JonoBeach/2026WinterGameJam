@@ -135,11 +135,25 @@ func _on_move_finish():
 	$Defend.hide()
 	$Gust.hide()
 	$Spike.hide()
+	$Fireball.hide()
 	$Tamadachi.play("Action")
 	await get_tree().create_timer(1).timeout
 	$Tamadachi.play("Idle")
 
 func Spike():
 	$Spike.show()
+	Global.playerpos = get_position()
+	Global.gust_check.emit()
+
+func Fireball():
+	$Fireball.show()
+	Global.playerpos = get_position()
+	Global.gust_check.emit()
+
+func Bulwark():
+	pass
+
+func Horizon():
+	$Horizon.show()
 	Global.playerpos = get_position()
 	Global.gust_check.emit()

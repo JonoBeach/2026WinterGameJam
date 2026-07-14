@@ -64,6 +64,11 @@ func _on_one_pressed() -> void:
 			"gust":
 				get_parent().get_node("Player").Gust()
 				actioning = true
+			"bewilder":
+				if get_parent().get_node("Player").move != "":
+					
+				.Gust()
+				actioning = true
 		$"1".hide()
 
 

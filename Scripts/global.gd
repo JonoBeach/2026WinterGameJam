@@ -6,3 +6,4 @@ var playerpos
 signal tama_move() #for when player chooses where they're doing their move
 var spikes = [] #stores current positions of spikes
 var shields = [] #stores current positions of shields
+var coins = 0

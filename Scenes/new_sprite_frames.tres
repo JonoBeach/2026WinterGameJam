@@ -1,11 +1,31 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://c4whn8g1p3nkl"]
 
+[ext_resource type="Texture2D" uid="uid://r237fsrks8yf" path="res://Art/spike rect.png" id="1_epcx1"]
 [ext_resource type="Texture2D" uid="uid://bll7bd124q80g" path="res://Art/tileholder.png" id="1_qj6k6"]
 [ext_resource type="Texture2D" uid="uid://i32wcyjchk1w" path="res://Art/button.png" id="2_0hmi3"]
+[ext_resource type="Texture2D" uid="uid://catg7nmy281l6" path="res://Art/gust rect.png" id="2_q4bmd"]
 [ext_resource type="Texture2D" uid="uid://bcdix717f6ei2" path="res://Art/enemy_placeholder.png" id="3_inma5"]
+[ext_resource type="Texture2D" uid="uid://cuaec2dolf5wj" path="res://Art/defend rect.png" id="4_tidt6"]
+[ext_resource type="Texture2D" uid="uid://5ymixwflhm0t" path="res://Art/player-placeholder.png" id="6_0fs5b"]
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_epcx1")
+}],
+"loop": 1,
+"name": &"bewilder",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q4bmd")
+}],
+"loop": 1,
+"name": &"bulwark",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_qj6k6")
@@ -16,10 +36,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("4_tidt6")
+}],
+"loop": 1,
+"name": &"fireball",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_0hmi3")
 }],
 "loop": 1,
 "name": &"gust",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_0fs5b")
+}],
+"loop": 1,
+"name": &"horizon",
 "speed": 5.0
 }, {
 "frames": [{

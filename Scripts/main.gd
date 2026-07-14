@@ -14,6 +14,6 @@ func _process(delta: float) -> void:
 ##called when end turn button pressed
 func endturn():
 	$Player.movedo()
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1.5).timeout
 	$Mainhud.reset()
 	$Player.movedecide()

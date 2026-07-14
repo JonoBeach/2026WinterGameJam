@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://byxgpjww3jkhk"]
+
+[ext_resource type="Texture2D" uid="uid://cbbwe4dfuyi3u" path="res://Art/gust.png" id="1_amy37"]
+[ext_resource type="Script" uid="uid://d1ppfgnjwr8oh" path="res://Scripts/gust.gd" id="2_somlo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on0lx"]
+atlas = ExtResource("1_amy37")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0c6j"]
+atlas = ExtResource("1_amy37")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21uoc"]
+atlas = ExtResource("1_amy37")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4iacn"]
+atlas = ExtResource("1_amy37")
+region = Rect2(360, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj6yt"]
+atlas = ExtResource("1_amy37")
+region = Rect2(480, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1uio"]
+atlas = ExtResource("1_amy37")
+region = Rect2(600, 0, 120, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3owqy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on0lx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0c6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21uoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4iacn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj6yt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1uio")
+}],
+"loop": 0,
+"name": &"Gust",
+"speed": 5.0
+}]
+
+[node name="Gust" type="AnimatedSprite2D" unique_id=1730988658]
+sprite_frames = SubResource("SpriteFrames_3owqy")
+animation = &"Gust"
+autoplay = "Gust"
+script = ExtResource("2_somlo")

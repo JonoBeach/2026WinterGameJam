@@ -30,16 +30,18 @@ func assignMoves():
 
 	discards+=avaiMoves
 	avaiMoves = []
-	if moves.size() < 3:
-		moves+=discards
-		discards = []
+	
 	
 	for i in range(0,3):
+		if moves.size() < 1:
+			moves+=discards
+			discards = []
 		var index = rng.randi_range(0,moves.size()-1)
 		get_node(str(i)).show()
 		get_node(str(i)+"/AnimatedSprite2D").play(moves[index])
 		avaiMoves.append(moves[index])
 		moves.remove_at(index)
+	print(moves, avaiMoves, discards)
 
 func _on_button_pressed() -> void:
 	if !actioning:
@@ -50,6 +52,7 @@ func _on_button_pressed() -> void:
 
 func _on_one_pressed() -> void:
 	if !actioning:
+		print("wahoo")
 		var hide = movechoose($"1/AnimatedSprite2D".animation)
 		if hide:
 			$"1".hide()
@@ -68,47 +71,47 @@ func movechoose(move):
 	match move:
 		"defend":
 			if energy > 0:
-				get_parent().get_node("Player").defend()
 				actioning = true
+				get_parent().get_node("Player").defend()
 				hide = true
 				energy -=1
 		"spike":
 			if energy > 0:
+				actioning = true
 				hide = true
 				energy -=1
 				get_parent().get_node("Player").Spike()
-				actioning = true
 		"gust":
 			if energy > 0:
+				actioning = true
 				hide = true
 				energy -=1
 				get_parent().get_node("Player").Gust()
-				actioning = true
 		"bewilder":
 			if energy > 0 and get_parent().get_node("Player").move != "":
+				actioning = true
 				Global.tama_move.emit()
 				hide = true
 				energy -=1
 				get_parent().get_node("Player").move = ""
-				actioning = true
 		"fireball":
 			if energy > 1:
+				actioning = true
 				hide = true
 				energy -=2
 				get_parent().get_node("Player").Fireball()
-				actioning = true
 		"horizon":
 			if energy >1:
 				hide = true
+				actioning = true
 				energy -=2
 				get_parent().get_node("Player").Horizon()
-				actioning = true
 		"bulwark":
 			if energy >2:
+				actioning = true
 				hide = true
 				energy -=3
 				get_parent().get_node("Player").Bulwark()
-				actioning = true
 	return hide
 
 

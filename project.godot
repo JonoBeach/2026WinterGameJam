@@ -29,6 +29,7 @@ window/size/mode=3
 2d_render/layer_1="bodies"
 2d_render/layer_2="attacks"
 2d_render/layer_3="pushes"
+2d_render/layer_4="shield"
 
 [physics]
 

@@ -2,7 +2,7 @@ extends CharacterBody2D
 @onready var spots = get_parent().get_node("TileMapLayer").get_used_cells()
 var rng = RandomNumberGenerator.new()
 var direction
-var move
+var move = ""
 var end = Vector2.ZERO
 var pushend = Vector2.ZERO
 var pushdirection = ""
@@ -25,6 +25,8 @@ func _physics_process(_delta):
 	if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
 		velocity = Vector2.ZERO
 		pushdirection = ""
+	if move == "":
+		$MoveChoice.play("empty")
 	move_and_slide()
 	
 
@@ -32,6 +34,10 @@ func _physics_process(_delta):
 ##decides move direction and what move
 func movedecide():
 	##sets direction to move and sets what the final point should be
+	Global.shields = []
+	for node in get_children():
+		if "Shield" in node.name or "Area2D@8" in node.name:
+			node.queue_free()
 	match rng.randi_range(1,4):
 		1:
 			direction = "up"
@@ -57,23 +63,28 @@ func movedecide():
 			if !end in spots:
 				direction = "right"
 				end += Vector2(240,0)
-	$PlayerAnim.play("Face"+direction)
+	$PlayerAnim.play("Face")
+	$Direction.play(direction)
 	##sets which action to do
-	match rng.randi_range(1,3):
+	match rng.randi_range(2,2):
 		1:
 			move = "attack"
 		2:
 			move = "defend"
 		3:
 			move = "move"
+	$MoveChoice.play(move)
 	
 
 ##does the move
 func movedo():
+	$Direction.play("empty")
+	$MoveChoice.play("empty")
 	match move:
 		"move":
 			if end in spots:
 				velocity = end-get_position() #sets velocity
+				$PlayerAnim.play("move")
 		"attack":
 			#turns on and then off the sword hitbox
 			$Sword.monitoring = true
@@ -81,16 +92,22 @@ func movedo():
 			await get_tree().create_timer(.5).timeout
 			$Sword.monitoring = false
 		"defend":
-			#places shield
-			#$Shield.play(direction)
-			pass
+			if end in spots and !(end-get_position() in Global.shields):
+				var scene = preload("res://Scenes/Shield.tscn")
+				var instance = scene.instantiate()
+				instance.set_position(end-get_position())
+				instance.direction = direction
+				add_child(instance)
 
 func push(finalPos,value):
+	$PlayerAnim.play("move")
 	pushend = get_position() + finalPos
 	if pushend in spots:
 		velocity = pushend-get_position()
 		pushdirection=value
 		end += finalPos
+	await get_tree().create_timer(1.5).timeout
+	$PlayerAnim.play("Face")
 
 #calls killed() if it touches a body
 func _on_sword_body_entered(body: Node2D) -> void:
@@ -103,28 +120,46 @@ func defend():
 	$Defend.show()
 	for node in $Defend.get_children():
 		node.hide()
-		if (node.get_position()+get_position()) in spots:
+		if (node.get_position()+get_position()) in spots and !(node.get_position() in Global.shields):
 			node.show()
-		
 
 func _on_right_pressed() -> void:
+	var scene = preload("res://Scenes/Shield.tscn")
+	var instance = scene.instantiate()
+	instance.set_position(Vector2(120,0))
+	instance.direction = "right"
+	add_child(instance)
 	Global.tama_move.emit()
-	pass # Replace with function body.
+
 
 
 func _on_left_pressed() -> void:
+	var scene = preload("res://Scenes/Shield.tscn")
+	var instance = scene.instantiate()
+	instance.set_position(Vector2(-120,0))
+	instance.direction = "left"
+	add_child(instance)
 	Global.tama_move.emit()
-	pass # Replace with function body.
+
 
 
 func _on_up_pressed() -> void:
+	var scene = preload("res://Scenes/Shield.tscn")
+	var instance = scene.instantiate()
+	instance.set_position(Vector2(0,-120))
+	instance.direction = "up"
+	add_child(instance)
 	Global.tama_move.emit()
-	pass # Replace with function body.
+
 
 
 func _on_down_pressed() -> void:
+	var scene = preload("res://Scenes/Shield.tscn")
+	var instance = scene.instantiate()
+	instance.set_position(Vector2(0,120))
+	instance.direction = "down"
+	add_child(instance)
 	Global.tama_move.emit()
-	pass # Replace with function body.
 
 func Gust():
 	$Gust.show()
@@ -137,7 +172,7 @@ func _on_move_finish():
 	$Spike.hide()
 	$Fireball.hide()
 	$Tamadachi.play("Action")
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.85).timeout
 	$Tamadachi.play("Idle")
 
 func Spike():
@@ -151,7 +186,17 @@ func Fireball():
 	Global.gust_check.emit()
 
 func Bulwark():
-	pass
+	var places = [Vector2(120,0),Vector2(-120,0),Vector2(0,-120),Vector2(0,120)]
+	var dir = ["right","left","up","down"]
+	Global.tama_move.emit()
+	for x in range(0,4):
+		if !(places[x] in Global.shields) and places[x]+get_position() in spots:
+			var scene = preload("res://Scenes/Shield.tscn")
+			var instance = scene.instantiate()
+			instance.set_position(places[x])
+			instance.direction = dir[x]
+			add_child(instance)
+	
 
 func Horizon():
 	$Horizon.show()

@@ -57,7 +57,17 @@ offset_top = 509.0
 offset_right = 144.0
 offset_bottom = 532.0
 
+[node name="Description" type="Sprite2D" parent="." unique_id=1790448682]
+
+[node name="Label" type="Label" parent="Description" unique_id=1653661567]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "gabagool"
+
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
+[connection signal="mouse_exited" from="0" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="0" to="." method="_on_button_pressed"]
+[connection signal="mouse_exited" from="1" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="1" to="." method="_on_one_pressed"]
+[connection signal="mouse_exited" from="2" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="2" to="." method="_on_two_pressed"]

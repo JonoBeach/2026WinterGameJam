@@ -117,3 +117,7 @@ func movechoose(move):
 
 func _on_move_finish():
 	actioning = false
+
+
+func _on__mouse_exited() -> void:
+	$Description.hide()

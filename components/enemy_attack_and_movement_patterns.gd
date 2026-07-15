@@ -96,7 +96,7 @@ func enemy_attack_pattern():
 			push_error("Error: %s attack pattern not defined!" % enemy.name)
 			return []
 
-func attack_up()  -> Array[Vector2]:
+func attack_up():
 	print(tilemap_dimensions.position.y)
 	var new_move
 	var attack_tiles = []
@@ -108,7 +108,7 @@ func attack_up()  -> Array[Vector2]:
 	print(attack_tiles)
 	return attack_tiles
 	
-func attack_left() -> Array[Vector2]:
+func attack_left():
 	var new_move
 	var attack_tiles = []
 	for current_attack in range(1, attack_size+1):
@@ -117,7 +117,7 @@ func attack_left() -> Array[Vector2]:
 			attack_tiles.append(new_move)
 	return attack_tiles
 	
-func attack_right() -> Array[Vector2]:
+func attack_right():
 	var new_move
 	var attack_tiles = []
 	for current_attack in range(1, attack_size+1):
@@ -126,7 +126,7 @@ func attack_right() -> Array[Vector2]:
 			attack_tiles.append(new_move)
 	return attack_tiles
 	
-func attack_down() -> Array[Vector2]:
+func attack_down():
 	var new_move
 	var attack_tiles = []
 	for current_attack in range(1, attack_size+1):

@@ -67,21 +67,25 @@ func enemy_movement_location() -> Vector2:
 	
 ## Will return the tiles that the enemy will attack, based on attack pattern defined.
 func enemy_attack_pattern() -> Array[Vector2]:
+	var attack_tiles = []
 	match attack_pattern_name:
 		"Attack Up":
-			return attack_up()
+			attack_tiles.append(attack_up())
+			return attack_tiles
 			
 		"Attack Left":
-			return attack_left()
+			attack_tiles.append(attack_left())
+			return attack_tiles
 			
 		"Attack Right":
-			return attack_right()
+			attack_tiles.append(attack_right())
+			return attack_tiles
 			
 		"Attack Down":
-			return attack_down()
+			attack_tiles.append(attack_down())
+			return attack_tiles
 
 		"Attack All Directions":
-			var attack_tiles = []
 			attack_tiles.append(attack_up())
 			attack_tiles.append(attack_left())
 			attack_tiles.append(attack_right())

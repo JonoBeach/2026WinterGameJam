@@ -18,3 +18,4 @@ func endturn():
 	$Mainhud.reset()
 	$Player.movedecide()
 	$Enemy.enemy_move()
+	$Enemy.do_attack()

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://y6qkru5k5j7f" path="res://Scenes/Mainhud.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://b1w0d8mxg8n8i" path="res://Art/decorations.png" id="7_344ge"]
 [ext_resource type="PackedScene" uid="uid://cofieok2kui82" path="res://Scenes/enemy.tscn" id="8_344ge"]
+[ext_resource type="Script" uid="uid://we4fyn7jki2m" path="res://components/enemy_attack_and_movement_patterns.gd" id="9_ynf5e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
 texture = ExtResource("2_8gbba")
@@ -44,3 +45,13 @@ position = Vector2(960, 540)
 texture = ExtResource("7_344ge")
 
 [node name="Enemy" parent="." unique_id=203983045 instance=ExtResource("8_344ge")]
+
+[node name="enemy_attack_and_movement_patterns2" type="Node" parent="Enemy" unique_id=1219645478 node_paths=PackedStringArray("enemy")]
+script = ExtResource("9_ynf5e")
+enemy = NodePath("..")
+movement_x = 2
+movement_y = 2
+randomise_direction = true
+attack_pattern_name = "Attack Forward"
+attack_size = 1
+metadata/_custom_type_script = "uid://we4fyn7jki2m"

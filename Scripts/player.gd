@@ -124,6 +124,7 @@ func movedo():
 				var instance = scene.instantiate()
 				instance.set_position(end-get_position())
 				instance.direction = direction
+				instance.origin = "knight"
 				add_child(instance)
 			await get_tree().create_timer(.6).timeout
 			$PlayerAnim.play("Face")
@@ -162,6 +163,7 @@ func _on_right_pressed() -> void:
 	var instance = scene.instantiate()
 	instance.set_position(Vector2(120,0))
 	instance.direction = "right"
+	instance.origin = "tama"
 	add_child(instance)
 	Global.tama_move.emit()
 
@@ -172,6 +174,7 @@ func _on_left_pressed() -> void:
 	var instance = scene.instantiate()
 	instance.set_position(Vector2(-120,0))
 	instance.direction = "left"
+	instance.origin = "tama"
 	add_child(instance)
 	Global.tama_move.emit()
 
@@ -182,6 +185,7 @@ func _on_up_pressed() -> void:
 	var instance = scene.instantiate()
 	instance.set_position(Vector2(0,-120))
 	instance.direction = "up"
+	instance.origin = "tama"
 	add_child(instance)
 	Global.tama_move.emit()
 
@@ -192,6 +196,7 @@ func _on_down_pressed() -> void:
 	var instance = scene.instantiate()
 	instance.set_position(Vector2(0,120))
 	instance.direction = "down"
+	instance.origin = "tama"
 	add_child(instance)
 	Global.tama_move.emit()
 

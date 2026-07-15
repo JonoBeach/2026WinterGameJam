@@ -8,3 +8,5 @@ var spikes = [] #stores current positions of spikes
 var shields = [] #stores current positions of shields
 var coins = 0
 signal player_move_finish()
+signal enemy_move_finish()
+signal enemy_dead()

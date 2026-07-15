@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dueim7yvoa2l4" path="res://Scripts/shield.gd" id="1_g6qfg"]
 [ext_resource type="Texture2D" uid="uid://brc3glfxhyvsu" path="res://Art/shield.png" id="2_g6qfg"]
+[ext_resource type="Texture2D" uid="uid://chg1w4sp3kss8" path="res://Art/tama_shield.png" id="3_1vnn7"]
 [ext_resource type="AudioStream" uid="uid://cmh2772d61uh4" path="res://Music/Shield Deflect.mp3" id="3_f84if"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
@@ -11,16 +12,32 @@ size = Vector2(100, 100)
 atlas = ExtResource("2_g6qfg")
 region = Rect2(0, 0, 120, 120)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkrl6"]
+atlas = ExtResource("3_1vnn7")
+region = Rect2(0, 0, 120, 120)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1vnn7"]
 atlas = ExtResource("2_g6qfg")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kxnc"]
+atlas = ExtResource("3_1vnn7")
 region = Rect2(240, 0, 120, 120)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fv2wv"]
 atlas = ExtResource("2_g6qfg")
 region = Rect2(360, 0, 120, 120)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_igp5u"]
+atlas = ExtResource("3_1vnn7")
+region = Rect2(360, 0, 120, 120)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_hfke4"]
 atlas = ExtResource("2_g6qfg")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31urn"]
+atlas = ExtResource("3_1vnn7")
 region = Rect2(120, 0, 120, 120)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3owqy"]
@@ -30,7 +47,15 @@ animations = [{
 "texture": SubResource("AtlasTexture_f84if")
 }],
 "loop": 1,
-"name": &"down",
+"name": &"downknight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkrl6")
+}],
+"loop": 1,
+"name": &"downtama",
 "speed": 5.0
 }, {
 "frames": [{
@@ -38,7 +63,15 @@ animations = [{
 "texture": SubResource("AtlasTexture_1vnn7")
 }],
 "loop": 1,
-"name": &"left",
+"name": &"leftknight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kxnc")
+}],
+"loop": 1,
+"name": &"lefttama",
 "speed": 5.0
 }, {
 "frames": [{
@@ -46,7 +79,15 @@ animations = [{
 "texture": SubResource("AtlasTexture_fv2wv")
 }],
 "loop": 1,
-"name": &"right",
+"name": &"rightknight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igp5u")
+}],
+"loop": 1,
+"name": &"righttama",
 "speed": 5.0
 }, {
 "frames": [{
@@ -54,7 +95,15 @@ animations = [{
 "texture": SubResource("AtlasTexture_hfke4")
 }],
 "loop": 1,
-"name": &"up",
+"name": &"upknight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31urn")
+}],
+"loop": 1,
+"name": &"uptama",
 "speed": 5.0
 }]
 
@@ -69,8 +118,8 @@ shape = SubResource("RectangleShape2D_3owqy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=443264886]
 sprite_frames = SubResource("SpriteFrames_3owqy")
-animation = &"left"
-autoplay = "left"
+animation = &"uptama"
+autoplay = "leftknight"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=53007239]
 stream = ExtResource("3_f84if")

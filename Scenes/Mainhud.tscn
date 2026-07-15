@@ -1,80 +1,143 @@
 [gd_scene format=3 uid="uid://y6qkru5k5j7f"]
 
 [ext_resource type="Script" uid="uid://cve7epwq3d2cy" path="res://Scripts/mainhud.gd" id="1_h7rvc"]
-[ext_resource type="Texture2D" uid="uid://i32wcyjchk1w" path="res://Art/button.png" id="2_3vmv3"]
-[ext_resource type="Texture2D" uid="uid://bll7bd124q80g" path="res://Art/tileholder.png" id="3_3vmv3"]
+[ext_resource type="Texture2D" uid="uid://bs2d1b4upivmx" path="res://Art/end_turn_ui.png" id="2_kl6qe"]
 [ext_resource type="SpriteFrames" uid="uid://c4whn8g1p3nkl" path="res://Scenes/new_sprite_frames.tres" id="4_s710e"]
+[ext_resource type="Texture2D" uid="uid://c5plr66jqogkg" path="res://Art/energy_ui.png" id="5_5fv6x"]
 [ext_resource type="Texture2D" uid="uid://b0iqonnhycy6u" path="res://Art/description.png" id="5_kl6qe"]
+[ext_resource type="Texture2D" uid="uid://n0xvlorbkbd6" path="res://Art/money_ui.png" id="6_5fv6x"]
+[ext_resource type="Texture2D" uid="uid://bd6guscxqyvar" path="res://Art/spells_ui.png" id="7_3t5u8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3t5u8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rs772"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bv2uc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yw1q3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pqtg3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3brje"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5fenn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qpjtc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t7dto"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6j2hq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d5ind"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8r008"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eb5wr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_23xet"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mjkyw"]
 
 [node name="Mainhud" type="CanvasLayer" unique_id=1191797521]
 script = ExtResource("1_h7rvc")
 
 [node name="EndTurn" type="TextureButton" parent="." unique_id=25918695]
-offset_left = 1776.0
-offset_top = 549.0
-offset_right = 1896.0
-offset_bottom = 669.0
+offset_left = 1800.0
+offset_top = 480.0
+offset_right = 1920.0
+offset_bottom = 600.0
 action_mode = 0
-texture_normal = ExtResource("2_3vmv3")
-texture_pressed = ExtResource("3_3vmv3")
+texture_normal = ExtResource("2_kl6qe")
 
 [node name="0" type="Button" parent="." unique_id=1197133805]
-offset_left = 701.0
-offset_top = 47.0
-offset_right = 821.0
-offset_bottom = 167.0
+offset_left = 750.0
+offset_top = 20.0
+offset_right = 870.0
+offset_bottom = 140.0
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3t5u8")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rs772")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bv2uc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yw1q3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pqtg3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="0" unique_id=191811329]
 position = Vector2(60, 60)
 sprite_frames = ExtResource("4_s710e")
-animation = &"spike"
+animation = &"gust"
 autoplay = "defend"
 
 [node name="1" type="Button" parent="." unique_id=820298994]
-offset_left = 886.0
-offset_top = 51.0
-offset_right = 1006.0
-offset_bottom = 171.0
+offset_left = 900.0
+offset_top = 20.0
+offset_right = 1020.0
+offset_bottom = 140.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3brje")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5fenn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qpjtc")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_t7dto")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6j2hq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="1" unique_id=519097795]
 position = Vector2(60, 60)
 sprite_frames = ExtResource("4_s710e")
-animation = &"defend"
+animation = &"fireball"
 
 [node name="2" type="Button" parent="." unique_id=528059288]
-offset_left = 1083.0
-offset_top = 59.0
-offset_right = 1203.0
-offset_bottom = 179.0
+offset_left = 1050.0
+offset_top = 20.0
+offset_right = 1170.0
+offset_bottom = 140.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_d5ind")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8r008")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_eb5wr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_23xet")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mjkyw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="2" unique_id=2094305291]
 position = Vector2(60, 60)
 sprite_frames = ExtResource("4_s710e")
 animation = &"gust"
 
-[node name="Energy" type="Label" parent="." unique_id=2020904708]
-offset_left = 104.0
-offset_top = 509.0
-offset_right = 144.0
-offset_bottom = 532.0
+[node name="Energy" type="Sprite2D" parent="." unique_id=781859365]
+position = Vector2(60, 60)
+texture = ExtResource("5_5fv6x")
 
-[node name="Spells" type="Label" parent="." unique_id=492558442]
-offset_left = 1304.0
-offset_top = 109.0
-offset_right = 1344.0
-offset_bottom = 132.0
-text = "6/10"
+[node name="EnergyLabel" type="Label" parent="Energy" unique_id=2020904708]
+custom_minimum_size = Vector2(25, 25)
+anchors_preset = -1
+anchor_left = 0.504
+anchor_top = 0.37100002
+anchor_right = 0.504
+anchor_bottom = 0.37100002
+offset_left = -84.479996
+offset_top = -82.520004
+offset_right = -35.48
+offset_bottom = -37.520004
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -15
+theme_override_font_sizes/font_size = 32
+text = "3/3"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Description" type="Sprite2D" parent="." unique_id=1790448682]
 visible = false
-position = Vector2(569, 101)
+position = Vector2(680, 100)
 texture = ExtResource("5_kl6qe")
 
 [node name="Title" type="Label" parent="Description" unique_id=1653661567]
-offset_left = -69.0
-offset_top = -89.0
-offset_right = 69.0
-offset_bottom = -60.0
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.11100001
+anchor_right = 0.48900002
+anchor_bottom = 0.11100001
+offset_left = -125.46001
+offset_top = -105.98
+offset_right = -14.460007
+offset_bottom = -73.98
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Bewilder"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -82,12 +145,58 @@ autowrap_mode = 2
 
 [node name="Body" type="Label" parent="Description" unique_id=1277361038]
 offset_left = -69.0
-offset_top = -59.0
+offset_top = -54.0
 offset_right = 69.0
 offset_bottom = 89.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Coins" type="Sprite2D" parent="." unique_id=2007511389]
+position = Vector2(60, 1020)
+texture = ExtResource("6_5fv6x")
+
+[node name="CoinLabel" type="Label" parent="Coins" unique_id=1713202009]
+custom_minimum_size = Vector2(25, 25)
+anchors_preset = -1
+anchor_left = 0.32033336
+anchor_top = 0.363
+anchor_right = 0.6536667
+anchor_bottom = 0.363
+offset_left = -84.44
+offset_top = -82.56
+offset_right = -35.440002
+offset_bottom = -37.559998
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -15
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Spells" type="Sprite2D" parent="." unique_id=1977984549]
+position = Vector2(1860, 60)
+texture = ExtResource("7_3t5u8")
+
+[node name="SpellLabel" type="Label" parent="Spells" unique_id=2117700482]
+custom_minimum_size = Vector2(25, 25)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.37100002
+anchor_right = 0.5
+anchor_bottom = 0.37100002
+offset_left = -84.0
+offset_top = -82.520004
+offset_right = -35.0
+offset_bottom = -37.520004
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -15
+theme_override_font_sizes/font_size = 32
+text = "3/3"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
 [connection signal="mouse_entered" from="0" to="." method="_on_zero_mouse_entered"]

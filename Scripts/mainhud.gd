@@ -20,9 +20,10 @@ func _ready() -> void:
 	Global.tama_move.connect(_on_move_finish)
 
 func _process(delta: float) -> void:
-	$Energy.text = str(energy)+"/3"
+	$Energy/EnergyLabel.text = str(energy)+"/3"
 	#print(moves)
-	$Spells.text = str(moves.size())+"/"+str(Global.Moves.size())
+	$Spells/SpellLabel.text = str(moves.size())+"/"+str(Global.Moves.size())
+	$Coins/CoinLabel.text = str(Global.coins)
 
 func _on_end_turn_pressed() -> void:
 	get_parent().endturn()
@@ -153,15 +154,18 @@ func _on__mouse_exited() -> void:
 
 func _on_zero_mouse_entered() -> void:
 	$Description.show()
+	$Description.position.x = 680
 	DescSet($"0/AnimatedSprite2D".animation)
 	
 
 
 func _on_one_mouse_entered() -> void:
 	$Description.show()
+	$Description.position.x = 830
 	DescSet($"1/AnimatedSprite2D".animation)
 
 
 func _on__mouse_entered() -> void:
 	$Description.show()
+	$Description.position.x = 980
 	DescSet($"2/AnimatedSprite2D".animation)

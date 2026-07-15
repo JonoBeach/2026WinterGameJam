@@ -1,10 +1,11 @@
 extends Area2D
 var direction
+var origin
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.shields.append(get_position())
-	$CollisionShape2D/AnimatedSprite2D.play(direction)
+	$CollisionShape2D/AnimatedSprite2D.play(direction+origin)
 	match direction:
 		"left":
 			$CollisionShape2D.set_position(Vector2(150,60))

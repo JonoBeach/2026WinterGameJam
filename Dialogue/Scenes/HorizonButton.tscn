@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bkjt64xm4wepd"]
+
+[ext_resource type="Texture2D" uid="uid://catg7nmy281l6" path="res://Art/gust rect.png" id="1_akg1f"]
+[ext_resource type="Script" uid="uid://bdkbsf0e17850" path="res://Scripts/horizon_button.gd" id="2_uh7sm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8upip"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drsw1"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpga7"]
+size = Vector2(100, 100)
+
+[node name="HorizonButton" type="TextureButton" unique_id=1076260603]
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+texture_normal = ExtResource("1_akg1f")
+script = ExtResource("2_uh7sm")
+
+[node name="HoriLeft" type="Area2D" parent="." unique_id=1853509819]
+visible = false
+collision_layer = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoriLeft" unique_id=242955644]
+position = Vector2(-60, 60)
+shape = SubResource("RectangleShape2D_3owqy")
+
+[node name="HoriRight" type="Area2D" parent="." unique_id=108355985]
+visible = false
+collision_layer = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoriRight" unique_id=889770570]
+position = Vector2(180, 60)
+shape = SubResource("RectangleShape2D_8upip")
+
+[node name="HoriUp" type="Area2D" parent="." unique_id=590013011]
+visible = false
+collision_layer = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoriUp" unique_id=618800309]
+position = Vector2(60, -60)
+shape = SubResource("RectangleShape2D_drsw1")
+
+[node name="HoriDown" type="Area2D" parent="." unique_id=2096698442]
+visible = false
+collision_layer = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoriDown" unique_id=167925236]
+position = Vector2(60, 180)
+shape = SubResource("RectangleShape2D_dpga7")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="body_entered" from="HoriLeft" to="." method="_on_hori_left_body_entered"]
+[connection signal="body_entered" from="HoriRight" to="." method="_on_hori_right_body_entered"]
+[connection signal="body_entered" from="HoriUp" to="." method="_on_hori_up_body_entered"]
+[connection signal="body_entered" from="HoriDown" to="." method="_on_hori_down_body_entered"]

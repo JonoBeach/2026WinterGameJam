@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bfk12ul16b5hb"]
+
+[ext_resource type="Script" uid="uid://b6ymsos0jycuv" path="res://Scripts/menu.gd" id="1_syfuq"]
+[ext_resource type="Texture2D" uid="uid://evsnckr60pka" path="res://Art/menubackground.png" id="2_s2c3o"]
+[ext_resource type="Texture2D" uid="uid://i32wcyjchk1w" path="res://Art/button.png" id="3_ma218"]
+[ext_resource type="AudioStream" uid="uid://bbxjgth6dj1nf" path="res://Music/Game Jam MENU THEME Export 2.mp3" id="4_s2c3o"]
+
+[node name="Menu" type="Node" unique_id=1722310977]
+script = ExtResource("1_syfuq")
+
+[node name="Background" type="TextureRect" parent="." unique_id=261152958]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_s2c3o")
+
+[node name="Play" type="TextureButton" parent="." unique_id=518026078]
+offset_left = 859.0
+offset_top = 633.0
+offset_right = 979.0
+offset_bottom = 753.0
+texture_normal = ExtResource("3_ma218")
+
+[node name="Exit" type="TextureButton" parent="." unique_id=2046399060]
+offset_left = 834.0
+offset_top = 840.0
+offset_right = 954.0
+offset_bottom = 960.0
+texture_normal = ExtResource("3_ma218")
+
+[node name="Theme" type="AudioStreamPlayer" parent="." unique_id=834464832]
+stream = ExtResource("4_s2c3o")
+autoplay = true
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="finished" from="Theme" to="." method="_on_theme_finished"]

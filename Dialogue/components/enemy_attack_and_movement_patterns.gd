@@ -74,26 +74,26 @@ func enemy_attack_pattern():
 	var attack_tiles = []
 	match attack_pattern_name:
 		"Attack Up":
-			attack_tiles += attack_up()
+			attack_tiles.append(attack_up())
 			return attack_tiles
 			
 		"Attack Left":
-			attack_tiles += attack_left()
+			attack_tiles.append(attack_left())
 			return attack_tiles
 			
 		"Attack Right":
-			attack_tiles += attack_right()
+			attack_tiles.append(attack_right())
 			return attack_tiles
 			
 		"Attack Down":
-			attack_tiles += attack_down()
+			attack_tiles.append(attack_down())
 			return attack_tiles
 
 		"Attack All Directions":
-			attack_tiles += attack_up()
-			attack_tiles += attack_left()
-			attack_tiles += attack_right()
-			attack_tiles += attack_down()
+			attack_tiles.append(attack_up())
+			attack_tiles.append(attack_left())
+			attack_tiles.append(attack_right())
+			attack_tiles.append(attack_down())
 			return attack_tiles
 			
 		_:

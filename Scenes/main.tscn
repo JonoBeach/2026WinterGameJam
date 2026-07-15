@@ -49,7 +49,7 @@ tile_set = SubResource("TileSet_3owqy")
 [node name="Player" parent="." unique_id=538769131 instance=ExtResource("3_jjvhh")]
 position = Vector2(360, 360)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2026995973]
+[node name="Deco2" type="Sprite2D" parent="." unique_id=2026995973]
 position = Vector2(960, 540)
 texture = ExtResource("8_344ge")
 
@@ -64,3 +64,5 @@ movement_y = 1
 attack_pattern_name = "Attack Up"
 attack_size = 2
 metadata/_custom_type_script = "uid://we4fyn7jki2m"
+
+[node name="Dialogue" type="Sprite2D" parent="." unique_id=2071331292]

@@ -21,10 +21,6 @@ const TILE_SIZE = 120
 
 ## Returns the location that the enemy will move to, based on its current position.
 func enemy_movement_location() -> Vector2:
-	#print("POS" + tilemap_dimensions.position)
-	#print("END" + tilemap_dimensions.end)
-	#print(Global.spots)
-	
 	enemy_occupying_spots.erase(enemy.position)
 	# Need to check if enemy is out of bounds OR there is another entity there
 	var new_position = enemy.position
@@ -56,14 +52,14 @@ func enemy_movement_location() -> Vector2:
 	if new_position.x < tilemap_dimensions.position.x * TILE_SIZE:
 		new_position.x = tilemap_dimensions.position.x * TILE_SIZE
 		
-	elif new_position.x > (tilemap_dimensions.end.x * TILE_SIZE) - TILE_SIZE:
-		new_position.x = (tilemap_dimensions.end.x * TILE_SIZE) - TILE_SIZE
+	elif new_position.x > tilemap_dimensions.end.x * TILE_SIZE:
+		new_position.x = tilemap_dimensions.end.x * TILE_SIZE
 		
 	if new_position.y < tilemap_dimensions.position.y * TILE_SIZE:
 		new_position.y = tilemap_dimensions.position.y * TILE_SIZE
 	
-	elif new_position.y > (tilemap_dimensions.end.y * TILE_SIZE) - TILE_SIZE:
-		new_position.y = (tilemap_dimensions.end.y * TILE_SIZE) - TILE_SIZE
+	elif new_position.y > tilemap_dimensions.end.y * TILE_SIZE:
+		new_position.y = tilemap_dimensions.end.y * TILE_SIZE
 	
 	enemy_occupying_spots.append(new_position)
 	return new_position

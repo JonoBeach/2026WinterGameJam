@@ -31,35 +31,14 @@ func attack_indicate():
 	pass
 	
 func do_attack():
-	hit_area.set_deferred("monitoring",true)
 	attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-	for tile_location in attacking_tiles:
-		hit_area.position = tile_location
-		print(tile_location)
-		if hit_area.body_entered:
-			for body in hit_area.get_overlapping_bodies():
-				print("%s has been attacked" % body)
-=======
->>>>>>> enemy
 	for tiles in attacking_tiles:
 		for tile_location in tiles:
 			hit_area.set_position(tile_location)
 			print(tile_location)
-<<<<<<< HEAD
 			if hit_area.body_entered:
 				for body in hit_area.get_overlapping_bodies():
 					print("%s has been attacked" % body)
-=======
-			#await get_tree().create_timer(2).timeout
-			if hit_area.body_entered:
-				for body in hit_area.get_overlapping_bodies():
-					print("%s has been attacked" % body)
-	hit_area.set_deferred("monitoring",false)
->>>>>>> Stashed changes
->>>>>>> enemy
 	
 func move_indicate():
 	pass

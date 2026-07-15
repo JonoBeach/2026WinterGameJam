@@ -1,0 +1,7 @@
+Defend|Place a shield in a cardinal direction of the knight.
+Gust|Pushes all entities in surrounding tiles away from it.
+Spike Trap|Place down a spike trap that kills anything that touches it.
+Bewilder|Distract the knight and prevent him from doing his next action.
+Event Horizon|Pulls all entities in surrounding tiles towards it.
+Fireball|Kills everything in its tile and surrounding tiles.
+Bulwark|Places a shield in every direction of the knight.

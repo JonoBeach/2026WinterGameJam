@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://i32wcyjchk1w" path="res://Art/button.png" id="2_3vmv3"]
 [ext_resource type="Texture2D" uid="uid://bll7bd124q80g" path="res://Art/tileholder.png" id="3_3vmv3"]
 [ext_resource type="SpriteFrames" uid="uid://c4whn8g1p3nkl" path="res://Scenes/new_sprite_frames.tres" id="4_s710e"]
+[ext_resource type="Texture2D" uid="uid://b0iqonnhycy6u" path="res://Art/description.png" id="5_kl6qe"]
 
 [node name="Mainhud" type="CanvasLayer" unique_id=1191797521]
 script = ExtResource("1_h7rvc")
@@ -58,16 +59,36 @@ offset_right = 144.0
 offset_bottom = 532.0
 
 [node name="Description" type="Sprite2D" parent="." unique_id=1790448682]
+visible = false
+position = Vector2(569, 101)
+texture = ExtResource("5_kl6qe")
 
-[node name="Label" type="Label" parent="Description" unique_id=1653661567]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "gabagool"
+[node name="Title" type="Label" parent="Description" unique_id=1653661567]
+offset_left = -69.0
+offset_top = -89.0
+offset_right = 69.0
+offset_bottom = -60.0
+text = "Bewilder"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Body" type="Label" parent="Description" unique_id=1277361038]
+offset_left = -69.0
+offset_top = -59.0
+offset_right = 69.0
+offset_bottom = 89.0
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [connection signal="pressed" from="EndTurn" to="." method="_on_end_turn_pressed"]
+[connection signal="mouse_entered" from="0" to="." method="_on_zero_mouse_entered"]
 [connection signal="mouse_exited" from="0" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="0" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="1" to="." method="_on_one_mouse_entered"]
 [connection signal="mouse_exited" from="1" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="1" to="." method="_on_one_pressed"]
+[connection signal="mouse_entered" from="2" to="." method="_on__mouse_entered"]
 [connection signal="mouse_exited" from="2" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="2" to="." method="_on_two_pressed"]

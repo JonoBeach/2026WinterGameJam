@@ -22,11 +22,13 @@ func _physics_process(_delta):
 	if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 		velocity = Vector2.ZERO
 		direction = ""
+		Global.player_move_finish.emit()
 	if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
 		velocity = Vector2.ZERO
 		pushdirection = ""
 	if move == "":
 		$MoveChoice.play("empty")
+		$Direction.play("empty")
 	move_and_slide()
 	
 
@@ -66,7 +68,7 @@ func movedecide():
 	$PlayerAnim.play("Face")
 	$Direction.play(direction)
 	##sets which action to do
-	match rng.randi_range(2,2):
+	match rng.randi_range(1,3):
 		1:
 			move = "attack"
 		2:
@@ -87,22 +89,54 @@ func movedo():
 				$PlayerAnim.play("move")
 		"attack":
 			#turns on and then off the sword hitbox
+			$PlayerAnim.play("use")
+			match direction:
+				"up":
+					$Sword/AnimatedSprite2D.rotation_degrees = -90
+					$Sword/AnimatedSprite2D.flip_h = false
+				"down":
+					$Sword/AnimatedSprite2D.rotation_degrees = 90
+					$Sword/AnimatedSprite2D.flip_h = false
+				"left":
+					$Sword/AnimatedSprite2D.rotation_degrees = 0
+					$Sword/AnimatedSprite2D.flip_h = true
+					$PlayerAnim.flip_h = true
+				"right":
+					$Sword/AnimatedSprite2D.rotation_degrees = 0
+					$Sword/AnimatedSprite2D.flip_h = false
+			await get_tree().create_timer(1.1).timeout
+			$Sword/AnimatedSprite2D.play("attack")
 			$Sword.monitoring = true
+			$SwordSlash.play()
 			$Sword.set_position(end-get_position())
-			await get_tree().create_timer(.5).timeout
+			await get_tree().create_timer(.6).timeout
 			$Sword.monitoring = false
+			$PlayerAnim.play("Face")
+			$PlayerAnim.flip_h = false
+			Global.player_move_finish.emit()
 		"defend":
+			$PlayerAnim.play("use")
+			if direction == "left":
+				$PlayerAnim.flip_h = true
+			await get_tree().create_timer(1.1).timeout
 			if end in spots and !(end-get_position() in Global.shields):
 				var scene = preload("res://Scenes/Shield.tscn")
 				var instance = scene.instantiate()
 				instance.set_position(end-get_position())
 				instance.direction = direction
 				add_child(instance)
+			await get_tree().create_timer(.6).timeout
+			$PlayerAnim.play("Face")
+			$PlayerAnim.flip_h = false
+			Global.player_move_finish.emit()
+		_:
+			await get_tree().create_timer(.1).timeout
+			Global.player_move_finish.emit()
 
 func push(finalPos,value):
-	$PlayerAnim.play("move")
 	pushend = get_position() + finalPos
 	if pushend in spots:
+		$PlayerAnim.play("move")
 		velocity = pushend-get_position()
 		pushdirection=value
 		end += finalPos

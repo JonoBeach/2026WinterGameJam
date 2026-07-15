@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d3cltwgwftrx2"
+path="res://.godot/imported/Sword Woosh.mp3-f07c26cde32968998d2d57e6802ffa04.mp3str"
+
+[deps]
+
+source_file="res://Music/Sword Woosh.mp3"
+dest_files=["res://.godot/imported/Sword Woosh.mp3-f07c26cde32968998d2d57e6802ffa04.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

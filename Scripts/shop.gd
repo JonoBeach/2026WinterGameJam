@@ -106,13 +106,39 @@ func _on__mouse_exited() -> void:
 func _on_zero_mouse_entered() -> void:
 	$Description.show()
 	DescSet($"NewSpells/0/AnimatedSprite2D".animation)
+	$Description/Body.text += "(1G)"
 
 
 func _on_one_mouse_entered() -> void:
 	$Description.show()
 	DescSet($"NewSpells/1/AnimatedSprite2D".animation)
+	$Description/Body.text += "(2G)"
 
 
 func _on_two_mouse_entered() -> void:
 	$Description.show()
 	DescSet($"NewSpells/2/AnimatedSprite2D".animation)
+	$Description/Body.text += "(3G)"
+
+
+func _on_win_mouse_entered() -> void:
+	$MainButtons/Win/description.show()
+
+
+func _on_gain_spell_mouse_entered() -> void:
+	$MainButtons/GainSpell/description.show()
+
+
+func _on_remove_spell_mouse_entered() -> void:
+	$MainButtons/RemoveSpell/description.show()
+
+
+func _on_continue_mouse_entered() -> void:
+	$MainButtons/Continue/description.show()
+
+
+func _on_continue_mouse_exited() -> void:
+	$MainButtons/Win/description.hide()
+	$MainButtons/Continue/description.hide()
+	$MainButtons/GainSpell/description.hide()
+	$MainButtons/RemoveSpell/description.hide()

@@ -53,6 +53,7 @@ script = ExtResource("1_wndna")
 position = Vector2(960, 540)
 sprite_frames = SubResource("SpriteFrames_3owqy")
 animation = &"Idle"
+autoplay = "Idle"
 
 [node name="MainButtons" type="Node2D" parent="." unique_id=352367023]
 
@@ -63,12 +64,48 @@ offset_right = 1031.0
 offset_bottom = 130.0
 texture_normal = ExtResource("3_2aaoe")
 
+[node name="description" type="Sprite2D" parent="MainButtons/Win" unique_id=457913571]
+visible = false
+position = Vector2(-74, 87)
+texture = ExtResource("9_ct2yw")
+
+[node name="Label" type="Label" parent="MainButtons/Win/description" unique_id=2146545425]
+offset_left = -68.0
+offset_top = -88.0
+offset_right = 69.0
+offset_bottom = 89.0
+text = "Grow
+
+Costs 20G
+Grow Tamadachi and escape from the dungeon"
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
 [node name="GainSpell" type="TextureButton" parent="MainButtons" unique_id=1443613484]
 offset_left = 344.0
 offset_top = 464.0
 offset_right = 464.0
 offset_bottom = 584.0
 texture_normal = ExtResource("4_ct2yw")
+
+[node name="description" type="Sprite2D" parent="MainButtons/GainSpell" unique_id=1179086719]
+visible = false
+position = Vector2(-74, 87)
+texture = ExtResource("9_ct2yw")
+
+[node name="Label" type="Label" parent="MainButtons/GainSpell/description" unique_id=195719581]
+offset_left = -68.0
+offset_top = -88.0
+offset_right = 69.0
+offset_bottom = 89.0
+text = "Feed
+
+Costs 1-3G
+Feed Tamadachi and in doing so help her learn a new spell"
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="RemoveSpell" type="TextureButton" parent="MainButtons" unique_id=1701816210]
 offset_left = 895.0
@@ -77,12 +114,47 @@ offset_right = 1015.0
 offset_bottom = 942.0
 texture_normal = ExtResource("5_ccd4q")
 
+[node name="description" type="Sprite2D" parent="MainButtons/RemoveSpell" unique_id=673424099]
+visible = false
+position = Vector2(-74, 87)
+texture = ExtResource("9_ct2yw")
+
+[node name="Label" type="Label" parent="MainButtons/RemoveSpell/description" unique_id=1956984485]
+offset_left = -68.0
+offset_top = -88.0
+offset_right = 69.0
+offset_bottom = 89.0
+text = "Bathe
+
+Costs 3G
+Give Tamadachi a shower causing her to forget a spell"
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
 [node name="Continue" type="TextureButton" parent="MainButtons" unique_id=1724799662]
 offset_left = 1530.0
 offset_top = 474.0
 offset_right = 1650.0
 offset_bottom = 594.0
 texture_normal = ExtResource("6_1mgah")
+
+[node name="description" type="Sprite2D" parent="MainButtons/Continue" unique_id=1296425292]
+visible = false
+position = Vector2(-74, 87)
+texture = ExtResource("9_ct2yw")
+
+[node name="Label" type="Label" parent="MainButtons/Continue/description" unique_id=519360916]
+offset_left = -68.0
+offset_top = -88.0
+offset_right = 69.0
+offset_bottom = 89.0
+text = "Continue
+
+Delve deeper into the dungeon for greater riches"
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="CurrentSpells" type="HBoxContainer" parent="." unique_id=545074453]
 visible = false
@@ -277,9 +349,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[connection signal="mouse_entered" from="MainButtons/Win" to="." method="_on_win_mouse_entered"]
+[connection signal="mouse_exited" from="MainButtons/Win" to="." method="_on_continue_mouse_exited"]
 [connection signal="pressed" from="MainButtons/Win" to="." method="_on_win_pressed"]
+[connection signal="mouse_entered" from="MainButtons/GainSpell" to="." method="_on_gain_spell_mouse_entered"]
+[connection signal="mouse_exited" from="MainButtons/GainSpell" to="." method="_on_continue_mouse_exited"]
 [connection signal="pressed" from="MainButtons/GainSpell" to="." method="_on_gain_spell_pressed"]
+[connection signal="mouse_entered" from="MainButtons/RemoveSpell" to="." method="_on_remove_spell_mouse_entered"]
+[connection signal="mouse_exited" from="MainButtons/RemoveSpell" to="." method="_on_continue_mouse_exited"]
 [connection signal="pressed" from="MainButtons/RemoveSpell" to="." method="_on_remove_spell_pressed"]
+[connection signal="mouse_entered" from="MainButtons/Continue" to="." method="_on_continue_mouse_entered"]
+[connection signal="mouse_exited" from="MainButtons/Continue" to="." method="_on_continue_mouse_exited"]
 [connection signal="pressed" from="MainButtons/Continue" to="." method="_on_continue_pressed"]
 [connection signal="mouse_entered" from="CurrentSpells/0" to="CurrentSpells/0" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CurrentSpells/0" to="." method="_on__mouse_exited"]

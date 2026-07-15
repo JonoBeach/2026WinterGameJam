@@ -58,6 +58,13 @@ offset_top = 509.0
 offset_right = 144.0
 offset_bottom = 532.0
 
+[node name="Spells" type="Label" parent="." unique_id=492558442]
+offset_left = 1304.0
+offset_top = 109.0
+offset_right = 1344.0
+offset_bottom = 132.0
+text = "6/10"
+
 [node name="Description" type="Sprite2D" parent="." unique_id=1790448682]
 visible = false
 position = Vector2(569, 101)

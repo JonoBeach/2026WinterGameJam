@@ -35,7 +35,6 @@ func do_attack():
 	for tiles in attacking_tiles:
 		for tile_location in tiles:
 			hit_area.set_position(tile_location)
-			print(tile_location)
 			if hit_area.body_entered:
 				for body in hit_area.get_overlapping_bodies():
 					print("%s has been attacked" % body)

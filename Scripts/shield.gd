@@ -19,4 +19,8 @@ func _ready() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	area.queue_free()
+	if area.name != "Sword":
+		$AudioStreamPlayer.play()
+		area.queue_free()
+		await get_tree().create_timer(.4).timeout
+		queue_free()

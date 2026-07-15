@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dueim7yvoa2l4" path="res://Scripts/shield.gd" id="1_g6qfg"]
 [ext_resource type="Texture2D" uid="uid://brc3glfxhyvsu" path="res://Art/shield.png" id="2_g6qfg"]
+[ext_resource type="AudioStream" uid="uid://cmh2772d61uh4" path="res://Music/Shield Deflect.mp3" id="3_f84if"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
 size = Vector2(100, 100)
@@ -70,5 +71,8 @@ shape = SubResource("RectangleShape2D_3owqy")
 sprite_frames = SubResource("SpriteFrames_3owqy")
 animation = &"left"
 autoplay = "left"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=53007239]
+stream = ExtResource("3_f84if")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -21,6 +21,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	$Energy.text = str(energy)+"/3"
+	#print(moves)
+	$Spells.text = str(moves.size())+"/"+str(Global.Moves.size())
 
 func _on_end_turn_pressed() -> void:
 	get_parent().endturn()
@@ -28,7 +30,7 @@ func _on_end_turn_pressed() -> void:
 
 func reset():
 	$EndTurn.show()
-	energy+=3
+	energy=3
 	assignMoves()
 
 
@@ -59,7 +61,6 @@ func _on_button_pressed() -> void:
 
 func _on_one_pressed() -> void:
 	if !actioning:
-		print("wahoo")
 		var hide = movechoose($"1/AnimatedSprite2D".animation)
 		if hide:
 			$"1".hide()

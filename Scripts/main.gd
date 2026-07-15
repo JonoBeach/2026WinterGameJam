@@ -1,11 +1,27 @@
 extends Node
-
+var diai = 0
+var dialogue = [[],[]]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if Global.coins == -1:
+		$Dialogue.show()
+		$Mainhud.hide()
+	else:
+		$Dialogue.hide()
+		$Mainhud.show()
 	$Player.movedecide()
 	Global.shields = []
 	Global.spikes = []
+	var f = FileAccess.open("res://Dialogue/Tutorial.txt",FileAccess.READ).get_as_text()
+	f = f.replace("\n","|").split("|")
+	for x in range(0,len(f),2):
+		dialogue[0].append(f[x])
+		if x < len(f)-1:
+			dialogue[1].append(f[x+1])
+	$Dialogue/Title.text = dialogue[0][diai]
+	$Dialogue/Body.text = dialogue[1][diai]
+	Global.player_move_finish.connect(_on_player_finished)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -14,8 +30,20 @@ func _process(delta: float) -> void:
 ##called when end turn button pressed
 func endturn():
 	$Player.movedo()
-	await get_tree().create_timer(1.5).timeout
+	
+
+
+func _on_next_pressed() -> void:
+	diai +=1
+	if diai < len(dialogue[0]):
+		$Dialogue/Title.text = dialogue[0][diai]
+		$Dialogue/Body.text = dialogue[1][diai]
+	else:
+		$Dialogue.hide()
+		$Mainhud.show()
+
+func _on_player_finished():
 	$Mainhud.reset()
 	$Player.movedecide()
-	$Enemy.enemy_move()
-	$Enemy.do_attack()
+	#$Enemy.enemy_move()
+	#$Enemy.do_attack()

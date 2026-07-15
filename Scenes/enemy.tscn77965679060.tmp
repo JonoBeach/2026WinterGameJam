@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://daa2l6q1xx08g" path="res://Scripts/enemy.gd" id="1_afpow"]
 [ext_resource type="Texture2D" uid="uid://bcdix717f6ei2" path="res://Art/enemy_placeholder.png" id="2_287tu"]
-[ext_resource type="Texture2D" uid="uid://btdxda7tdist7" path="res://Art/enemy_move_placeholder.png" id="3_afpow"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0yxg5"]
 animations = [{
@@ -43,10 +42,6 @@ position = Vector2(60, 60)
 shape = SubResource("RectangleShape2D_0yxg5")
 
 [node name="HitArea" type="Area2D" parent="." unique_id=83828995]
-top_level = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="HitArea" unique_id=1632672931]
 shape = SubResource("RectangleShape2D_ohjvl")
-
-[node name="TestHitboxShower" type="Sprite2D" parent="HitArea" unique_id=2071910095]
-texture = ExtResource("3_afpow")

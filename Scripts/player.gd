@@ -14,6 +14,7 @@ func _ready() -> void:
 		spots[x] *=120
 	set_position(spots[10])
 	Global.spots = spots
+	print(spots)
 	Global.tama_move.connect(_on_move_finish)
 
 

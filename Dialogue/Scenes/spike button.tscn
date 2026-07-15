@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bludk5xs1qs2x"]
+
+[ext_resource type="Texture2D" uid="uid://r237fsrks8yf" path="res://Art/spike rect.png" id="1_mtooq"]
+[ext_resource type="Script" uid="uid://uyw2j3yfl48c" path="res://Scripts/spike_button.gd" id="2_7lf7g"]
+
+[node name="SpikeButton" type="TextureButton" unique_id=1175176508]
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+texture_normal = ExtResource("1_mtooq")
+script = ExtResource("2_7lf7g")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bnqpiaouov3e7"]
+
+[ext_resource type="Script" uid="uid://b7wyt010xa0ds" path="res://Scripts/spike.gd" id="1_nuopa"]
+[ext_resource type="Texture2D" uid="uid://bll7bd124q80g" path="res://Art/tileholder.png" id="2_n83sx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3owqy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n83sx")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
+size = Vector2(100, 100)
+
+[node name="Spike" type="Area2D" unique_id=648554836]
+collision_layer = 2
+script = ExtResource("1_nuopa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=428870485]
+sprite_frames = SubResource("SpriteFrames_3owqy")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914029834]
+shape = SubResource("RectangleShape2D_3owqy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

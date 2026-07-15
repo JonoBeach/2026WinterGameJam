@@ -17,5 +17,5 @@ func endturn():
 	await get_tree().create_timer(1.5).timeout
 	$Mainhud.reset()
 	$Player.movedecide()
-	$Enemy.enemy_move()
 	$Enemy.do_attack()
+	$Enemy.enemy_move()

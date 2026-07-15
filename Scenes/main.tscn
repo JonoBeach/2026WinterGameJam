@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://y6qkru5k5j7f" path="res://Scenes/Mainhud.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://b1w0d8mxg8n8i" path="res://Art/decorations.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://d34alusg2ba13" path="res://Art/decorations_bot.png" id="8_344ge"]
+[ext_resource type="PackedScene" uid="uid://cofieok2kui82" path="res://Scenes/enemy.tscn" id="9_hptm8"]
+[ext_resource type="Script" uid="uid://we4fyn7jki2m" path="res://components/enemy_attack_and_movement_patterns.gd" id="10_d1ilt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
 texture = ExtResource("2_8gbba")
@@ -50,3 +52,15 @@ position = Vector2(360, 360)
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2026995973]
 position = Vector2(960, 540)
 texture = ExtResource("8_344ge")
+
+[node name="Enemy" parent="." unique_id=203983045 instance=ExtResource("9_hptm8")]
+position = Vector2(960, 360)
+
+[node name="enemy_attack_and_movement_patterns" type="Node" parent="Enemy" unique_id=1975240966 node_paths=PackedStringArray("enemy")]
+script = ExtResource("10_d1ilt")
+enemy = NodePath("..")
+movement_x = 1
+movement_y = 1
+attack_pattern_name = "Attack Up"
+attack_size = 2
+metadata/_custom_type_script = "uid://we4fyn7jki2m"

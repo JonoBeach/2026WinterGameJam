@@ -41,7 +41,7 @@ func assignMoves():
 		get_node(str(i)+"/AnimatedSprite2D").play(moves[index])
 		avaiMoves.append(moves[index])
 		moves.remove_at(index)
-	print(moves, avaiMoves, discards)
+	#print(moves, avaiMoves, discards)
 
 func _on_button_pressed() -> void:
 	if !actioning:

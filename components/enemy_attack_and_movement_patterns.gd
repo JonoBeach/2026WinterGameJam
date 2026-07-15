@@ -66,7 +66,7 @@ func enemy_movement_location() -> Vector2:
 	
 	
 ## Will return the tiles that the enemy will attack, based on attack pattern defined.
-func enemy_attack_pattern() -> Array[Vector2]:
+func enemy_attack_pattern():
 	var attack_tiles = []
 	match attack_pattern_name:
 		"Attack Up":
@@ -96,13 +96,16 @@ func enemy_attack_pattern() -> Array[Vector2]:
 			push_error("Error: %s attack pattern not defined!" % enemy.name)
 			return []
 
-func attack_up() -> Array[Vector2]:
+func attack_up()  -> Array[Vector2]:
+	print(tilemap_dimensions.position.y)
 	var new_move
 	var attack_tiles = []
 	for current_attack in range(1, attack_size+1):
 		new_move = Vector2(enemy.position.x, enemy.position.y - TILE_SIZE * current_attack)
+		print(new_move)
 		if new_move.y >= tilemap_dimensions.position.y * TILE_SIZE:
 			attack_tiles.append(new_move)
+	print(attack_tiles)
 	return attack_tiles
 	
 func attack_left() -> Array[Vector2]:

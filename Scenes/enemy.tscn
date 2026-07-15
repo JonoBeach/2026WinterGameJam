@@ -44,6 +44,7 @@ shape = SubResource("RectangleShape2D_0yxg5")
 
 [node name="HitArea" type="Area2D" parent="." unique_id=83828995]
 top_level = true
+collision_layer = 2
 
 [node name="Hitbox" type="CollisionShape2D" parent="HitArea" unique_id=1632672931]
 shape = SubResource("RectangleShape2D_ohjvl")

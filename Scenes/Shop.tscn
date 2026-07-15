@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cuaec2dolf5wj" path="res://Art/defend rect.png" id="6_1mgah"]
 [ext_resource type="Script" uid="uid://b5afp6gybthxp" path="res://Scripts/removespellsbuttons.gd" id="7_2aaoe"]
 [ext_resource type="SpriteFrames" uid="uid://c4whn8g1p3nkl" path="res://Scenes/new_sprite_frames.tres" id="7_ckylj"]
+[ext_resource type="Texture2D" uid="uid://b0iqonnhycy6u" path="res://Art/description.png" id="9_ct2yw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r8bg4"]
 atlas = ExtResource("2_ckylj")
@@ -252,22 +253,72 @@ animation = &"defend"
 layout_mode = 2
 texture_normal = ExtResource("5_ccd4q")
 
+[node name="Description" type="Sprite2D" parent="." unique_id=1994858251]
+visible = false
+position = Vector2(1850, 90)
+texture = ExtResource("9_ct2yw")
+
+[node name="Title" type="Label" parent="Description" unique_id=108166702]
+offset_left = -69.0
+offset_top = -89.0
+offset_right = 69.0
+offset_bottom = -60.0
+text = "Bewilder"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Body" type="Label" parent="Description" unique_id=872032744]
+offset_left = -69.0
+offset_top = -59.0
+offset_right = 69.0
+offset_bottom = 89.0
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [connection signal="pressed" from="MainButtons/Win" to="." method="_on_win_pressed"]
 [connection signal="pressed" from="MainButtons/GainSpell" to="." method="_on_gain_spell_pressed"]
 [connection signal="pressed" from="MainButtons/RemoveSpell" to="." method="_on_remove_spell_pressed"]
 [connection signal="pressed" from="MainButtons/Continue" to="." method="_on_continue_pressed"]
+[connection signal="mouse_entered" from="CurrentSpells/0" to="CurrentSpells/0" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CurrentSpells/0" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="CurrentSpells/0" to="CurrentSpells/0" method="_on__pressed"]
+[connection signal="mouse_entered" from="CurrentSpells/1" to="CurrentSpells/1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CurrentSpells/1" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="CurrentSpells/1" to="CurrentSpells/1" method="_on__pressed"]
+[connection signal="mouse_entered" from="CurrentSpells/2" to="CurrentSpells/2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CurrentSpells/2" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="CurrentSpells/2" to="CurrentSpells/2" method="_on__pressed"]
+[connection signal="mouse_entered" from="CurrentSpells/3" to="CurrentSpells/3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CurrentSpells/3" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="CurrentSpells/3" to="CurrentSpells/3" method="_on__pressed"]
+[connection signal="mouse_entered" from="CurrentSpells/4" to="CurrentSpells/4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CurrentSpells/4" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="CurrentSpells/4" to="CurrentSpells/4" method="_on__pressed"]
+[connection signal="mouse_entered" from="CurrentSpells/5" to="CurrentSpells/5" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CurrentSpells/5" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="CurrentSpells/5" to="CurrentSpells/5" method="_on__pressed"]
+[connection signal="mouse_entered" from="CurrentSpells/6" to="CurrentSpells/6" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CurrentSpells/6" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="CurrentSpells/6" to="CurrentSpells/6" method="_on__pressed"]
+[connection signal="mouse_entered" from="CurrentSpells/7" to="CurrentSpells/7" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CurrentSpells/7" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="CurrentSpells/7" to="CurrentSpells/7" method="_on__pressed"]
+[connection signal="mouse_entered" from="CurrentSpells/8" to="CurrentSpells/8" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CurrentSpells/8" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="CurrentSpells/8" to="CurrentSpells/8" method="_on__pressed"]
+[connection signal="mouse_entered" from="CurrentSpells/9" to="CurrentSpells/9" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CurrentSpells/9" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="CurrentSpells/9" to="CurrentSpells/9" method="_on__pressed"]
 [connection signal="pressed" from="CurrentSpells/Exit" to="." method="_on_exit_pressed"]
+[connection signal="mouse_entered" from="NewSpells/0" to="." method="_on_zero_mouse_entered"]
+[connection signal="mouse_exited" from="NewSpells/0" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="NewSpells/0" to="." method="_on__pressed"]
+[connection signal="mouse_entered" from="NewSpells/1" to="." method="_on_one_mouse_entered"]
+[connection signal="mouse_exited" from="NewSpells/1" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="NewSpells/1" to="." method="_on_one_pressed"]
+[connection signal="mouse_entered" from="NewSpells/2" to="." method="_on_two_mouse_entered"]
+[connection signal="mouse_exited" from="NewSpells/2" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="NewSpells/2" to="." method="_on_two_pressed"]
 [connection signal="pressed" from="NewSpells/Exit" to="." method="_on_exit_pressed"]

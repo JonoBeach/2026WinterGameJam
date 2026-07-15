@@ -115,9 +115,10 @@ func movedo():
 			$PlayerAnim.flip_h = false
 			Global.player_move_finish.emit()
 		"defend":
-			$PlayerAnim.play("use")
-			if direction == "left":
-				$PlayerAnim.flip_h = true
+			if end in spots and !(end-get_position() in Global.shields):
+				$PlayerAnim.play("use")
+				if direction == "left":
+					$PlayerAnim.flip_h = true
 			await get_tree().create_timer(1.1).timeout
 			if end in spots and !(end-get_position() in Global.shields):
 				var scene = preload("res://Scenes/Shield.tscn")

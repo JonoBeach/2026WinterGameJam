@@ -1,12 +1,12 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://c4whn8g1p3nkl"]
 
-[ext_resource type="Texture2D" uid="uid://r237fsrks8yf" path="res://Art/spike rect.png" id="1_epcx1"]
-[ext_resource type="Texture2D" uid="uid://i32wcyjchk1w" path="res://Art/button.png" id="2_0hmi3"]
-[ext_resource type="Texture2D" uid="uid://catg7nmy281l6" path="res://Art/gust rect.png" id="2_q4bmd"]
+[ext_resource type="Texture2D" uid="uid://cavre330f3ygb" path="res://Art/bewilder_ui.png" id="1_epcx1"]
+[ext_resource type="Texture2D" uid="uid://dq1vilvcomfii" path="res://Art/bulwark_ui.png" id="2_q4bmd"]
 [ext_resource type="Texture2D" uid="uid://c64cim4sbordx" path="res://Art/block_ui.png" id="3_epcx1"]
-[ext_resource type="Texture2D" uid="uid://bcdix717f6ei2" path="res://Art/enemy_placeholder.png" id="3_inma5"]
 [ext_resource type="Texture2D" uid="uid://d14b4xd7weo3x" path="res://Art/fireball_ui.png" id="4_epcx1"]
 [ext_resource type="Texture2D" uid="uid://c78ju006y818d" path="res://Art/gust_ui.png" id="5_epcx1"]
+[ext_resource type="Texture2D" uid="uid://dg71q5ogcrsqo" path="res://Art/event_horizon_ui.png" id="6_tidt6"]
+[ext_resource type="Texture2D" uid="uid://lduoakd01xha" path="res://Art/spike_ui.png" id="7_0fs5b"]
 
 [resource]
 animations = [{
@@ -52,7 +52,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_0hmi3")
+"texture": ExtResource("6_tidt6")
 }],
 "loop": 1,
 "name": &"horizon",
@@ -60,7 +60,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_inma5")
+"texture": ExtResource("7_0fs5b")
 }],
 "loop": 1,
 "name": &"spike",

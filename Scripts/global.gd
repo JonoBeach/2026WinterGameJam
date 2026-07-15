@@ -1,5 +1,5 @@
 extends Node
-var Moves = ["defend","defend","defend","gust","gust","spike","bulwark","bewilder"]
+var Moves = ["defend","defend","defend","gust","gust","spike"]
 signal gust_check() #for both gust and spike buttons visibility setting
 var spots
 var playerpos

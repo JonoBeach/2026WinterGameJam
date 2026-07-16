@@ -5,7 +5,6 @@ var origin
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.shields.append(get_position())
-	print(Global.shields)
 	$CollisionShape2D/AnimatedSprite2D.play(direction+origin)
 	match direction:
 		"left":

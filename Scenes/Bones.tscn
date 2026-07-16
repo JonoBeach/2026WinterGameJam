@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://d3ajlvfbclver"]
+
+[node name="Bones" type="CharacterBody2D" unique_id=1165785481]

@@ -50,7 +50,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"Gust",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [node name="Gust" type="AnimatedSprite2D" unique_id=1730988658]

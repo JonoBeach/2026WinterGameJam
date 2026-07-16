@@ -153,6 +153,7 @@ func push(finalPos,value):
 #calls killed() if it touches a body
 func _on_sword_body_entered(body: Node2D) -> void:
 	body.killed(get_position())
+	$swordhit.play()
 
 func killed(area):
 	if area == Vector2(0,0):

@@ -101,6 +101,7 @@ texture_normal = ExtResource("2_8gbba")
 [node name="enemy_attack_and_movement_patterns" type="Node" parent="Enemy" unique_id=1354690557 node_paths=PackedStringArray("enemy")]
 script = ExtResource("11_6iyac")
 enemy = NodePath("..")
+tile_move_count = 3
 metadata/_custom_type_script = "uid://we4fyn7jki2m"
 
 [node name="enemypositions" type="TileMapLayer" parent="." unique_id=831590137]

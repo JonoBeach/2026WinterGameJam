@@ -53,6 +53,7 @@ func move_indicate():
 func enemy_move():
 	var previous_move = position
 	var current_move = position
+	var move_list = []
 	for i in range(attack_movement_patterns.tile_move_count):
 		current_move = end
 		end = attack_movement_patterns.enemy_movement_location()
@@ -75,24 +76,28 @@ func enemy_move():
 			print("HIT")
 			hit_area.set_deferred("monitoring", false)
 		
-		else:
-			hit_area.set_deferred("monitoring", false)
-			# Determine direction
-			if (end.x - position.x < 0):
-				direction = "left"
-				enemy_sprite.play("face_left")
-			if (end.x - position.x > 0):
-				direction = "right"
-				enemy_sprite.play("face_right")
+		move_list.append(end)
+	
+	#print(move_list)
+	
+	for move in move_list:
+		hit_area.set_deferred("monitoring", false)
+		# Determine direction
+		if (move.x - position.x < 0):
+			direction = "left"
+			enemy_sprite.play("face_left")
+		if (move.x - position.x > 0):
+			direction = "right"
+			enemy_sprite.play("face_right")
 			
-			if (end.y - position.y < 0):
-				direction = "up"
-			if (end.y - position.y > 0):
-				direction = "down"
+		if (move.y - position.y < 0):
+			direction = "up"
+		if (move.y - position.y > 0):
+			direction = "down"
 			
-			velocity = end - position
-			#previous_move = end
-			await get_tree().create_timer(1).timeout
+		velocity = end - position
+		#previous_move = end
+		await get_tree().create_timer(1).timeout
 			
 		#previous_move = end
 		hit_area.set_deferred("monitoring", false)

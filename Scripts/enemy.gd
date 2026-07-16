@@ -47,7 +47,9 @@ func move_indicate():
 
 func enemy_move():
 	var previous_move = position
+	var current_move = position
 	for i in range(attack_movement_patterns.tile_move_count):
+		current_move = end
 		end = attack_movement_patterns.enemy_movement_location()
 		print("end %s" % end)
 		print("prev move %s" % previous_move)
@@ -58,17 +60,18 @@ func enemy_move():
 			print("prev move %s" % previous_move)
 			end = attack_movement_patterns.enemy_movement_location()
 				
-		previous_move = end
-		
+		previous_move = current_move
 		# Check if another entity is at destination
-		hit_area.set_deferred("monitoring", true)
 		hit_area.set_position(end)
+		hit_area.set_deferred("monitoring", true)
 		
-		if _on_hit_area_body_entered(player):
-			print("HIT")
+		if hit_area.has_overlapping_bodies():
 			velocity = Vector2.ZERO
+			print("HIT")
+			hit_area.set_deferred("monitoring", false)
 		
 		else:
+			hit_area.set_deferred("monitoring", false)
 			# Determine direction
 			if (end.x - position.x < 0):
 				direction = "left"
@@ -85,6 +88,8 @@ func enemy_move():
 			velocity = end - position
 			#previous_move = end
 			await get_tree().create_timer(1).timeout
+			
+		#previous_move = end
 		hit_area.set_deferred("monitoring", false)
 
 

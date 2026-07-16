@@ -5,6 +5,7 @@ var origin
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.shields.append(get_position())
+	print(Global.shields)
 	$CollisionShape2D/AnimatedSprite2D.play(direction+origin)
 	match direction:
 		"left":
@@ -17,11 +18,3 @@ func _ready() -> void:
 		"down":
 			$CollisionShape2D.set_position(Vector2(60,-30))
 			$CollisionShape2D/AnimatedSprite2D.z_index = 1
-
-
-func _on_area_entered(area: Area2D) -> void:
-	if area.name != "Sword":
-		$AudioStreamPlayer.play()
-		area.queue_free()
-		await get_tree().create_timer(.4).timeout
-		queue_free()

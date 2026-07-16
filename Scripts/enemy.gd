@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var hit_area = $HitArea
 @onready var spots = get_parent().get_node("enemypositions").get_used_cells()
 
+var attackpos
 var movei = 0
 var move_list = []
 var rng = RandomNumberGenerator.new()
@@ -15,12 +16,15 @@ var pushdirection = ""
 var attacking_tiles
 
 func _ready():
-	set_position(spots[rng.randi_range(0, len(spots)-1)]*120)
 	Global.enemy_move.connect(do_attack)
 	Global.enemy_calculate_move.connect(calculate_enemy_move)
 
 func _physics_process(_delta):
-	
+	if !player == null:
+		if position.y < player.position.y:
+			z_index = -1
+		else:
+			z_index = 1
 	if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 		velocity = Vector2.ZERO
 		direction = ""
@@ -30,6 +34,8 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 		pushdirection = ""
 		set_position(pushend)
+	if velocity == Vector2.ZERO and $Enemy_overlap.get_overlapping_areas().size()>0:
+		$Enemy_overlap.get_overlapping_areas()[0].get_parent().killed(Vector2(0,0))
 	move_and_slide()
 
 func attack_indicate():
@@ -37,16 +43,20 @@ func attack_indicate():
 	pass
 	
 func do_attack():
-	hit_area.set_deferred("monitoring", true)
-	attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
-	for tile_location in attacking_tiles:
-			hit_area.set_position(tile_location)
-			
-			if hit_area.has_overlapping_bodies():
-				for body in hit_area.get_overlapping_bodies():
-					print("%s has been attacked" % body)
-					
-	hit_area.set_deferred("monitoring", false)
+	if (attackpos+get_position() in Global.spots):
+		hit_area.set_deferred("monitoring", true)
+		await get_tree().create_timer(.5).timeout
+		hit_area.set_deferred("monitoring", false)
+	
+	#attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
+	#for tile_location in attacking_tiles:
+			#hit_area.set_position(tile_location)
+			#
+			#if hit_area.has_overlapping_bodies():
+				#for body in hit_area.get_overlapping_bodies():
+					#print("%s has been attacked" % body)
+					#
+	
 	Global.occupied.erase(position)
 	enemy_move()
 	
@@ -54,22 +64,29 @@ func move_indicate():
 	pass
 
 func calculate_enemy_move():
+	var attacks = attack_movement_patterns.enemy_movement_location(position)
+	attackpos = attacks[rng.randi_range(0,attacks.size()-1)]#-get_position()
+
+	$HitArea.show()
+	$HitArea.set_position(attackpos)
+	
 	move_list = []
 	movei =0
 	var pos_moves
 	var next_move
 	var initial_pos = position
 	for i in range(attack_movement_patterns.tile_move_count):
-		if i == 0:
+		if move_list.size() == 0:
 			pos_moves  = attack_movement_patterns.enemy_movement_location(position)
 		else:
 			pos_moves = attack_movement_patterns.enemy_movement_location(move_list[-1])
 		for move in pos_moves:
-			if move in move_list or move == initial_pos:
+			if move in move_list or move == initial_pos or move in Global.occupied:
 				pos_moves.erase(move)
 		if pos_moves.size() > 0:
 			next_move = pos_moves[rng.randi_range(0,pos_moves.size()-1)]
 			move_list.append(next_move)
+
 	if move_list.size() > 0:
 		$Move_indicator.show()
 		$Move_indicator.set_position(move_list[-1]-position+Vector2(60,60))
@@ -97,6 +114,7 @@ func calculate_enemy_move():
 	#print(move_list)
 func enemy_move():
 	$Move_indicator.hide()
+	$HitArea.hide()
 	if movei < move_list.size():
 		var move = move_list[movei]
 		movei+=1
@@ -123,14 +141,25 @@ func enemy_move():
 
 
 func _on_hit_area_body_entered(body):
-	return true
+	body.killed(get_position())
 
 
 func push(finalPos,value):
 	pushend = get_position() + finalPos
 	if pushend in Global.spots:
+		attackpos+=finalPos
+		if !(attackpos in Global.spots):
+			$HitArea.hide()
+		else:
+			$HitArea.set_position(attackpos)
 		for x in range(0,move_list.size()):
 			move_list[x]+=finalPos
+		if !move_list[-1] in Global.spots:
+			$Move_indicator.hide()
 		velocity = pushend-get_position()
 		pushdirection=value
 		end += finalPos
+
+func killed(area):
+	Global.enemy_dead.emit() 
+	queue_free()

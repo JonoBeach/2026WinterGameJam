@@ -1,9 +1,14 @@
 extends Node
 var diai = 0
 var dialogue = [[],[]]
+var rng = RandomNumberGenerator.new()
+@onready var spots = $enemypositions.get_used_cells()
+var enemies_finished = 0
+var enemcount
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	enemcount = Global.enemy_count
 	if Global.coins == -1:
 		$Dialogue.show()
 		$Mainhud.hide()
@@ -23,8 +28,20 @@ func _ready() -> void:
 	$Dialogue/Body.text = dialogue[1][diai]
 	Global.player_move_finish.connect(_on_player_finished)
 	Global.enemy_move_finish.connect(_on_enemy_finished)
+	Global.enemy_dead.connect(_on_death)
 	for x in range(0,Global.enemy_count):
-		pass #spawn x amount of enemies
+		match rng.randi_range(1,1):
+			1:
+				var scene = preload("res://Scenes/enemy.tscn")
+				var instance = scene.instantiate()
+				var i =rng.randi_range(0, len(spots)-1)
+				instance.set_position(spots[i]*120)
+				spots.remove_at(i)
+				add_child(instance)
+			2:
+				pass
+			3:
+				pass
 	Global.enemy_calculate_move.emit()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,10 +65,16 @@ func _on_next_pressed() -> void:
 		$Mainhud.show()
 
 func _on_player_finished():
-	$Player.movedecide()
+	
+	enemies_finished = 0
 	Global.enemy_move.emit()
 
 func _on_enemy_finished():
-	print(Global.occupied)
-	$Mainhud.reset()
-	Global.enemy_calculate_move.emit()
+	enemies_finished+=1
+	if enemies_finished == enemcount:
+		$Mainhud.reset()
+		$Player.movedecide()
+		Global.enemy_calculate_move.emit()
+
+func _on_death():
+	enemcount-=1

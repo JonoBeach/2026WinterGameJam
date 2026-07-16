@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://daa2l6q1xx08g" path="res://Scripts/enemy.gd" id="1_afpow"]
 [ext_resource type="Texture2D" uid="uid://bcdix717f6ei2" path="res://Art/enemy_placeholder.png" id="2_287tu"]
-[ext_resource type="Texture2D" uid="uid://btdxda7tdist7" path="res://Art/enemy_move_placeholder.png" id="3_afpow"]
 [ext_resource type="Texture2D" uid="uid://cko4prortla3v" path="res://Art/enemy_indicator.png" id="4_287tu"]
+[ext_resource type="Texture2D" uid="uid://bo6xi7jrl6q5b" path="res://Art/enemy_move_indicator.png" id="4_0830c"]
+[ext_resource type="Script" uid="uid://we4fyn7jki2m" path="res://components/enemy_attack_and_movement_patterns.gd" id="5_0830c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0yxg5"]
 animations = [{
@@ -30,7 +31,10 @@ size = Vector2(100, 100)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ohjvl"]
 size = Vector2(120, 120)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
+
 [node name="Enemy" type="CharacterBody2D" unique_id=203983045]
+collision_mask = 0
 script = ExtResource("1_afpow")
 
 [node name="EnemySprite" type="AnimatedSprite2D" parent="." unique_id=1093748365]
@@ -44,20 +48,37 @@ position = Vector2(60, 60)
 shape = SubResource("RectangleShape2D_0yxg5")
 
 [node name="HitArea" type="Area2D" parent="." unique_id=83828995]
+visible = false
 top_level = true
 collision_layer = 2
 monitoring = false
 
 [node name="Hitbox" type="CollisionShape2D" parent="HitArea" unique_id=1632672931]
-position = Vector2(61, 60)
+position = Vector2(60, 60)
 shape = SubResource("RectangleShape2D_ohjvl")
 
 [node name="TestHitboxShower" type="Sprite2D" parent="HitArea" unique_id=2071910095]
 position = Vector2(60, 60)
-texture = ExtResource("3_afpow")
+texture = ExtResource("4_287tu")
 
 [node name="Move_indicator" type="Sprite2D" parent="." unique_id=1306482521]
 visible = false
-texture = ExtResource("4_287tu")
+texture = ExtResource("4_0830c")
+
+[node name="enemy_attack_and_movement_patterns" type="Node" parent="." unique_id=1487008254 node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_0830c")
+enemy = NodePath("..")
+tile_move_count = 2
+attack_pattern_name = "Attack All Directions"
+attack_size = 1
+metadata/_custom_type_script = "uid://we4fyn7jki2m"
+
+[node name="Enemy_overlap" type="Area2D" parent="." unique_id=891400463]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_overlap" unique_id=49315736]
+position = Vector2(60, 60)
+shape = SubResource("RectangleShape2D_3owqy")
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

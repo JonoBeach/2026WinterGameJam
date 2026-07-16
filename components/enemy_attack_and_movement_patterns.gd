@@ -25,7 +25,7 @@ func enemy_movement_location(posit):
 	# Need to check if enemy is out of bounds OR there is another entity there
 	var new_position = [posit + Vector2(TILE_SIZE, 0),posit - Vector2(TILE_SIZE, 0),posit + Vector2(0, TILE_SIZE),posit - Vector2(0, TILE_SIZE)]
 	for x in range(3,-1,-1):
-		if !(new_position[x] in Global.spots) or new_position[x] in Global.occupied:
+		if !(new_position[x] in Global.spots):
 			new_position.remove_at(x)
 	return new_position
 	#TODO: add prevention of walking over enemies
@@ -119,7 +119,7 @@ func attack_down():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(tilemap_dimensions)
+	#print(tilemap_dimensions)
 	pass # Replace with function body.
 
 

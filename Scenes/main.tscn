@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://y6qkru5k5j7f" path="res://Scenes/Mainhud.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://b1w0d8mxg8n8i" path="res://Art/decorations.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://d34alusg2ba13" path="res://Art/decorations_bot.png" id="8_344ge"]
-[ext_resource type="PackedScene" uid="uid://cofieok2kui82" path="res://Scenes/enemy.tscn" id="10_d1ilt"]
-[ext_resource type="Script" uid="uid://we4fyn7jki2m" path="res://components/enemy_attack_and_movement_patterns.gd" id="11_6iyac"]
 [ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="11_d1ilt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
@@ -95,14 +93,6 @@ offset_top = 157.0
 offset_right = 7.0
 offset_bottom = 277.0
 texture_normal = ExtResource("2_8gbba")
-
-[node name="Enemy" parent="." unique_id=203983045 instance=ExtResource("10_d1ilt")]
-
-[node name="enemy_attack_and_movement_patterns" type="Node" parent="Enemy" unique_id=1354690557 node_paths=PackedStringArray("enemy")]
-script = ExtResource("11_6iyac")
-enemy = NodePath("..")
-tile_move_count = 3
-metadata/_custom_type_script = "uid://we4fyn7jki2m"
 
 [node name="enemypositions" type="TileMapLayer" parent="." unique_id=831590137]
 visible = false

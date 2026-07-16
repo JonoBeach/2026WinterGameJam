@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://csyof1eit5i5j" path="res://Art/sword.png" id="9_igrcy"]
 [ext_resource type="PackedScene" uid="uid://bkjt64xm4wepd" path="res://Scenes/HorizonButton.tscn" id="10_tx1dd"]
 [ext_resource type="AudioStream" uid="uid://d3cltwgwftrx2" path="res://Music/Sword Woosh.mp3" id="16_fd4e3"]
+[ext_resource type="AudioStream" uid="uid://cmh2772d61uh4" path="res://Music/Shield Deflect.mp3" id="18_fs7ks"]
 [ext_resource type="AudioStream" uid="uid://cakkb87k8dra4" path="res://Music/SPELL SOUND.mp3" id="18_igrcy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_36dho"]
@@ -449,6 +450,8 @@ scenes/1/scene = ExtResource("10_tx1dd")
 tile_size = Vector2i(120, 120)
 sources/0 = SubResource("TileSetScenesCollectionSource_gymyn")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drsw1"]
+
 [node name="Player" type="CharacterBody2D" unique_id=600283651]
 collision_mask = 0
 script = ExtResource("1_cvnsp")
@@ -551,9 +554,21 @@ tile_set = SubResource("TileSet_dpga7")
 [node name="SwordSlash" type="AudioStreamPlayer" parent="." unique_id=1446820892]
 stream = ExtResource("16_fd4e3")
 
+[node name="shieldblock" type="AudioStreamPlayer" parent="." unique_id=2132863391]
+stream = ExtResource("18_fs7ks")
+
 [node name="Spell" type="AudioStreamPlayer" parent="." unique_id=500142808]
 stream = ExtResource("18_igrcy")
 
+[node name="overlap" type="Area2D" parent="." unique_id=686559488]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="overlap" unique_id=241831581]
+position = Vector2(60, 60)
+shape = SubResource("RectangleShape2D_drsw1")
+
+[connection signal="animation_finished" from="PlayerAnim" to="." method="_on_player_anim_animation_finished"]
 [connection signal="body_entered" from="Sword" to="." method="_on_sword_body_entered"]
 [connection signal="pressed" from="Defend/right" to="." method="_on_right_pressed"]
 [connection signal="pressed" from="Defend/left" to="." method="_on_left_pressed"]

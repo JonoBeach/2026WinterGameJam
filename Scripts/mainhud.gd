@@ -27,6 +27,9 @@ func _process(delta: float) -> void:
 
 func _on_end_turn_pressed() -> void:
 	if !actioning:
+		$"0".hide()
+		$"1".hide()
+		$"2".hide()
 		actioning = true
 		get_parent().endturn()
 		$EndTurn.hide()

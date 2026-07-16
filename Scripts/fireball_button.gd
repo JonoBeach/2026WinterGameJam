@@ -13,10 +13,11 @@ func _on_gust_check():
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	body.killed()
+	body.killed(get_position()+Global.playerpos)
 
 
 func _on_pressed() -> void:
+	print(get_position())
 	Global.tama_move.emit()
 	var pos = [Vector2(0,0),Vector2(120,0),Vector2(-120,0),Vector2(0,120),Vector2(0,-120)]
 	var scene = preload("res://Scenes/Fireball.tscn")

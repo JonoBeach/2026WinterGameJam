@@ -2,9 +2,7 @@ class_name enemy_attack_and_movement_patterns
 extends Node
 
 @export var enemy : CharacterBody2D
-@export var movement_x : int
-@export var movement_y : int
-@export var randomise_direction : bool
+@export var tile_move_count: int = 1
 @onready var player = $Player
 @onready var enemy_occupying_spots = Global.spots
 @onready var tilemap_dimensions = get_parent().get_parent().get_node("TileMapLayer").get_used_rect()
@@ -20,7 +18,7 @@ const TILE_SIZE = 120
 @export var attack_size : int
 
 ## Returns the location that the enemy will move to, based on its current position.
-func enemy_movement_location() -> Vector2:
+func enemy_movement_location():
 	#print("POS" + tilemap_dimensions.position)
 	#print("END" + tilemap_dimensions.end)
 	#print(Global.spots)
@@ -28,28 +26,18 @@ func enemy_movement_location() -> Vector2:
 	enemy_occupying_spots.erase(enemy.position)
 	# Need to check if enemy is out of bounds OR there is another entity there
 	var new_position = enemy.position
-	if !randomise_direction:
-		new_position = enemy.position + Vector2(movement_x * TILE_SIZE, movement_y * TILE_SIZE)
-	if randomise_direction:
-		match rng.randi_range(1, 3): # determine x
-			1:
-				new_position = enemy.position + Vector2(movement_x * TILE_SIZE, 0)
-			2:
-				new_position = enemy.position - Vector2(movement_x * TILE_SIZE, 0)
-			3:
-				pass # no change in x
+	match rng.randi_range(1, 4):
+		1:
+			new_position = enemy.position + Vector2(TILE_SIZE, 0)
+		2:
+			new_position = enemy.position - Vector2(TILE_SIZE, 0)
+		3:
+			new_position = enemy.position + Vector2(0, TILE_SIZE)
+		4:
+			new_position = enemy.position - Vector2(0, TILE_SIZE)
 		
-		match rng.randi_range(1, 3): # determine y
-			1:
-				new_position = enemy.position + Vector2(0, movement_y * TILE_SIZE)
-			2:
-				new_position = enemy.position - Vector2(0, movement_y * TILE_SIZE)
-			3:
-				pass # no change in x
-	
 	#TODO: add prevention of walking over enemies
-	if new_position in enemy_occupying_spots:
-		pass
+	
 		
 	# prevention for walking off map
 	
@@ -64,7 +52,7 @@ func enemy_movement_location() -> Vector2:
 	
 	elif new_position.y > (tilemap_dimensions.end.y * TILE_SIZE) - TILE_SIZE:
 		new_position.y = (tilemap_dimensions.end.y * TILE_SIZE) - TILE_SIZE
-	
+		
 	enemy_occupying_spots.append(new_position)
 	return new_position
 	

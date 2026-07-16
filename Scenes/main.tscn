@@ -59,8 +59,7 @@ position = Vector2(960, 360)
 [node name="enemy_attack_and_movement_patterns" type="Node" parent="Enemy" unique_id=1975240966 node_paths=PackedStringArray("enemy")]
 script = ExtResource("10_d1ilt")
 enemy = NodePath("..")
-movement_x = 1
-movement_y = 1
+tile_move_count = 10
 attack_pattern_name = "Attack Up"
 attack_size = 2
 metadata/_custom_type_script = "uid://we4fyn7jki2m"

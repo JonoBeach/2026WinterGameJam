@@ -212,6 +212,7 @@ func _on_move_finish():
 	$Spike.hide()
 	$Fireball.hide()
 	$Tamadachi.play("Action")
+	$Spell.play()
 	await get_tree().create_timer(0.85).timeout
 	$Tamadachi.play("Idle")
 

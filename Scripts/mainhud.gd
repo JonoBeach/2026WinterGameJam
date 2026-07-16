@@ -125,6 +125,7 @@ func movechoose(move):
 
 
 func _on_move_finish():
+	await get_tree().create_timer(1.3).timeout
 	actioning = false
 
 

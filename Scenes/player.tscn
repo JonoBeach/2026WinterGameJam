@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://csyof1eit5i5j" path="res://Art/sword.png" id="9_igrcy"]
 [ext_resource type="PackedScene" uid="uid://bkjt64xm4wepd" path="res://Scenes/HorizonButton.tscn" id="10_tx1dd"]
 [ext_resource type="AudioStream" uid="uid://d3cltwgwftrx2" path="res://Music/Sword Woosh.mp3" id="16_fd4e3"]
+[ext_resource type="AudioStream" uid="uid://cakkb87k8dra4" path="res://Music/SPELL SOUND.mp3" id="18_igrcy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_36dho"]
 atlas = ExtResource("2_h4iuc")
@@ -547,6 +548,9 @@ tile_set = SubResource("TileSet_dpga7")
 
 [node name="SwordSlash" type="AudioStreamPlayer" parent="." unique_id=1446820892]
 stream = ExtResource("16_fd4e3")
+
+[node name="Spell" type="AudioStreamPlayer" parent="." unique_id=500142808]
+stream = ExtResource("18_igrcy")
 
 [connection signal="body_entered" from="Sword" to="." method="_on_sword_body_entered"]
 [connection signal="pressed" from="Defend/right" to="." method="_on_right_pressed"]

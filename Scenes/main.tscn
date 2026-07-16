@@ -67,13 +67,7 @@ text = "hijfgo"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="enemy_attack_and_movement_patterns" type="Node" parent="Enemy" unique_id=1975240966 node_paths=PackedStringArray("enemy")]
-script = ExtResource("10_d1ilt")
-enemy = NodePath("..")
-tile_move_count = 50
-attack_pattern_name = "Attack Up"
-attack_size = 2
-metadata/_custom_type_script = "uid://we4fyn7jki2m"
+
 [node name="Body" type="Label" parent="Dialogue" unique_id=1595017194]
 offset_left = -248.0
 offset_top = -220.0

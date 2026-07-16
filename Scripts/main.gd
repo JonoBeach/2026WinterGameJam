@@ -47,5 +47,5 @@ func _on_next_pressed() -> void:
 func _on_player_finished():
 	$Mainhud.reset()
 	$Player.movedecide()
-	#$Enemy.enemy_move()
-	#$Enemy.do_attack()
+	$Enemy.enemy_move()
+	$Enemy.do_attack()

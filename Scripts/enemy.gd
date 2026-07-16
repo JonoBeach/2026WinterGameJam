@@ -21,9 +21,11 @@ func _physics_process(_delta):
 	if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 		velocity = Vector2.ZERO
 		direction = ""
+		set_position(end)
 	if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
 		velocity = Vector2.ZERO
 		pushdirection = ""
+		set_position(pushend)
 	move_and_slide()
 
 func attack_indicate():
@@ -95,3 +97,11 @@ func enemy_move():
 
 func _on_hit_area_body_entered(body):
 	return true
+
+
+func push(finalPos,value):
+	pushend = get_position() + finalPos
+	if pushend in Global.spots:
+		velocity = pushend-get_position()
+		pushdirection=value
+		end += finalPos

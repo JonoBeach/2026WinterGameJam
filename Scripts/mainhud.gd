@@ -26,8 +26,9 @@ func _process(delta: float) -> void:
 	$Coins/CoinLabel.text = str(Global.coins)
 
 func _on_end_turn_pressed() -> void:
-	get_parent().endturn()
-	$EndTurn.hide()
+	if !actioning:
+		get_parent().endturn()
+		$EndTurn.hide()
 
 func reset():
 	$EndTurn.show()

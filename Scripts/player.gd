@@ -22,10 +22,12 @@ func _physics_process(_delta):
 	if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 		velocity = Vector2.ZERO
 		direction = ""
+		set_position(end)
 		Global.player_move_finish.emit()
 	if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
 		velocity = Vector2.ZERO
 		pushdirection = ""
+		set_position(pushend)
 	if move == "":
 		$MoveChoice.play("empty")
 		$Direction.play("empty")

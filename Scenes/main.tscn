@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://y6qkru5k5j7f" path="res://Scenes/Mainhud.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://b1w0d8mxg8n8i" path="res://Art/decorations.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://d34alusg2ba13" path="res://Art/decorations_bot.png" id="8_344ge"]
+[ext_resource type="PackedScene" uid="uid://cofieok2kui82" path="res://Scenes/enemy.tscn" id="10_d1ilt"]
+[ext_resource type="Script" uid="uid://we4fyn7jki2m" path="res://components/enemy_attack_and_movement_patterns.gd" id="11_6iyac"]
 [ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="11_d1ilt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
@@ -18,6 +20,15 @@ texture_region_size = Vector2i(120, 120)
 [sub_resource type="TileSet" id="TileSet_3owqy"]
 tile_size = Vector2i(120, 120)
 sources/0 = SubResource("TileSetAtlasSource_kry3j")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d1ilt"]
+texture = ExtResource("2_8gbba")
+texture_region_size = Vector2i(120, 120)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8upip"]
+tile_size = Vector2i(120, 120)
+sources/1 = SubResource("TileSetAtlasSource_d1ilt")
 
 [node name="Main" type="Node" unique_id=310977077]
 script = ExtResource("1_jjvhh")
@@ -54,6 +65,7 @@ position = Vector2(960, 540)
 texture = ExtResource("8_344ge")
 
 [node name="Dialogue" type="Sprite2D" parent="." unique_id=2071331292]
+visible = false
 position = Vector2(960, 540)
 texture = ExtResource("11_d1ilt")
 
@@ -66,7 +78,6 @@ theme_override_font_sizes/font_size = 48
 text = "hijfgo"
 horizontal_alignment = 1
 vertical_alignment = 1
-
 
 [node name="Body" type="Label" parent="Dialogue" unique_id=1595017194]
 offset_left = -248.0
@@ -84,5 +95,17 @@ offset_top = 157.0
 offset_right = 7.0
 offset_bottom = 277.0
 texture_normal = ExtResource("2_8gbba")
+
+[node name="Enemy" parent="." unique_id=203983045 instance=ExtResource("10_d1ilt")]
+
+[node name="enemy_attack_and_movement_patterns" type="Node" parent="Enemy" unique_id=1354690557 node_paths=PackedStringArray("enemy")]
+script = ExtResource("11_6iyac")
+enemy = NodePath("..")
+metadata/_custom_type_script = "uid://we4fyn7jki2m"
+
+[node name="enemypositions" type="TileMapLayer" parent="." unique_id=831590137]
+visible = false
+tile_map_data = PackedByteArray("AAAHAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAAJAAUAAQAAAAAAAAAKAAUAAQAAAAAAAAALAAUAAQAAAAAAAAAMAAUAAQAAAAAAAAANAAUAAQAAAAAAAAANAAYAAQAAAAAAAAAMAAYAAQAAAAAAAAALAAYAAQAAAAAAAAAKAAYAAQAAAAAAAAAJAAYAAQAAAAAAAAAIAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAANAAIAAQAAAAAAAAAMAAIAAQAAAAAAAAALAAIAAQAAAAAAAAAKAAIAAQAAAAAAAAAJAAIAAQAAAAAAAAAIAAIAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAQAAQAAAAAAAAAJAAQAAQAAAAAAAAAJAAMAAQAAAAAAAAAKAAQAAQAAAAAAAAAKAAMAAQAAAAAAAAALAAMAAQAAAAAAAAALAAQAAQAAAAAAAAAMAAMAAQAAAAAAAAAMAAQAAQAAAAAAAAANAAQAAQAAAAAAAAANAAMAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAMAAQAAAAAAAAAHAAIAAQAAAAAAAAAFAAYAAQAAAAAAAAAEAAYAAQAAAAAAAAADAAYAAQAAAAAAAAACAAYAAQAAAAAAAAAGAAUAAQAAAAAAAAAGAAYAAQAAAAAAAAAGAAQAAQAAAAAAAAAGAAMAAQAAAAAAAAAGAAIAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_8upip")
 
 [connection signal="pressed" from="Dialogue/Next" to="." method="_on_next_pressed"]

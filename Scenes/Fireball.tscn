@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://br1hqxw50okwv"]
+
+[ext_resource type="Texture2D" uid="uid://b6xr2mm07cfvh" path="res://Art/fireball.png" id="1_dju2h"]
+[ext_resource type="Script" uid="uid://io0asfnllpbm" path="res://Scenes/fireball.gd" id="2_ffurd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4j73p"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3s34"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6v0yx"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77ydb"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(360, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xodhr"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(480, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1m3og"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(600, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vvyj"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(720, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwloq"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(840, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwexh"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(960, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cybv5"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(1080, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1y7fy"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(1200, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyygf"]
+atlas = ExtResource("1_dju2h")
+region = Rect2(1320, 0, 120, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vpulw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4j73p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3s34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6v0yx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77ydb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xodhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1m3og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vvyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwloq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwexh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cybv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1y7fy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyygf")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Fireball" type="AnimatedSprite2D" unique_id=1491104532]
+sprite_frames = SubResource("SpriteFrames_vpulw")
+autoplay = "default"
+frame = 1
+frame_progress = 0.04860797
+script = ExtResource("2_ffurd")

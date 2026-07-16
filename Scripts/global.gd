@@ -5,7 +5,8 @@ signal player_move_finish()
 signal enemy_move_finish()
 signal enemy_dead()
 signal enemy_move()
-var Moves = ["defend","defend","defend","gust","gust","spike"]
+signal enemy_calculate_move()
+var Moves = ["defend","defend","defend","gust","gust","spike","fireball"]
 var spots
 var playerpos
 var occupied = []

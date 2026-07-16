@@ -27,10 +27,12 @@ func _process(delta: float) -> void:
 
 func _on_end_turn_pressed() -> void:
 	if !actioning:
+		actioning = true
 		get_parent().endturn()
 		$EndTurn.hide()
 
 func reset():
+	actioning = false
 	$EndTurn.show()
 	energy=3
 	assignMoves()

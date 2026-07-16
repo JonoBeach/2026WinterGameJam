@@ -20,7 +20,6 @@ func _ready() -> void:
 
 ##move if need to
 func _physics_process(_delta):
-	print(Global.occupied)
 	if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 		velocity = Vector2.ZERO
 		direction = ""
@@ -89,10 +88,11 @@ func movedo():
 	match move:
 		"move":
 			if end in spots and !(end in Global.occupied):
-				velocity = end-get_position() #sets velocity
-				$PlayerAnim.play("move")
 				Global.occupied.erase(get_position())
 				Global.occupied.append(end)
+				velocity = end-get_position() #sets velocity
+				$PlayerAnim.play("move")
+				
 		"attack":
 			#turns on and then off the sword hitbox
 			$PlayerAnim.play("use")

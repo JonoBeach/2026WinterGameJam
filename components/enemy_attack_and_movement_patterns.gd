@@ -17,41 +17,35 @@ const TILE_SIZE = 120
 @export var attack_size : int
 
 ## Returns the location that the enemy will move to, based on its current position.
-func enemy_movement_location():
+func enemy_movement_location(posit):
 	#print("POS" + tilemap_dimensions.position)
 	#print("END" + tilemap_dimensions.end)
 	#print(Global.spots)
 	
 	# Need to check if enemy is out of bounds OR there is another entity there
-	var new_position = enemy.position
-	match rng.randi_range(1, 4):
-		1:
-			new_position = enemy.position + Vector2(TILE_SIZE, 0)
-		2:
-			new_position = enemy.position - Vector2(TILE_SIZE, 0)
-		3:
-			new_position = enemy.position + Vector2(0, TILE_SIZE)
-		4:
-			new_position = enemy.position - Vector2(0, TILE_SIZE)
-		
+	var new_position = [posit + Vector2(TILE_SIZE, 0),posit - Vector2(TILE_SIZE, 0),posit + Vector2(0, TILE_SIZE),posit - Vector2(0, TILE_SIZE)]
+	for x in range(3,-1,-1):
+		if !(new_position[x] in Global.spots) or new_position[x] in Global.occupied:
+			new_position.remove_at(x)
+	return new_position
 	#TODO: add prevention of walking over enemies
 	
 		
 	# prevention for walking off map
-	
-	if new_position.x < tilemap_dimensions.position.x * TILE_SIZE:
-		new_position.x = tilemap_dimensions.position.x * TILE_SIZE
+	#if new_position in Global.spots and !new_position in Global.occupied
+	#if new_position.x < tilemap_dimensions.position.x * TILE_SIZE:
+		#new_position.x = tilemap_dimensions.position.x * TILE_SIZE
+		#
+	#elif new_position.x > (tilemap_dimensions.end.x * TILE_SIZE) - TILE_SIZE:
+		#new_position.x = (tilemap_dimensions.end.x * TILE_SIZE) - TILE_SIZE
+		#
+	#if new_position.y < tilemap_dimensions.position.y * TILE_SIZE:
+		#new_position.y = tilemap_dimensions.position.y * TILE_SIZE
+	#
+	#elif new_position.y > (tilemap_dimensions.end.y * TILE_SIZE) - TILE_SIZE:
+		#new_position.y = (tilemap_dimensions.end.y * TILE_SIZE) - TILE_SIZE
 		
-	elif new_position.x > (tilemap_dimensions.end.x * TILE_SIZE) - TILE_SIZE:
-		new_position.x = (tilemap_dimensions.end.x * TILE_SIZE) - TILE_SIZE
-		
-	if new_position.y < tilemap_dimensions.position.y * TILE_SIZE:
-		new_position.y = tilemap_dimensions.position.y * TILE_SIZE
-	
-	elif new_position.y > (tilemap_dimensions.end.y * TILE_SIZE) - TILE_SIZE:
-		new_position.y = (tilemap_dimensions.end.y * TILE_SIZE) - TILE_SIZE
-		
-	return new_position
+	#return new_position
 	
 	
 ## Will return the tiles that the enemy will attack, based on attack pattern defined.
@@ -86,7 +80,7 @@ func enemy_attack_pattern():
 			return []
 
 func attack_up():
-	print(tilemap_dimensions.position.y)
+	#print(tilemap_dimensions.position.y)
 	var new_move
 	var attack_tiles = []
 	for current_attack in range(1, attack_size+1):

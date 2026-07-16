@@ -25,6 +25,7 @@ func _ready() -> void:
 	Global.enemy_move_finish.connect(_on_enemy_finished)
 	for x in range(0,Global.enemy_count):
 		pass #spawn x amount of enemies
+	Global.enemy_calculate_move.emit()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -33,6 +34,7 @@ func _process(delta: float) -> void:
 ##called when end turn button pressed
 func endturn():
 	$Player.movedo()
+	
 	
 
 
@@ -50,4 +52,6 @@ func _on_player_finished():
 	Global.enemy_move.emit()
 
 func _on_enemy_finished():
+	print(Global.occupied)
 	$Mainhud.reset()
+	Global.enemy_calculate_move.emit()

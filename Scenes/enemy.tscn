@@ -45,6 +45,7 @@ shape = SubResource("RectangleShape2D_0yxg5")
 [node name="HitArea" type="Area2D" parent="." unique_id=83828995]
 top_level = true
 collision_layer = 2
+monitoring = false
 
 [node name="Hitbox" type="CollisionShape2D" parent="HitArea" unique_id=1632672931]
 position = Vector2(61, 60)
@@ -53,3 +54,5 @@ shape = SubResource("RectangleShape2D_ohjvl")
 [node name="TestHitboxShower" type="Sprite2D" parent="HitArea" unique_id=2071910095]
 position = Vector2(60, 60)
 texture = ExtResource("3_afpow")
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

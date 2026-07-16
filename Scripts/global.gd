@@ -10,3 +10,4 @@ var coins = 0
 signal player_move_finish()
 signal enemy_move_finish()
 signal enemy_dead()
+var enemy_count = 4

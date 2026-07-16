@@ -22,6 +22,8 @@ func _ready() -> void:
 	$Dialogue/Title.text = dialogue[0][diai]
 	$Dialogue/Body.text = dialogue[1][diai]
 	Global.player_move_finish.connect(_on_player_finished)
+	for x in range(0,Global.enemy_count):
+		pass #spawn x amount of enemies
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

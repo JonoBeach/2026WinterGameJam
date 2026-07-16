@@ -8,8 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://y6qkru5k5j7f" path="res://Scenes/Mainhud.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://b1w0d8mxg8n8i" path="res://Art/decorations.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://d34alusg2ba13" path="res://Art/decorations_bot.png" id="8_344ge"]
-[ext_resource type="PackedScene" uid="uid://cofieok2kui82" path="res://Scenes/enemy.tscn" id="9_hptm8"]
-[ext_resource type="Script" uid="uid://we4fyn7jki2m" path="res://components/enemy_attack_and_movement_patterns.gd" id="10_d1ilt"]
+[ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="11_d1ilt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
 texture = ExtResource("2_8gbba")
@@ -45,6 +44,7 @@ tile_map_data = PackedByteArray("AAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAA
 tile_set = SubResource("TileSet_3owqy")
 
 [node name="Mainhud" parent="." unique_id=1191797521 instance=ExtResource("5_kry3j")]
+visible = false
 
 [node name="Player" parent="." unique_id=538769131 instance=ExtResource("3_jjvhh")]
 position = Vector2(360, 360)
@@ -53,16 +53,35 @@ position = Vector2(360, 360)
 position = Vector2(960, 540)
 texture = ExtResource("8_344ge")
 
-[node name="Enemy" parent="." unique_id=203983045 instance=ExtResource("9_hptm8")]
-position = Vector2(960, 360)
-
-[node name="enemy_attack_and_movement_patterns" type="Node" parent="Enemy" unique_id=1975240966 node_paths=PackedStringArray("enemy")]
-script = ExtResource("10_d1ilt")
-enemy = NodePath("..")
-movement_x = 1
-movement_y = 1
-attack_pattern_name = "Attack Up"
-attack_size = 2
-metadata/_custom_type_script = "uid://we4fyn7jki2m"
-
 [node name="Dialogue" type="Sprite2D" parent="." unique_id=2071331292]
+position = Vector2(960, 540)
+texture = ExtResource("11_d1ilt")
+
+[node name="Title" type="Label" parent="Dialogue" unique_id=414655547]
+offset_left = -248.0
+offset_top = -299.0
+offset_right = 129.0
+offset_bottom = -222.0
+theme_override_font_sizes/font_size = 48
+text = "hijfgo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Body" type="Label" parent="Dialogue" unique_id=1595017194]
+offset_left = -248.0
+offset_top = -220.0
+offset_right = 249.0
+offset_bottom = 299.0
+theme_override_font_sizes/font_size = 24
+text = "Hey there, it seems you hit your head on the way down, fingers crossed that won't have any lasting effects :). Anyway, we're stranded down here with no way out :(. I could get us out of here if I were only a bit stronger :(. but that'll have to wait, first we should take care of these enemies, do what you do best and I'll back you up :)"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Next" type="TextureButton" parent="Dialogue" unique_id=132504839]
+offset_left = -113.0
+offset_top = 157.0
+offset_right = 7.0
+offset_bottom = 277.0
+texture_normal = ExtResource("2_8gbba")
+
+[connection signal="pressed" from="Dialogue/Next" to="." method="_on_next_pressed"]

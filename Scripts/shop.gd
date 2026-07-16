@@ -1,9 +1,17 @@
 extends Node
 var rng = RandomNumberGenerator.new()
 var descriptions = [[],[]]
+var dialogue = [[],[]]
+var diai = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if Global.enemy_count == 4:
+		$MainButtons.hide()
+		$Dialogue.show()
+	else:
+		$MainButtons.show()
+		$Dialogue.hide()
 	var oneArr = ["defend","defend","gust","spike"]
 	var twoArr = ["gust","spike","bewilder","horizon"]
 	var threeArr = ["bulwark","fireball","horizon"]
@@ -16,12 +24,20 @@ func _ready() -> void:
 		descriptions[0].append(f[x])
 		if x < len(f)-1:
 			descriptions[1].append(f[x+1])
+	f = FileAccess.open("res://Dialogue/Shop.txt",FileAccess.READ).get_as_text()
+	f = f.replace("\n","|").split("|")
+	for x in range(0,len(f),2):
+		dialogue[0].append(f[x])
+		if x < len(f)-1:
+			dialogue[1].append(f[x+1])
+	$Dialogue/Title.text = dialogue[0][diai]
+	$Dialogue/Body.text = dialogue[1][diai]
 	Global.coins = 100
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	$Spells/SpellLabel.text = str(Global.Moves.size())+"/10"
+	$Coins/CoinLabel.text = str(Global.coins)
 
 
 func _on_win_pressed() -> void:
@@ -31,6 +47,7 @@ func _on_win_pressed() -> void:
 
 func _on_continue_pressed() -> void:
 	Global.Moves.sort()
+	Global.enemy_count+=1
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 
@@ -106,13 +123,49 @@ func _on__mouse_exited() -> void:
 func _on_zero_mouse_entered() -> void:
 	$Description.show()
 	DescSet($"NewSpells/0/AnimatedSprite2D".animation)
+	$Description/Body.text += "\n(1G)"
 
 
 func _on_one_mouse_entered() -> void:
 	$Description.show()
 	DescSet($"NewSpells/1/AnimatedSprite2D".animation)
+	$Description/Body.text += "\n(2G)"
 
 
 func _on_two_mouse_entered() -> void:
 	$Description.show()
 	DescSet($"NewSpells/2/AnimatedSprite2D".animation)
+	$Description/Body.text += "\n(3G)"
+
+
+func _on_win_mouse_entered() -> void:
+	$MainButtons/Win/description.show()
+
+
+func _on_gain_spell_mouse_entered() -> void:
+	$MainButtons/GainSpell/description.show()
+
+
+func _on_remove_spell_mouse_entered() -> void:
+	$MainButtons/RemoveSpell/description.show()
+
+
+func _on_continue_mouse_entered() -> void:
+	$MainButtons/Continue/description.show()
+
+
+func _on_continue_mouse_exited() -> void:
+	$MainButtons/Win/description.hide()
+	$MainButtons/Continue/description.hide()
+	$MainButtons/GainSpell/description.hide()
+	$MainButtons/RemoveSpell/description.hide()
+
+
+func _on_next_pressed() -> void:
+	diai +=1
+	if diai < len(dialogue[0]):
+		$Dialogue/Title.text = dialogue[0][diai]
+		$Dialogue/Body.text = dialogue[1][diai]
+	else:
+		$Dialogue.hide()
+		$MainButtons.show()

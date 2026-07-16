@@ -20,7 +20,10 @@ func _ready() -> void:
 	Global.tama_move.connect(_on_move_finish)
 
 func _process(delta: float) -> void:
-	$Energy.text = str(energy)+"/3"
+	$Energy/EnergyLabel.text = str(energy)+"/3"
+	#print(moves)
+	$Spells/SpellLabel.text = str(moves.size())+"/"+str(Global.Moves.size())
+	$Coins/CoinLabel.text = str(Global.coins)
 
 func _on_end_turn_pressed() -> void:
 	get_parent().endturn()
@@ -28,7 +31,7 @@ func _on_end_turn_pressed() -> void:
 
 func reset():
 	$EndTurn.show()
-	energy+=3
+	energy=3
 	assignMoves()
 
 
@@ -59,7 +62,6 @@ func _on_button_pressed() -> void:
 
 func _on_one_pressed() -> void:
 	if !actioning:
-		print("wahoo")
 		var hide = movechoose($"1/AnimatedSprite2D".animation)
 		if hide:
 			$"1".hide()
@@ -123,6 +125,7 @@ func movechoose(move):
 
 
 func _on_move_finish():
+	await get_tree().create_timer(1.3).timeout
 	actioning = false
 
 
@@ -152,15 +155,18 @@ func _on__mouse_exited() -> void:
 
 func _on_zero_mouse_entered() -> void:
 	$Description.show()
+	$Description.position.x = 680
 	DescSet($"0/AnimatedSprite2D".animation)
 	
 
 
 func _on_one_mouse_entered() -> void:
 	$Description.show()
+	$Description.position.x = 830
 	DescSet($"1/AnimatedSprite2D".animation)
 
 
 func _on__mouse_entered() -> void:
 	$Description.show()
+	$Description.position.x = 980
 	DescSet($"2/AnimatedSprite2D".animation)

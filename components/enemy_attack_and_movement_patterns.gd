@@ -94,10 +94,8 @@ func attack_up():
 	var attack_tiles = []
 	for current_attack in range(1, attack_size+1):
 		new_move = Vector2(enemy.position.x, enemy.position.y - TILE_SIZE * current_attack)
-		print(new_move)
 		if new_move.y >= tilemap_dimensions.position.y * TILE_SIZE:
 			attack_tiles.append(new_move)
-	print(attack_tiles)
 	return attack_tiles
 	
 func attack_left():

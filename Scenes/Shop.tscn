@@ -8,7 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://cuaec2dolf5wj" path="res://Art/defend rect.png" id="6_1mgah"]
 [ext_resource type="Script" uid="uid://b5afp6gybthxp" path="res://Scripts/removespellsbuttons.gd" id="7_2aaoe"]
 [ext_resource type="SpriteFrames" uid="uid://c4whn8g1p3nkl" path="res://Scenes/new_sprite_frames.tres" id="7_ckylj"]
+[ext_resource type="Theme" uid="uid://bofyggykeefln" path="res://Scenes/button theme.tres" id="8_ccd4q"]
 [ext_resource type="Texture2D" uid="uid://b0iqonnhycy6u" path="res://Art/description.png" id="9_ct2yw"]
+[ext_resource type="Texture2D" uid="uid://bd6guscxqyvar" path="res://Art/spells_ui.png" id="11_1mgah"]
+[ext_resource type="Texture2D" uid="uid://n0xvlorbkbd6" path="res://Art/money_ui.png" id="12_r8bg4"]
+[ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="13_m1c0q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r8bg4"]
 atlas = ExtResource("2_ckylj")
@@ -53,6 +57,7 @@ script = ExtResource("1_wndna")
 position = Vector2(960, 540)
 sprite_frames = SubResource("SpriteFrames_3owqy")
 animation = &"Idle"
+autoplay = "Idle"
 
 [node name="MainButtons" type="Node2D" parent="." unique_id=352367023]
 
@@ -63,12 +68,54 @@ offset_right = 1031.0
 offset_bottom = 130.0
 texture_normal = ExtResource("3_2aaoe")
 
+[node name="description" type="Sprite2D" parent="MainButtons/Win" unique_id=457913571]
+visible = false
+position = Vector2(-74, 87)
+texture = ExtResource("9_ct2yw")
+
+[node name="Label" type="Label" parent="MainButtons/Win/description" unique_id=2146545425]
+offset_left = -68.0
+offset_top = -88.0
+offset_right = 69.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Grow
+
+Costs 20G
+Grow Tamadachi and escape from the dungeon"
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
 [node name="GainSpell" type="TextureButton" parent="MainButtons" unique_id=1443613484]
 offset_left = 344.0
 offset_top = 464.0
 offset_right = 464.0
 offset_bottom = 584.0
 texture_normal = ExtResource("4_ct2yw")
+
+[node name="description" type="Sprite2D" parent="MainButtons/GainSpell" unique_id=1179086719]
+visible = false
+position = Vector2(-74, 87)
+texture = ExtResource("9_ct2yw")
+
+[node name="Label" type="Label" parent="MainButtons/GainSpell/description" unique_id=195719581]
+anchors_preset = -1
+anchor_bottom = 0.011111111
+offset_left = -68.0
+offset_top = -88.0
+offset_right = 69.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -5
+text = "Feed
+
+
+Costs 1-3G
+Feed Tamadachi and in doing so help her learn a new spell"
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="RemoveSpell" type="TextureButton" parent="MainButtons" unique_id=1701816210]
 offset_left = 895.0
@@ -77,12 +124,51 @@ offset_right = 1015.0
 offset_bottom = 942.0
 texture_normal = ExtResource("5_ccd4q")
 
+[node name="description" type="Sprite2D" parent="MainButtons/RemoveSpell" unique_id=673424099]
+visible = false
+position = Vector2(-74, 87)
+texture = ExtResource("9_ct2yw")
+
+[node name="Label" type="Label" parent="MainButtons/RemoveSpell/description" unique_id=1956984485]
+offset_left = -68.0
+offset_top = -88.0
+offset_right = 69.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -5
+text = "Bathe
+
+
+Costs 3G
+Give Tamadachi a shower causing her to forget a spell"
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
 [node name="Continue" type="TextureButton" parent="MainButtons" unique_id=1724799662]
 offset_left = 1530.0
 offset_top = 474.0
 offset_right = 1650.0
 offset_bottom = 594.0
 texture_normal = ExtResource("6_1mgah")
+
+[node name="description" type="Sprite2D" parent="MainButtons/Continue" unique_id=1296425292]
+visible = false
+position = Vector2(-74, 87)
+texture = ExtResource("9_ct2yw")
+
+[node name="Label" type="Label" parent="MainButtons/Continue/description" unique_id=519360916]
+offset_left = -68.0
+offset_top = -88.0
+offset_right = 69.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Continue
+
+Delve deeper into the dungeon for greater riches"
+horizontal_alignment = 1
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="CurrentSpells" type="HBoxContainer" parent="." unique_id=545074453]
 visible = false
@@ -92,19 +178,21 @@ offset_left = 10.0
 offset_top = 903.0
 offset_right = 1910.0
 offset_bottom = 1023.0
-theme_override_constants/separation = 55
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="0" type="Button" parent="CurrentSpells" unique_id=604010945]
 visible = false
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+theme = ExtResource("8_ccd4q")
+theme_type_variation = &"FlatButton"
 script = ExtResource("7_2aaoe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CurrentSpells/0" unique_id=1952263134]
 position = Vector2(60, 60)
 sprite_frames = ExtResource("7_ckylj")
-animation = &"gust"
+animation = &"spike"
 
 [node name="1" type="Button" parent="CurrentSpells" unique_id=1913428605]
 visible = false
@@ -219,7 +307,7 @@ custom_minimum_size = Vector2(1920, 120)
 offset_top = 60.0
 offset_right = 1920.0
 offset_bottom = 180.0
-theme_override_constants/separation = 55
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="0" type="Button" parent="NewSpells" unique_id=890403329]
@@ -259,27 +347,122 @@ position = Vector2(1850, 90)
 texture = ExtResource("9_ct2yw")
 
 [node name="Title" type="Label" parent="Description" unique_id=108166702]
-offset_left = -69.0
-offset_top = -89.0
-offset_right = 69.0
-offset_bottom = -60.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+offset_left = -140.0
+offset_top = -102.0
+offset_bottom = -78.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Bewilder"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Body" type="Label" parent="Description" unique_id=872032744]
-offset_left = -69.0
-offset_top = -59.0
-offset_right = 69.0
-offset_bottom = 89.0
+offset_left = -66.0
+offset_top = -54.0
+offset_right = 66.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/paragraph_spacing = -24
+theme_override_font_sizes/font_size = 14
+text = "lm"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="Spells" type="Sprite2D" parent="." unique_id=1240620953]
+position = Vector2(60, 60)
+texture = ExtResource("11_1mgah")
+
+[node name="SpellLabel" type="Label" parent="Spells" unique_id=901772792]
+custom_minimum_size = Vector2(25, 25)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.37100002
+anchor_right = 0.5
+anchor_bottom = 0.37100002
+offset_left = -84.0
+offset_top = -82.520004
+offset_right = -35.0
+offset_bottom = -37.520004
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -15
+theme_override_font_sizes/font_size = 28
+text = "3/3"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Coins" type="Sprite2D" parent="." unique_id=1076151941]
+position = Vector2(60, 1020)
+texture = ExtResource("12_r8bg4")
+
+[node name="CoinLabel" type="Label" parent="Coins" unique_id=1565654736]
+custom_minimum_size = Vector2(25, 25)
+anchors_preset = -1
+anchor_left = 0.32033336
+anchor_top = 0.363
+anchor_right = 0.6536667
+anchor_bottom = 0.363
+offset_left = -84.44
+offset_top = -82.56
+offset_right = -35.440002
+offset_bottom = -37.559998
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -15
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Dialogue" type="Sprite2D" parent="." unique_id=552854314]
+visible = false
+position = Vector2(960, 540)
+texture = ExtResource("13_m1c0q")
+
+[node name="Title" type="Label" parent="Dialogue" unique_id=1940221323]
+offset_left = -248.0
+offset_top = -299.0
+offset_right = 129.0
+offset_bottom = -222.0
+theme_override_font_sizes/font_size = 48
+text = "hijfgo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Body" type="Label" parent="Dialogue" unique_id=1290921123]
+offset_left = -248.0
+offset_top = -220.0
+offset_right = 249.0
+offset_bottom = 299.0
+theme_override_font_sizes/font_size = 24
+text = "Hey there, it seems you hit your head on the way down, fingers crossed that won't have any lasting effects :). Anyway, we're stranded down here with no way out :(. I could get us out of here if I were only a bit stronger :(. but that'll have to wait, first we should take care of these enemies, do what you do best and I'll back you up :)"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Next" type="TextureButton" parent="Dialogue" unique_id=560996786]
+offset_left = -113.0
+offset_top = 157.0
+offset_right = 7.0
+offset_bottom = 277.0
+texture_normal = ExtResource("3_2aaoe")
+
+[connection signal="mouse_entered" from="MainButtons/Win" to="." method="_on_win_mouse_entered"]
+[connection signal="mouse_exited" from="MainButtons/Win" to="." method="_on_continue_mouse_exited"]
 [connection signal="pressed" from="MainButtons/Win" to="." method="_on_win_pressed"]
+[connection signal="mouse_entered" from="MainButtons/GainSpell" to="." method="_on_gain_spell_mouse_entered"]
+[connection signal="mouse_exited" from="MainButtons/GainSpell" to="." method="_on_continue_mouse_exited"]
 [connection signal="pressed" from="MainButtons/GainSpell" to="." method="_on_gain_spell_pressed"]
+[connection signal="mouse_entered" from="MainButtons/RemoveSpell" to="." method="_on_remove_spell_mouse_entered"]
+[connection signal="mouse_exited" from="MainButtons/RemoveSpell" to="." method="_on_continue_mouse_exited"]
 [connection signal="pressed" from="MainButtons/RemoveSpell" to="." method="_on_remove_spell_pressed"]
+[connection signal="mouse_entered" from="MainButtons/Continue" to="." method="_on_continue_mouse_entered"]
+[connection signal="mouse_exited" from="MainButtons/Continue" to="." method="_on_continue_mouse_exited"]
 [connection signal="pressed" from="MainButtons/Continue" to="." method="_on_continue_pressed"]
 [connection signal="mouse_entered" from="CurrentSpells/0" to="CurrentSpells/0" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CurrentSpells/0" to="." method="_on__mouse_exited"]
@@ -322,3 +505,4 @@ autowrap_mode = 3
 [connection signal="mouse_exited" from="NewSpells/2" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="NewSpells/2" to="." method="_on_two_pressed"]
 [connection signal="pressed" from="NewSpells/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Dialogue/Next" to="." method="_on_next_pressed"]

@@ -17,7 +17,7 @@ func _on_exit_pressed() -> void:
 
 func _on_play_pressed() -> void:
 	Global.Moves = ["defend","defend","defend","gust","gust","spike"]
-	Global.coins = 0
+	Global.coins = -1
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 

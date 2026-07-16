@@ -1,10 +1,11 @@
 extends Area2D
 var direction
+var origin
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.shields.append(get_position())
-	$CollisionShape2D/AnimatedSprite2D.play(direction)
+	$CollisionShape2D/AnimatedSprite2D.play(direction+origin)
 	match direction:
 		"left":
 			$CollisionShape2D.set_position(Vector2(150,60))
@@ -19,4 +20,8 @@ func _ready() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	area.queue_free()
+	if area.name != "Sword":
+		$AudioStreamPlayer.play()
+		area.queue_free()
+		await get_tree().create_timer(.4).timeout
+		queue_free()

@@ -16,12 +16,14 @@ var attacking_tiles
 func _ready():
 	await get_tree().create_timer(.1).timeout
 	set_position(Global.spots[rng.randi_range(0, len(Global.spots)-1)])
+	Global.enemy_move.connect(do_attack)
 
 func _physics_process(_delta):
 	if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 		velocity = Vector2.ZERO
 		direction = ""
 		set_position(end)
+		Global.enemy_move_finish.emit()
 	if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
 		velocity = Vector2.ZERO
 		pushdirection = ""
@@ -43,6 +45,7 @@ func do_attack():
 					print("%s has been attacked" % body)
 					
 	hit_area.set_deferred("monitoring", false)
+	enemy_move()
 	
 func move_indicate():
 	pass

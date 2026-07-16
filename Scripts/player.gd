@@ -12,13 +12,15 @@ var pushdirection = ""
 func _ready() -> void:
 	for x in range(0,len(spots)):
 		spots[x] *=120
-	set_position(spots[10])
+	set_position(spots[6])
+	Global.occupied.append(get_position())
 	Global.spots = spots
 	Global.tama_move.connect(_on_move_finish)
 
 
 ##move if need to
 func _physics_process(_delta):
+	print(Global.occupied)
 	if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 		velocity = Vector2.ZERO
 		direction = ""
@@ -86,9 +88,11 @@ func movedo():
 	$MoveChoice.play("empty")
 	match move:
 		"move":
-			if end in spots:
+			if end in spots and !(end in Global.occupied):
 				velocity = end-get_position() #sets velocity
 				$PlayerAnim.play("move")
+				Global.occupied.erase(get_position())
+				Global.occupied.append(end)
 		"attack":
 			#turns on and then off the sword hitbox
 			$PlayerAnim.play("use")
@@ -140,6 +144,8 @@ func movedo():
 func push(finalPos,value):
 	pushend = get_position() + finalPos
 	if pushend in spots:
+		Global.occupied.erase(get_position())
+		Global.occupied.append(pushend)
 		$PlayerAnim.play("move")
 		velocity = pushend-get_position()
 		pushdirection=value

@@ -4,7 +4,6 @@ extends Node
 @export var enemy : CharacterBody2D
 @export var tile_move_count: int = 1
 @onready var player = $Player
-@onready var enemy_occupying_spots = Global.spots
 @onready var tilemap_dimensions = get_parent().get_parent().get_node("TileMapLayer").get_used_rect()
 var rng = RandomNumberGenerator.new()
 
@@ -23,7 +22,6 @@ func enemy_movement_location():
 	#print("END" + tilemap_dimensions.end)
 	#print(Global.spots)
 	
-	enemy_occupying_spots.erase(enemy.position)
 	# Need to check if enemy is out of bounds OR there is another entity there
 	var new_position = enemy.position
 	match rng.randi_range(1, 4):
@@ -53,7 +51,6 @@ func enemy_movement_location():
 	elif new_position.y > (tilemap_dimensions.end.y * TILE_SIZE) - TILE_SIZE:
 		new_position.y = (tilemap_dimensions.end.y * TILE_SIZE) - TILE_SIZE
 		
-	enemy_occupying_spots.append(new_position)
 	return new_position
 	
 	

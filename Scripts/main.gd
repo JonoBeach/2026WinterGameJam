@@ -22,6 +22,7 @@ func _ready() -> void:
 	$Dialogue/Title.text = dialogue[0][diai]
 	$Dialogue/Body.text = dialogue[1][diai]
 	Global.player_move_finish.connect(_on_player_finished)
+	Global.enemy_move_finish.connect(_on_enemy_finished)
 	for x in range(0,Global.enemy_count):
 		pass #spawn x amount of enemies
 	
@@ -45,7 +46,8 @@ func _on_next_pressed() -> void:
 		$Mainhud.show()
 
 func _on_player_finished():
-	$Mainhud.reset()
 	$Player.movedecide()
-	$Enemy.enemy_move()
-	$Enemy.do_attack()
+	Global.enemy_move.emit()
+
+func _on_enemy_finished():
+	$Mainhud.reset()

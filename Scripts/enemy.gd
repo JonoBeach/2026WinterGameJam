@@ -51,13 +51,13 @@ func enemy_move():
 	for i in range(attack_movement_patterns.tile_move_count):
 		current_move = end
 		end = attack_movement_patterns.enemy_movement_location()
-		print("end %s" % end)
-		print("prev move %s" % previous_move)
+		#print("end %s" % end)
+		#print("prev move %s" % previous_move)
 			
 		while end == previous_move:
-			print("CONDITION MET")
-			print("end %s" % end)
-			print("prev move %s" % previous_move)
+			#print("CONDITION MET")
+			#print("end %s" % end)
+			#print("prev move %s" % previous_move)
 			end = attack_movement_patterns.enemy_movement_location()
 				
 		previous_move = current_move

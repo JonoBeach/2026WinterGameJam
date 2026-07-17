@@ -20,7 +20,6 @@ func _ready() -> void:
 
 ##move if need to
 func _physics_process(_delta):
-	print(Global.occupied)
 	if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 		velocity = Vector2.ZERO
 		direction = ""
@@ -69,7 +68,6 @@ func movedecide():
 			if !end in spots:
 				direction = "right"
 				end += Vector2(240,0)
-	$PlayerAnim.play("Face")
 	$Direction.play(direction)
 	##sets which action to do
 	match rng.randi_range(1,3):
@@ -89,10 +87,11 @@ func movedo():
 	match move:
 		"move":
 			if end in spots and !(end in Global.occupied):
-				velocity = end-get_position() #sets velocity
-				$PlayerAnim.play("move")
 				Global.occupied.erase(get_position())
 				Global.occupied.append(end)
+				velocity = end-get_position() #sets velocity
+				$PlayerAnim.play("move")
+				
 		"attack":
 			#turns on and then off the sword hitbox
 			$PlayerAnim.play("use")
@@ -117,7 +116,6 @@ func movedo():
 			$Sword.set_position(end-get_position())
 			await get_tree().create_timer(.6).timeout
 			$Sword.monitoring = false
-			$PlayerAnim.play("Face")
 			$PlayerAnim.flip_h = false
 			Global.player_move_finish.emit()
 		"defend":
@@ -134,7 +132,6 @@ func movedo():
 				instance.origin = "knight"
 				add_child(instance)
 			await get_tree().create_timer(.6).timeout
-			$PlayerAnim.play("Face")
 			$PlayerAnim.flip_h = false
 			Global.player_move_finish.emit()
 		_:
@@ -151,14 +148,21 @@ func push(finalPos,value):
 		pushdirection=value
 		end += finalPos
 	await get_tree().create_timer(1.5).timeout
-	$PlayerAnim.play("Face")
+
 
 #calls killed() if it touches a body
 func _on_sword_body_entered(body: Node2D) -> void:
-	body.killed()
+	body.killed(get_position())
+	$swordhit.play()
 
-func killed():
-	queue_free()
+func killed(area):
+	if area == Vector2(0,0):
+		queue_free()
+	else:
+		if (area.x < position.x and Vector2(-120,0) in Global.shields) or (area.x>position.x and Vector2(120,0) in Global.shields) or(area.y < position.y and Vector2(0,-120) in Global.shields) or (area.y>position.y and Vector2(0,120) in Global.shields):
+			$shieldblock.play()
+		else:
+			queue_free()
 
 func defend():
 	$Defend.show()
@@ -244,6 +248,7 @@ func Bulwark():
 			var instance = scene.instantiate()
 			instance.set_position(places[x])
 			instance.direction = dir[x]
+			instance.origin = "tama"
 			add_child(instance)
 	
 
@@ -251,3 +256,7 @@ func Horizon():
 	$Horizon.show()
 	Global.playerpos = get_position()
 	Global.gust_check.emit()
+
+
+func _on_player_anim_animation_finished() -> void:
+	$PlayerAnim.play("Face")

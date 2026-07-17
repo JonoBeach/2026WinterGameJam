@@ -5,6 +5,6 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	body.killed()
+	body.killed(get_position())
 	Global.spikes.erase(get_position())
 	queue_free()

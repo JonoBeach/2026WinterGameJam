@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://y6qkru5k5j7f" path="res://Scenes/Mainhud.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://b1w0d8mxg8n8i" path="res://Art/decorations.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://d34alusg2ba13" path="res://Art/decorations_bot.png" id="8_344ge"]
-[ext_resource type="PackedScene" uid="uid://cofieok2kui82" path="res://Scenes/enemy.tscn" id="10_d1ilt"]
-[ext_resource type="Script" uid="uid://we4fyn7jki2m" path="res://components/enemy_attack_and_movement_patterns.gd" id="11_6iyac"]
 [ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="11_d1ilt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
@@ -61,47 +59,44 @@ visible = false
 position = Vector2(360, 360)
 
 [node name="Deco2" type="Sprite2D" parent="." unique_id=2026995973]
+z_index = 3
 position = Vector2(960, 540)
 texture = ExtResource("8_344ge")
 
 [node name="Dialogue" type="Sprite2D" parent="." unique_id=2071331292]
-visible = false
-position = Vector2(960, 540)
+z_index = 5
+position = Vector2(960, 930)
 texture = ExtResource("11_d1ilt")
 
 [node name="Title" type="Label" parent="Dialogue" unique_id=414655547]
-offset_left = -248.0
-offset_top = -299.0
-offset_right = 129.0
-offset_bottom = -222.0
-theme_override_font_sizes/font_size = 48
-text = "hijfgo"
+offset_left = -447.0
+offset_top = 23.0
+offset_right = -228.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Chosen One"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Body" type="Label" parent="Dialogue" unique_id=1595017194]
-offset_left = -248.0
-offset_top = -220.0
-offset_right = 249.0
-offset_bottom = 299.0
-theme_override_font_sizes/font_size = 24
+offset_left = -187.0
+offset_top = -114.0
+offset_right = 468.0
+offset_bottom = 112.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
 text = "Hey there, it seems you hit your head on the way down, fingers crossed that won't have any lasting effects :). Anyway, we're stranded down here with no way out :(. I could get us out of here if I were only a bit stronger :(. but that'll have to wait, first we should take care of these enemies, do what you do best and I'll back you up :)"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Next" type="TextureButton" parent="Dialogue" unique_id=132504839]
-offset_left = -113.0
-offset_top = 157.0
-offset_right = 7.0
-offset_bottom = 277.0
+offset_left = 491.0
+offset_top = -60.0
+offset_right = 611.0
+offset_bottom = 60.0
 texture_normal = ExtResource("2_8gbba")
-
-[node name="Enemy" parent="." unique_id=203983045 instance=ExtResource("10_d1ilt")]
-
-[node name="enemy_attack_and_movement_patterns" type="Node" parent="Enemy" unique_id=1354690557 node_paths=PackedStringArray("enemy")]
-script = ExtResource("11_6iyac")
-enemy = NodePath("..")
-metadata/_custom_type_script = "uid://we4fyn7jki2m"
 
 [node name="enemypositions" type="TileMapLayer" parent="." unique_id=831590137]
 visible = false

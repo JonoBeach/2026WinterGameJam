@@ -420,36 +420,39 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Dialogue" type="Sprite2D" parent="." unique_id=552854314]
-visible = false
-position = Vector2(960, 540)
+[node name="Dialogue" type="Sprite2D" parent="." unique_id=1353882886]
+z_index = 5
+position = Vector2(960, 930)
 texture = ExtResource("13_m1c0q")
 
-[node name="Title" type="Label" parent="Dialogue" unique_id=1940221323]
-offset_left = -248.0
-offset_top = -299.0
-offset_right = 129.0
-offset_bottom = -222.0
-theme_override_font_sizes/font_size = 48
-text = "hijfgo"
+[node name="Title" type="Label" parent="Dialogue" unique_id=100348714]
+offset_left = -447.0
+offset_top = 23.0
+offset_right = -228.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Chosen One"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Body" type="Label" parent="Dialogue" unique_id=1290921123]
-offset_left = -248.0
-offset_top = -220.0
-offset_right = 249.0
-offset_bottom = 299.0
-theme_override_font_sizes/font_size = 24
+[node name="Body" type="Label" parent="Dialogue" unique_id=1035599619]
+offset_left = -187.0
+offset_top = -114.0
+offset_right = 468.0
+offset_bottom = 112.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
 text = "Hey there, it seems you hit your head on the way down, fingers crossed that won't have any lasting effects :). Anyway, we're stranded down here with no way out :(. I could get us out of here if I were only a bit stronger :(. but that'll have to wait, first we should take care of these enemies, do what you do best and I'll back you up :)"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Next" type="TextureButton" parent="Dialogue" unique_id=560996786]
-offset_left = -113.0
-offset_top = 157.0
-offset_right = 7.0
-offset_bottom = 277.0
+[node name="Next" type="TextureButton" parent="Dialogue" unique_id=169525326]
+offset_left = 491.0
+offset_top = -60.0
+offset_right = 611.0
+offset_bottom = 60.0
 texture_normal = ExtResource("3_2aaoe")
 
 [connection signal="mouse_entered" from="MainButtons/Win" to="." method="_on_win_mouse_entered"]

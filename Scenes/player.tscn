@@ -17,7 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://csyof1eit5i5j" path="res://Art/sword.png" id="9_igrcy"]
 [ext_resource type="PackedScene" uid="uid://bkjt64xm4wepd" path="res://Scenes/HorizonButton.tscn" id="10_tx1dd"]
 [ext_resource type="AudioStream" uid="uid://d3cltwgwftrx2" path="res://Music/Sword Woosh.mp3" id="16_fd4e3"]
+[ext_resource type="AudioStream" uid="uid://cmh2772d61uh4" path="res://Music/Shield Deflect.mp3" id="18_fs7ks"]
 [ext_resource type="AudioStream" uid="uid://cakkb87k8dra4" path="res://Music/SPELL SOUND.mp3" id="18_igrcy"]
+[ext_resource type="AudioStream" uid="uid://c8cofpnp8wfjk" path="res://Music/Sword Hit.mp3" id="20_l6n3p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_36dho"]
 atlas = ExtResource("2_h4iuc")
@@ -449,6 +451,8 @@ scenes/1/scene = ExtResource("10_tx1dd")
 tile_size = Vector2i(120, 120)
 sources/0 = SubResource("TileSetScenesCollectionSource_gymyn")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drsw1"]
+
 [node name="Player" type="CharacterBody2D" unique_id=600283651]
 collision_mask = 0
 script = ExtResource("1_cvnsp")
@@ -464,7 +468,7 @@ shape = SubResource("RectangleShape2D_8upip")
 debug_color = Color(0.9366923, 1.7808377e-05, 0.63324153, 0.41960785)
 
 [node name="PlayerAnim" type="AnimatedSprite2D" parent="." unique_id=1249637971]
-position = Vector2(60, -5)
+position = Vector2(60, 0)
 sprite_frames = SubResource("SpriteFrames_3owqy")
 animation = &"use"
 autoplay = "Face"
@@ -551,11 +555,110 @@ tile_set = SubResource("TileSet_dpga7")
 [node name="SwordSlash" type="AudioStreamPlayer" parent="." unique_id=1446820892]
 stream = ExtResource("16_fd4e3")
 
+[node name="shieldblock" type="AudioStreamPlayer" parent="." unique_id=2132863391]
+stream = ExtResource("18_fs7ks")
+
 [node name="Spell" type="AudioStreamPlayer" parent="." unique_id=500142808]
 stream = ExtResource("18_igrcy")
 
+[node name="swordhit" type="AudioStreamPlayer" parent="." unique_id=1432320629]
+stream = ExtResource("20_l6n3p")
+
+[node name="overlap" type="Area2D" parent="." unique_id=686559488]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="overlap" unique_id=241831581]
+position = Vector2(60, 60)
+shape = SubResource("RectangleShape2D_drsw1")
+
+[connection signal="animation_finished" from="PlayerAnim" to="." method="_on_player_anim_animation_finished"]
 [connection signal="body_entered" from="Sword" to="." method="_on_sword_body_entered"]
 [connection signal="pressed" from="Defend/right" to="." method="_on_right_pressed"]
 [connection signal="pressed" from="Defend/left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="Defend/up" to="." method="_on_up_pressed"]
 [connection signal="pressed" from="Defend/down" to="." method="_on_down_pressed"]
+[connection signal="pressed" from="Gust/GustButton" to="Gust/GustButton" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87698" to="Gust/@TextureButton@87698" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87699" to="Gust/@TextureButton@87699" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87700" to="Gust/@TextureButton@87700" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87701" to="Gust/@TextureButton@87701" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87702" to="Gust/@TextureButton@87702" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87703" to="Gust/@TextureButton@87703" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87704" to="Gust/@TextureButton@87704" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87705" to="Gust/@TextureButton@87705" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87706" to="Gust/@TextureButton@87706" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87707" to="Gust/@TextureButton@87707" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87708" to="Gust/@TextureButton@87708" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87709" to="Gust/@TextureButton@87709" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87710" to="Gust/@TextureButton@87710" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87711" to="Gust/@TextureButton@87711" method="_on_pressed"]
+[connection signal="pressed" from="Gust/@TextureButton@87712" to="Gust/@TextureButton@87712" method="_on_pressed"]
+[connection signal="pressed" from="Spike/SpikeButton" to="Spike/SpikeButton" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87713" to="Spike/@TextureButton@87713" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87714" to="Spike/@TextureButton@87714" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87715" to="Spike/@TextureButton@87715" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87716" to="Spike/@TextureButton@87716" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87717" to="Spike/@TextureButton@87717" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87718" to="Spike/@TextureButton@87718" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87719" to="Spike/@TextureButton@87719" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87720" to="Spike/@TextureButton@87720" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87721" to="Spike/@TextureButton@87721" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87722" to="Spike/@TextureButton@87722" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87723" to="Spike/@TextureButton@87723" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87724" to="Spike/@TextureButton@87724" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87725" to="Spike/@TextureButton@87725" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87726" to="Spike/@TextureButton@87726" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87727" to="Spike/@TextureButton@87727" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87728" to="Spike/@TextureButton@87728" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87729" to="Spike/@TextureButton@87729" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87730" to="Spike/@TextureButton@87730" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87731" to="Spike/@TextureButton@87731" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87732" to="Spike/@TextureButton@87732" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87733" to="Spike/@TextureButton@87733" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87734" to="Spike/@TextureButton@87734" method="_on_pressed"]
+[connection signal="pressed" from="Spike/@TextureButton@87735" to="Spike/@TextureButton@87735" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/FireballButton" to="Fireball/FireballButton" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87736" to="Fireball/@TextureButton@87736" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87737" to="Fireball/@TextureButton@87737" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87738" to="Fireball/@TextureButton@87738" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87739" to="Fireball/@TextureButton@87739" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87740" to="Fireball/@TextureButton@87740" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87741" to="Fireball/@TextureButton@87741" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87742" to="Fireball/@TextureButton@87742" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87743" to="Fireball/@TextureButton@87743" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87744" to="Fireball/@TextureButton@87744" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87745" to="Fireball/@TextureButton@87745" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87746" to="Fireball/@TextureButton@87746" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87747" to="Fireball/@TextureButton@87747" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87748" to="Fireball/@TextureButton@87748" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87749" to="Fireball/@TextureButton@87749" method="_on_pressed"]
+[connection signal="pressed" from="Fireball/@TextureButton@87750" to="Fireball/@TextureButton@87750" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/HorizonButton" to="Horizon/HorizonButton" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87751" to="Horizon/@TextureButton@87751" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87752" to="Horizon/@TextureButton@87752" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87753" to="Horizon/@TextureButton@87753" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87754" to="Horizon/@TextureButton@87754" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87755" to="Horizon/@TextureButton@87755" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87756" to="Horizon/@TextureButton@87756" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87757" to="Horizon/@TextureButton@87757" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87758" to="Horizon/@TextureButton@87758" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87759" to="Horizon/@TextureButton@87759" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87760" to="Horizon/@TextureButton@87760" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87761" to="Horizon/@TextureButton@87761" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87762" to="Horizon/@TextureButton@87762" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87763" to="Horizon/@TextureButton@87763" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87764" to="Horizon/@TextureButton@87764" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87765" to="Horizon/@TextureButton@87765" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87766" to="Horizon/@TextureButton@87766" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87767" to="Horizon/@TextureButton@87767" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87768" to="Horizon/@TextureButton@87768" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87769" to="Horizon/@TextureButton@87769" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87770" to="Horizon/@TextureButton@87770" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87771" to="Horizon/@TextureButton@87771" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87772" to="Horizon/@TextureButton@87772" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87773" to="Horizon/@TextureButton@87773" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87774" to="Horizon/@TextureButton@87774" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87775" to="Horizon/@TextureButton@87775" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87776" to="Horizon/@TextureButton@87776" method="_on_pressed"]
+[connection signal="pressed" from="Horizon/@TextureButton@87777" to="Horizon/@TextureButton@87777" method="_on_pressed"]

@@ -35,6 +35,7 @@ theme/custom="uid://bofyggykeefln"
 2d_render/layer_2="attacks"
 2d_render/layer_3="pushes"
 2d_render/layer_4="shield"
+2d_render/layer_5="collision kill"
 
 [physics]
 

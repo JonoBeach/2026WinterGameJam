@@ -27,10 +27,15 @@ func _process(delta: float) -> void:
 
 func _on_end_turn_pressed() -> void:
 	if !actioning:
+		$"0".hide()
+		$"1".hide()
+		$"2".hide()
+		actioning = true
 		get_parent().endturn()
 		$EndTurn.hide()
 
 func reset():
+	actioning = false
 	$EndTurn.show()
 	energy=3
 	assignMoves()
@@ -126,7 +131,7 @@ func movechoose(move):
 
 
 func _on_move_finish():
-	await get_tree().create_timer(1.3).timeout
+	await get_tree().create_timer(1.5).timeout
 	actioning = false
 
 

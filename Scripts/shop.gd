@@ -32,7 +32,6 @@ func _ready() -> void:
 			dialogue[1].append(f[x+1])
 	$Dialogue/Title.text = dialogue[0][diai]
 	$Dialogue/Body.text = dialogue[1][diai]
-	Global.coins = 100
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -47,7 +46,7 @@ func _on_win_pressed() -> void:
 
 func _on_continue_pressed() -> void:
 	Global.Moves.sort()
-	Global.enemy_count+=2
+	Global.enemy_count+=3
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 

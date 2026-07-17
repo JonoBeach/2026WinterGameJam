@@ -2,9 +2,9 @@ extends CharacterBody2D
 @onready var attack_movement_patterns = $enemy_attack_and_movement_patterns
 @onready var player = get_parent().get_node("Player")
 @onready var enemy_sprite = $EnemySprite
-@onready var hit_area = $HitArea
 @onready var spots = get_parent().get_node("enemypositions").get_used_cells()
 
+var attackdirection
 var attackpos
 var movei = 0
 var move_list = []
@@ -35,6 +35,7 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 		pushdirection = ""
 		set_position(pushend)
+		hitIndic()
 	if velocity == Vector2.ZERO and $Enemy_overlap.get_overlapping_areas().size()>0:
 		$Enemy_overlap.get_overlapping_areas()[0].get_parent().killed(Vector2(0,0))
 	move_and_slide()
@@ -42,24 +43,51 @@ func _physics_process(_delta):
 func attack_indicate():
 	attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
 	pass
-	
-func do_attack():
+
+
+func hitIndic():
+	var indicate
 	if (attackpos in Global.spots):
-		$EnemySprite.play("Attack")
-		await get_tree().create_timer(.35).timeout
-		$Swordslash.play()
-		hit_area.set_deferred("monitoring", true)
-		$HitArea/EnemAttack.play("attack")
 		match attackpos-get_position():
 			Vector2(0,120):
-				$HitArea/EnemAttack.flip_v = true
+				indicate = $DownIndicate
+				attackdirection = "down"
+			Vector2(0,-120):
+				indicate = $UpIndicate
+				attackdirection = "up"
 			Vector2(-120,0):
-				$HitArea/EnemAttack.flip_h = true
-				$HitArea/EnemAttack.rotation_degrees = -90
+				indicate = $LeftIndicate
+				attackdirection = "left"
 			Vector2(120,0):
-				$HitArea/EnemAttack.rotation_degrees = 90
+				indicate = $RightIndicate
+				attackdirection = "right"
+			_:
+				indicate = $RightIndicate
+				attackdirection = "right"
+		indicate.show()
+		indicate.set_position(attackpos)
+		for node in indicate.get_children():
+			node.hide()
+			if node.position +indicate.position-Vector2(60,60) in Global.spots:
+				node.show()
+
+func do_attack():
+	$Move_indicator.hide()
+	$DownIndicate.hide()
+	$UpIndicate.hide()
+	$LeftIndicate.hide()
+	$RightIndicate.hide()
+	if (attackpos in Global.spots):
+		$EnemySprite.play("Attack")
+		await get_tree().create_timer(.3).timeout
+		$spell.play()
+		await get_tree().create_timer(.7).timeout
+		var scene = preload("res://Scenes/BonesAttack.tscn")
+		var instance = scene.instantiate()
+		instance.set_position(attackpos)
+		instance.direction = attackdirection
+		get_parent().add_child(instance)
 		await get_tree().create_timer(2).timeout
-		hit_area.set_deferred("monitoring", false)
 	
 	#attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
 	#for tile_location in attacking_tiles:
@@ -80,12 +108,7 @@ func calculate_enemy_move():
 	var attacks = attack_movement_patterns.enemy_movement_location(position)
 	attackpos = attacks[rng.randi_range(0,attacks.size()-1)]#-get_position()
 	
-	$HitArea/EnemAttack.rotation_degrees = 0
-	$HitArea/EnemAttack.flip_h = false
-	$HitArea/EnemAttack.flip_v = false
-	$HitArea.show()
-	$HitArea/EnemAttack.play("indicator")
-	$HitArea.set_position(attackpos)
+	hitIndic()
 	
 	move_list = []
 	movei =0
@@ -130,8 +153,6 @@ func calculate_enemy_move():
 	
 	#print(move_list)
 func enemy_move():
-	$Move_indicator.hide()
-	$HitArea.hide()
 	if movei < move_list.size():
 		var move = move_list[movei]
 		movei+=1
@@ -159,21 +180,17 @@ func enemy_move():
 		#hit_area.set_deferred("monitoring", false)
 
 
-func _on_hit_area_body_entered(body):
-	body.killed(get_position())
-	$Swordhit.play()
-
 
 func push(finalPos,value):
 	pushend = get_position() + finalPos
 	if pushend in Global.spots:
+		$DownIndicate.hide()
+		$UpIndicate.hide()
+		$LeftIndicate.hide()
+		$RightIndicate.hide()
 		$EnemySprite.play("Move")
 		await get_tree().create_timer(.35).timeout
 		attackpos+=finalPos
-		if !(attackpos in Global.spots):
-			$HitArea.hide()
-		else:
-			$HitArea.set_position(attackpos)
 		for x in range(0,move_list.size()):
 			move_list[x]+=finalPos
 		if !move_list[-1] in Global.spots:
@@ -183,9 +200,14 @@ func push(finalPos,value):
 		end += finalPos
 
 func killed(area):
-	Global.enemy_dead.emit() 
-	queue_free()
+	Global.enemies_alive-=1
+	$death.play()
 
 
 func _on_enemy_sprite_animation_finished() -> void:
 	$EnemySprite.play("Face")
+
+
+
+func _on_death_finished() -> void:
+	queue_free()

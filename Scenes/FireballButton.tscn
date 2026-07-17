@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://r237fsrks8yf" path="res://Art/spike rect.png" id="1_qpx71"]
 [ext_resource type="Script" uid="uid://dnj5mmhoecobt" path="res://Scripts/fireball_button.gd" id="2_q8idp"]
+[ext_resource type="AudioStream" uid="uid://e787u0v36ttv" path="res://Music/fireball.mp3" id="3_q8idp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
 size = Vector2(320, 100)
@@ -30,6 +31,9 @@ shape = SubResource("RectangleShape2D_3owqy")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=84839573]
 position = Vector2(60, 59)
 shape = SubResource("RectangleShape2D_8upip")
+
+[node name="fireball" type="AudioStreamPlayer" parent="." unique_id=1088681040]
+stream = ExtResource("3_q8idp")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

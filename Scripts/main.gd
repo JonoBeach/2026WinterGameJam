@@ -4,10 +4,12 @@ var dialogue = [[],[]]
 var rng = RandomNumberGenerator.new()
 @onready var spots = $enemypositions.get_used_cells()
 var enemies_finished = 0
-var enemcount
+var enemcount = 4
+var dead = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Global.enemies_alive = 0
 	enemcount = Global.enemy_count
 	if Global.coins == -1:
 		$Dialogue.show()
@@ -28,32 +30,55 @@ func _ready() -> void:
 	$Dialogue/Body.text = dialogue[1][diai]
 	Global.player_move_finish.connect(_on_player_finished)
 	Global.enemy_move_finish.connect(_on_enemy_finished)
-	Global.enemy_dead.connect(_on_death)
+	var rand_range = 3
+	if Global.enemy_count >4:
+		rand_range+=1
 	for x in range(0,Global.enemy_count):
-		match rng.randi_range(3,3):
-			1:
-				var scene = preload("res://Scenes/enemy.tscn")
-				var instance = scene.instantiate()
-				var i =rng.randi_range(0, len(spots)-1)
-				instance.set_position(spots[i]*120)
-				spots.remove_at(i)
-				add_child(instance)
-			2:
-				pass
-			3:
-				var scene = preload("res://Scenes/berserker.tscn")
-				var instance = scene.instantiate()
-				var i =rng.randi_range(0, len(spots)-1)
-				instance.set_position(spots[i]*120)
-				spots.remove_at(i)
-				add_child(instance)
-				
+		if spots.size()>0:
+			Global.enemies_alive+=1
+			match rng.randi_range(1,rand_range):
+				1:
+					var scene = preload("res://Scenes/enemy.tscn")
+					var instance = scene.instantiate()
+					var i =rng.randi_range(0, len(spots)-1)
+					instance.set_position(spots[i]*120)
+					spots.remove_at(i)
+					add_child(instance)
+				2:
+					var scene = preload("res://Scenes/Bones.tscn")
+					var instance = scene.instantiate()
+					var i =rng.randi_range(0, len(spots)-1)
+					instance.set_position(spots[i]*120)
+					spots.remove_at(i)
+					add_child(instance)
+				3:
+					var scene = preload("res://Scenes/enemy.tscn")
+					var instance = scene.instantiate()
+					var i =rng.randi_range(0, len(spots)-1)
+					instance.set_position(spots[i]*120)
+					spots.remove_at(i)
+					add_child(instance)
+				4:
+					pass
 	Global.enemy_calculate_move.emit()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-
+	if (enemies_finished == Global.enemies_alive) and enemies_finished>0 and !dead:
+		$Mainhud.reset()
+		$Player.movedecide()
+		enemies_finished = 0
+		Global.enemy_calculate_move.emit()
+	if Global.enemies_alive == 0:
+		await get_tree().create_timer(1).timeout
+		get_tree().change_scene_to_file("res://Scenes/Shop.tscn")
+	if dead:
+		$Dialogue.show()
+		$Dialogue/Next.hide()
+		$Dialogue/Body.text = "I'm sorry, I let you down :( now the world is doomed. If only I'd learnt more spells"
+		$Dialogue/Title.text = "You"
+		await get_tree().create_timer(2).timeout
+		get_tree().change_scene_to_file("res://Scenes/Menu.tscn")
 ##called when end turn button pressed
 func endturn():
 	$Player.movedo()
@@ -72,15 +97,12 @@ func _on_next_pressed() -> void:
 
 func _on_player_finished():
 	
-	enemies_finished = 0
 	Global.enemy_move.emit()
 
 func _on_enemy_finished():
 	enemies_finished+=1
-	if enemies_finished == enemcount:
-		$Mainhud.reset()
-		$Player.movedecide()
-		Global.enemy_calculate_move.emit()
 
-func _on_death():
-	enemcount-=1
+
+
+func _on_theme_finished() -> void:
+	$theme.play()

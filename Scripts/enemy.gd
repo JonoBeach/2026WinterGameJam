@@ -183,9 +183,12 @@ func push(finalPos,value):
 		end += finalPos
 
 func killed(area):
-	Global.enemy_dead.emit() 
-	queue_free()
-
+	Global.enemies_alive-=1
+	$death.play()
 
 func _on_enemy_sprite_animation_finished() -> void:
 	$EnemySprite.play("Face")
+
+
+func _on_death_finished() -> void:
+	queue_free()

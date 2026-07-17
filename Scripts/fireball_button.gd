@@ -17,7 +17,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_pressed() -> void:
-	print(get_position())
 	Global.tama_move.emit()
 	var pos = [Vector2(0,0),Vector2(120,0),Vector2(-120,0),Vector2(0,120),Vector2(0,-120)]
 	var scene = preload("res://Scenes/Fireball.tscn")
@@ -27,6 +26,7 @@ func _on_pressed() -> void:
 			instance.set_position(x+get_position()+Global.playerpos+Vector2(60,60))
 			get_parent().get_parent().get_parent().add_child(instance)
 	await get_tree().create_timer(1).timeout
+	$fireball.play()
 	$Area2D.monitoring = true
 	$Area2D.monitorable = true
 	await get_tree().create_timer(1).timeout

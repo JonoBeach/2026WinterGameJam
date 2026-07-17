@@ -47,7 +47,7 @@ func _on_win_pressed() -> void:
 
 func _on_continue_pressed() -> void:
 	Global.Moves.sort()
-	Global.enemy_count+=1
+	Global.enemy_count+=2
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 

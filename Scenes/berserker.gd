@@ -81,8 +81,6 @@ func move_indicate():
 func calculate_enemy_move():
 	attacking_tiles = attack_movement_patterns.enemy_movement_location(position)
 	#attackpos = attacks[rng.randi_range(0,attacks.size()-1)]#-get_position()
-	print(attacking_tiles)
-	print(attack_indicators)
 	
 	for attack_num in range(len(attacking_tiles)):
 		attackpos = attacking_tiles[attack_num]
@@ -93,7 +91,6 @@ func calculate_enemy_move():
 		$HitArea.show()
 		attack_indicators[attack_num].play("indicator")
 		attack_indicators[attack_num].set_position(attacking_tiles[attack_num] + Vector2(180, 60))
-		print(attack_indicators[attack_num].get_position())
 	
 	move_list = []
 	movei =0
@@ -191,9 +188,14 @@ func push(finalPos,value):
 		end += finalPos
 
 func killed(area):
-	Global.enemy_dead.emit() 
-	queue_free()
+	Global.enemies_alive-=1
+	Global.coins+=1
+	$death.play()
 
 
 func _on_enemy_sprite_animation_finished() -> void:
 	$EnemySprite.play("Face")
+
+
+func _on_death_finished() -> void:
+	queue_free()

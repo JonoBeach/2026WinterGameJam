@@ -14,6 +14,7 @@ func _ready() -> void:
 	if Global.coins == -1:
 		$Dialogue.show()
 		$Mainhud.hide()
+		Global.coins = 0
 	else:
 		$Dialogue.hide()
 		$Mainhud.show()

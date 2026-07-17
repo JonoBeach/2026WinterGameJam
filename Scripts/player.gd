@@ -156,15 +156,13 @@ func _on_sword_body_entered(body: Node2D) -> void:
 
 func killed(area):
 	if area == Vector2(0,0):
-		get_parent().dead = true
-		hide()
+		$death.play()
 	else:
 		print(area,position, Global.shields)
 		if (area.x < position.x and Vector2(-120,0) in Global.shields) or (area.x>position.x and Vector2(120,0) in Global.shields) or(area.y < position.y and Vector2(0,-120) in Global.shields) or (area.y>position.y and Vector2(0,120) in Global.shields):
 			$shieldblock.play()
 		else:
-			get_parent().dead = true
-			hide()
+			$death.play()
 
 func defend():
 	$Defend.show()
@@ -262,3 +260,8 @@ func Horizon():
 
 func _on_player_anim_animation_finished() -> void:
 	$PlayerAnim.play("Face")
+
+
+func _on_death_finished() -> void:
+	get_parent().dead = true
+	hide()

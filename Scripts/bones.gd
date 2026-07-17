@@ -201,6 +201,7 @@ func push(finalPos,value):
 
 func killed(area):
 	Global.enemies_alive-=1
+	Global.coins+=1
 	$death.play()
 
 

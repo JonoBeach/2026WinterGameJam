@@ -39,6 +39,7 @@ func _physics_process(_delta):
 		set_position(pushend)
 	if velocity == Vector2.ZERO and $Enemy_overlap.get_overlapping_areas().size()>0:
 		$Enemy_overlap.get_overlapping_areas()[0].get_parent().killed(Vector2(0,0))
+		$Enemy_overlap/CollisionShape2D.disabled = true
 	move_and_slide()
 
 func attack_indicate():
@@ -62,8 +63,9 @@ func do_attack():
 					attack_indicators[attack_num].rotation_degrees = -90
 				Vector2(120,0):
 					attack_indicators[attack_num].rotation_degrees = 90
-			hit_area.set_deferred("monitoring", false)
-	await get_tree().create_timer(2).timeout
+			
+	await get_tree().create_timer(1).timeout
+	hit_area.set_deferred("monitoring", false)
 	#attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
 	#for tile_location in attacking_tiles:
 			#hit_area.set_position(tile_location)
@@ -189,6 +191,7 @@ func push(finalPos,value):
 		end += finalPos
 
 func killed(area):
+	$CollisionShape2D.disabled = true
 	Global.enemies_alive-=1
 	Global.coins+=1
 	Global.occupied.erase(position)

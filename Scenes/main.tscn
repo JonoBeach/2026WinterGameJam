@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://ivcnxvxl0co7" path="res://Music/main theme.mp3" id="10_hptm8"]
 [ext_resource type="AudioStream" uid="uid://dgic0kqfr05wx" path="res://Music/lose.mp3" id="11_6iyac"]
 [ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="11_d1ilt"]
+[ext_resource type="AudioStream" uid="uid://dcavesg6iradi" path="res://Music/victory.mp3" id="12_6iyac"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
 texture = ExtResource("2_8gbba")
@@ -113,5 +114,9 @@ autoplay = true
 [node name="lose" type="AudioStreamPlayer" parent="." unique_id=1489307942]
 stream = ExtResource("11_6iyac")
 
+[node name="win" type="AudioStreamPlayer" parent="." unique_id=254120090]
+stream = ExtResource("12_6iyac")
+
 [connection signal="pressed" from="Dialogue/Next" to="." method="_on_next_pressed"]
 [connection signal="finished" from="theme" to="." method="_on_theme_finished"]
+[connection signal="finished" from="win" to="." method="_on_win_finished"]

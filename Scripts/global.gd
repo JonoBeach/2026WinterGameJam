@@ -15,5 +15,5 @@ var occupied = []
 var spikes = [] #stores current positions of spikes
 var shields = [] #stores current positions of shields
 var coins = 0
-var enemy_count = 4
+var enemy_count = 10
 var enemies_alive = 0

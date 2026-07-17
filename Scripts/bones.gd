@@ -39,6 +39,7 @@ func _physics_process(_delta):
 		hitIndic()
 	if velocity == Vector2.ZERO and $Enemy_overlap.get_overlapping_areas().size()>0:
 		$Enemy_overlap.get_overlapping_areas()[0].get_parent().killed(Vector2(0,0))
+		$Enemy_overlap/CollisionShape2D.disabled = true
 	move_and_slide()
 
 func attack_indicate():
@@ -107,7 +108,8 @@ func move_indicate():
 
 func calculate_enemy_move():
 	var attacks = attack_movement_patterns.enemy_movement_location(position)
-	attackpos = attacks[rng.randi_range(0,attacks.size()-1)]#-get_position()
+	if attacks.size()>0:
+		attackpos = attacks[rng.randi_range(0,attacks.size()-1)]#-get_position()
 	
 	hitIndic()
 	
@@ -201,6 +203,7 @@ func push(finalPos,value):
 		end += finalPos
 
 func killed(area):
+	$CollisionShape2D.disabled = true
 	Global.enemies_alive-=1
 	Global.coins+=1
 	Global.occupied.erase(position)

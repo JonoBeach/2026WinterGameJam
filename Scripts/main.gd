@@ -7,6 +7,7 @@ var enemies_finished = 0
 var enemcount = 4
 var dead = false
 var enemies_attacked = 0
+var finish = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,7 +40,7 @@ func _ready() -> void:
 	for x in range(0,Global.enemy_count):
 		if spots.size()>0:
 			Global.enemies_alive+=1
-			match rng.randi_range(1,rand_range):
+			match rng.randi_range(4,4):#1,rand_range):
 				1:
 					var scene = preload("res://Scenes/enemy.tscn")
 					var instance = scene.instantiate()
@@ -72,18 +73,20 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if (enemies_finished == Global.enemies_alive) and enemies_finished>0 and !dead:
+	print(enemies_attacked,enemies_finished, Global.enemies_alive,Global.occupied)
+	if (enemies_finished >= Global.enemies_alive) and enemies_finished>0 and !dead:
 		$Mainhud.reset()
 		$Player.movedecide()
 		enemies_finished = 0
 		Global.enemy_calculate_move.emit()
-	if (enemies_attacked == Global.enemies_alive) and enemies_attacked > 0 and !dead:
+	if (enemies_attacked >= Global.enemies_alive) and enemies_attacked > 0 and !dead:
 		enemies_attacked=0
 		Global.enemy_walk_start.emit()
-	if Global.enemies_alive == 0:
-		await get_tree().create_timer(1).timeout
-		get_tree().change_scene_to_file("res://Scenes/Shop.tscn")
-	if dead and !$lose.playing:
+	if Global.enemies_alive == 0 and !finish:
+		finish = true
+		$win.play()
+	if dead and !finish:
+		finish = true
 		$Dialogue.show()
 		$Dialogue/Next.hide()
 		$lose.play()
@@ -120,3 +123,7 @@ func _on_enemy_attack_finished():
 
 func _on_theme_finished() -> void:
 	$theme.play()
+
+
+func _on_win_finished() -> void:
+	get_tree().change_scene_to_file("res://Scenes/Shop.tscn")

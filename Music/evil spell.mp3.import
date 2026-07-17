@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ny6ddocbm7b6"
+path="res://.godot/imported/evil spell.mp3-9cf7b0e0282de3cc191428e3a0b55706.mp3str"
+
+[deps]
+
+source_file="res://Music/evil spell.mp3"
+dest_files=["res://.godot/imported/evil spell.mp3-9cf7b0e0282de3cc191428e3a0b55706.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

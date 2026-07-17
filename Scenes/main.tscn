@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://y6qkru5k5j7f" path="res://Scenes/Mainhud.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://b1w0d8mxg8n8i" path="res://Art/decorations.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://d34alusg2ba13" path="res://Art/decorations_bot.png" id="8_344ge"]
+[ext_resource type="AudioStream" uid="uid://ivcnxvxl0co7" path="res://Music/main theme.mp3" id="10_hptm8"]
 [ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="11_d1ilt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
@@ -56,7 +57,7 @@ tile_set = SubResource("TileSet_3owqy")
 visible = false
 
 [node name="Player" parent="." unique_id=538769131 instance=ExtResource("3_jjvhh")]
-position = Vector2(360, 360)
+position = Vector2(1560, 720)
 
 [node name="Deco2" type="Sprite2D" parent="." unique_id=2026995973]
 z_index = 3
@@ -103,4 +104,10 @@ visible = false
 tile_map_data = PackedByteArray("AAAHAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAAJAAUAAQAAAAAAAAAKAAUAAQAAAAAAAAALAAUAAQAAAAAAAAAMAAUAAQAAAAAAAAANAAUAAQAAAAAAAAANAAYAAQAAAAAAAAAMAAYAAQAAAAAAAAALAAYAAQAAAAAAAAAKAAYAAQAAAAAAAAAJAAYAAQAAAAAAAAAIAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAANAAIAAQAAAAAAAAAMAAIAAQAAAAAAAAALAAIAAQAAAAAAAAAKAAIAAQAAAAAAAAAJAAIAAQAAAAAAAAAIAAIAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAQAAQAAAAAAAAAJAAQAAQAAAAAAAAAJAAMAAQAAAAAAAAAKAAQAAQAAAAAAAAAKAAMAAQAAAAAAAAALAAMAAQAAAAAAAAALAAQAAQAAAAAAAAAMAAMAAQAAAAAAAAAMAAQAAQAAAAAAAAANAAQAAQAAAAAAAAANAAMAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAMAAQAAAAAAAAAHAAIAAQAAAAAAAAAFAAYAAQAAAAAAAAAEAAYAAQAAAAAAAAADAAYAAQAAAAAAAAACAAYAAQAAAAAAAAAGAAUAAQAAAAAAAAAGAAYAAQAAAAAAAAAGAAQAAQAAAAAAAAAGAAMAAQAAAAAAAAAGAAIAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_8upip")
 
+[node name="theme" type="AudioStreamPlayer" parent="." unique_id=1558468557]
+stream = ExtResource("10_hptm8")
+volume_db = -2.5
+autoplay = true
+
 [connection signal="pressed" from="Dialogue/Next" to="." method="_on_next_pressed"]
+[connection signal="finished" from="theme" to="." method="_on_theme_finished"]

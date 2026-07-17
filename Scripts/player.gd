@@ -147,7 +147,6 @@ func push(finalPos,value):
 		velocity = pushend-get_position()
 		pushdirection=value
 		end += finalPos
-	await get_tree().create_timer(1.5).timeout
 
 
 #calls killed() if it touches a body
@@ -157,12 +156,15 @@ func _on_sword_body_entered(body: Node2D) -> void:
 
 func killed(area):
 	if area == Vector2(0,0):
-		queue_free()
+		get_parent().dead = true
+		hide()
 	else:
+		print(area,position, Global.shields)
 		if (area.x < position.x and Vector2(-120,0) in Global.shields) or (area.x>position.x and Vector2(120,0) in Global.shields) or(area.y < position.y and Vector2(0,-120) in Global.shields) or (area.y>position.y and Vector2(0,120) in Global.shields):
 			$shieldblock.play()
 		else:
-			queue_free()
+			get_parent().dead = true
+			hide()
 
 func defend():
 	$Defend.show()

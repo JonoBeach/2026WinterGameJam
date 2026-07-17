@@ -30,7 +30,7 @@ func _ready() -> void:
 	$Dialogue/Body.text = dialogue[1][diai]
 	Global.player_move_finish.connect(_on_player_finished)
 	Global.enemy_move_finish.connect(_on_enemy_finished)
-	var rand_range = 3
+	var rand_range = 4
 	if Global.enemy_count >4:
 		rand_range+=1
 	for x in range(0,Global.enemy_count):
@@ -59,7 +59,12 @@ func _ready() -> void:
 					spots.remove_at(i)
 					add_child(instance)
 				4:
-					pass
+					var scene = preload("res://Scenes/berserker.tscn")
+					var instance = scene.instantiate()
+					var i =rng.randi_range(0, len(spots)-1)
+					instance.set_position(spots[i]*120)
+					spots.remove_at(i)
+					add_child(instance)
 	Global.enemy_calculate_move.emit()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

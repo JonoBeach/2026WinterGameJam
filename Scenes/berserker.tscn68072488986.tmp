@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://cwo8d0leupsa2"]
+
+[ext_resource type="Script" uid="uid://ba5gfpcubcjcu" path="res://Scenes/berserker.gd" id="1_jbovf"]
+[ext_resource type="Texture2D" uid="uid://bcdix717f6ei2" path="res://Art/enemy_placeholder.png" id="1_tgad1"]
+[ext_resource type="Texture2D" uid="uid://cvk7daa0ox0n0" path="res://Art/gob_spear.png" id="2_jbovf"]
+[ext_resource type="Texture2D" uid="uid://d26n3g6rhl10d" path="res://Art/attack_indicator.png" id="3_j603l"]
+[ext_resource type="Texture2D" uid="uid://bo6xi7jrl6q5b" path="res://Art/enemy_move_indicator.png" id="4_6045b"]
+[ext_resource type="Script" uid="uid://we4fyn7jki2m" path="res://components/enemy_attack_and_movement_patterns.gd" id="5_elhvj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0yxg5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tgad1")
+}],
+"loop": 1,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tgad1")
+}],
+"loop": 1,
+"name": &"Face",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tgad1")
+}],
+"loop": 1,
+"name": &"Move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6s7r"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxokm"]
+size = Vector2(120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqxsh"]
+atlas = ExtResource("2_jbovf")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0whn2"]
+atlas = ExtResource("2_jbovf")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bx1xr"]
+atlas = ExtResource("2_jbovf")
+region = Rect2(240, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n85mp"]
+atlas = ExtResource("2_jbovf")
+region = Rect2(360, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxecp"]
+atlas = ExtResource("2_jbovf")
+region = Rect2(480, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jaer"]
+atlas = ExtResource("2_jbovf")
+region = Rect2(600, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ve8xs"]
+atlas = ExtResource("3_j603l")
+region = Rect2(0, 0, 120, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2krqq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqxsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0whn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bx1xr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n85mp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxecp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jaer")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ve8xs")
+}],
+"loop": 1,
+"name": &"indicator",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0ja0"]
+
+[node name="Berserker" type="CharacterBody2D" unique_id=144534571]
+collision_mask = 0
+script = ExtResource("1_jbovf")
+
+[node name="EnemySprite" type="AnimatedSprite2D" parent="." unique_id=942627595]
+position = Vector2(60, 60)
+scale = Vector2(0.8333333, 0.39999998)
+sprite_frames = SubResource("SpriteFrames_0yxg5")
+animation = &"Move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=571569132]
+position = Vector2(60, 60)
+shape = SubResource("RectangleShape2D_r6s7r")
+
+[node name="HitArea" type="Area2D" parent="." unique_id=1509851348]
+top_level = true
+position = Vector2(-120, 0)
+collision_layer = 2
+monitoring = false
+
+[node name="Hitbox" type="CollisionShape2D" parent="HitArea" unique_id=1403382977]
+position = Vector2(60, 60)
+shape = SubResource("RectangleShape2D_fxokm")
+
+[node name="EnemAttack" type="AnimatedSprite2D" parent="HitArea" unique_id=780800625]
+z_index = -1
+position = Vector2(60, 60)
+sprite_frames = SubResource("SpriteFrames_2krqq")
+animation = &"indicator"
+autoplay = "indicator"
+
+[node name="EnemAttackInd1" type="AnimatedSprite2D" parent="HitArea" unique_id=49041787]
+z_index = -1
+position = Vector2(60, 60)
+sprite_frames = SubResource("SpriteFrames_2krqq")
+animation = &"attack"
+autoplay = "indicator"
+
+[node name="EnemAttackInd2" type="AnimatedSprite2D" parent="HitArea" unique_id=270055723]
+z_index = -1
+position = Vector2(60, 60)
+sprite_frames = SubResource("SpriteFrames_2krqq")
+animation = &"indicator"
+autoplay = "indicator"
+
+[node name="EnemAttackInd3" type="AnimatedSprite2D" parent="HitArea" unique_id=833122125]
+z_index = -1
+position = Vector2(60, 60)
+sprite_frames = SubResource("SpriteFrames_2krqq")
+animation = &"indicator"
+autoplay = "indicator"
+
+[node name="Move_indicator" type="Sprite2D" parent="." unique_id=790671053]
+visible = false
+texture = ExtResource("4_6045b")
+
+[node name="enemy_attack_and_movement_patterns" type="Node" parent="." unique_id=1557476662 node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_elhvj")
+enemy = NodePath("")
+tile_move_count = 2
+attack_pattern_name = "Attack All Directions"
+attack_size = 2
+metadata/_custom_type_script = "uid://we4fyn7jki2m"
+
+[node name="Enemy_overlap" type="Area2D" parent="." unique_id=217312390]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy_overlap" unique_id=1703434742]
+position = Vector2(60, 60)
+shape = SubResource("RectangleShape2D_i0ja0")

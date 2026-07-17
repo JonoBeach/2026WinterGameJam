@@ -58,3 +58,5 @@ sprite_frames = SubResource("SpriteFrames_3owqy")
 animation = &"Gust"
 autoplay = "Gust"
 script = ExtResource("2_somlo")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

@@ -32,7 +32,6 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 		direction = ""
 		set_position(end)
-		await get_tree().create_timer(.5).timeout
 		enemy_move()
 	if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
 		velocity = Vector2.ZERO
@@ -49,34 +48,18 @@ func attack_indicate():
 	
 func do_attack():
 	$Move_indicator.hide()
-	for attack_num in range(len(attacking_tiles)):
-		attackpos = attacking_tiles[attack_num]
-		if (attackpos in Global.spots):
-			$EnemySprite.play("Attack")
-			await get_tree().create_timer(.35).timeout
+	$HitArea.hide()
+	$EnemySprite.play("Attack")
+	await get_tree().create_timer(1.4).timeout
 			#$Swordslash.play()
-			hit_area.set_deferred("monitoring", true)
-			attack_indicators[attack_num].play("attack")
-			match attackpos-get_position():
-				Vector2(0,120):
-					attack_indicators[attack_num].flip_v = true
-				Vector2(-120,0):
-					attack_indicators[attack_num].flip_h = true
-					attack_indicators[attack_num].rotation_degrees = -90
-				Vector2(120,0):
-					attack_indicators[attack_num].rotation_degrees = 90
+	hit_area.set_deferred("monitoring", true)
+	$Attack.play("default")
+	$Swordslash.play()
 			
 	await get_tree().create_timer(1).timeout
 	$HitArea.hide()
 	hit_area.set_deferred("monitoring", false)
-	#attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
-	#for tile_location in attacking_tiles:
-			#hit_area.set_position(tile_location)
-			#
-			#if hit_area.has_overlapping_bodies():
-				#for body in hit_area.get_overlapping_bodies():
-					#print("%s has been attacked" % body)
-					#
+
 	
 	Global.occupied.erase(position)
 	Global.enemy_attack_finish.emit()
@@ -90,9 +73,6 @@ func calculate_enemy_move():
 	
 	for attack_num in range(len(attacking_tiles)):
 		attackpos = attacking_tiles[attack_num]
-		attack_indicators[attack_num].rotation_degrees = 0
-		attack_indicators[attack_num].flip_h = false
-		attack_indicators[attack_num].flip_v = false
 		
 		$HitArea.show()
 		attack_indicators[attack_num].play("indicator")
@@ -118,28 +98,7 @@ func calculate_enemy_move():
 	if move_list.size() > 0:
 		$Move_indicator.show()
 		$Move_indicator.set_position(move_list[-1]-position+Vector2(60,60))
-		#print("end %s" % end)
-		#print("prev move %s" % previous_move)
-			
-		#while end == previous_move:
-			#print("CONDITION MET")
-			#print("end %s" % end)
-			#print("prev move %s" % previous_move)
-			#end = attack_movement_patterns.enemy_movement_location()
-				
-		
-		# Check if another entity is at destination
-		#hit_area.set_position(end)
-		#hit_area.set_deferred("monitoring", true)
-		#
-		#if hit_area.has_overlapping_bodies():
-			#velocity = Vector2.ZERO
-			#print("HIT")
-			#hit_area.set_deferred("monitoring", false)
-		
-		#move_list.append(end)
-	
-	#print(move_list)
+
 func enemy_move():
 	$Enemy_overlap.set_deferred("monitoring",false)
 	$Enemy_overlap.set_deferred("monitorable",false)
@@ -147,8 +106,9 @@ func enemy_move():
 		var move = move_list[movei]
 		movei+=1
 		if move in Global.spots and !(move in Global.occupied):
+			$EnemySprite.frame = 0
 			$EnemySprite.play("Move")
-			await get_tree().create_timer(.35).timeout
+			await get_tree().create_timer(1).timeout
 			if (move.x - position.x < 0):
 				direction = "left"
 			if (move.x - position.x > 0):
@@ -175,18 +135,15 @@ func enemy_move():
 
 func _on_hit_area_body_entered(body):
 	body.killed(get_position())
+	$Swordhit.play()
 
 
 func push(finalPos,value):
 	pushend = get_position() + finalPos
 	if pushend in Global.spots:
 		$EnemySprite.play("Move")
-		await get_tree().create_timer(.35).timeout
+		await get_tree().create_timer(1).timeout
 		attackpos+=finalPos
-		if !(attackpos in Global.spots):
-			$HitArea.hide()
-		else:
-			$HitArea.set_position(attackpos)
 		for x in range(0,move_list.size()):
 			move_list[x]+=finalPos
 		if !move_list[-1] in Global.spots:
@@ -209,3 +166,7 @@ func _on_death_finished() -> void:
 	Global.enemies_alive-=1
 	Global.coins+=1
 	queue_free()
+
+
+func _on_attack_animation_finished() -> void:
+	$Attack.play("empty")

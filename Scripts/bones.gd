@@ -31,7 +31,6 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 		direction = ""
 		set_position(end)
-		await get_tree().create_timer(.5).timeout
 		enemy_move()
 	if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
 		velocity = Vector2.ZERO
@@ -91,16 +90,7 @@ func do_attack():
 		instance.direction = attackdirection
 		add_child(instance)
 		#await get_tree().create_timer(4).timeout
-	
-	#attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
-	#for tile_location in attacking_tiles:
-			#hit_area.set_position(tile_location)
-			#
-			#if hit_area.has_overlapping_bodies():
-				#for body in hit_area.get_overlapping_bodies():
-					#print("%s has been attacked" % body)
-					#
-	
+
 	
 
 
@@ -138,28 +128,7 @@ func calculate_enemy_move():
 	if move_list.size() > 0:
 		$Move_indicator.show()
 		$Move_indicator.set_position(move_list[-1]-position+Vector2(60,60))
-		#print("end %s" % end)
-		#print("prev move %s" % previous_move)
-			
-		#while end == previous_move:
-			#print("CONDITION MET")
-			#print("end %s" % end)
-			#print("prev move %s" % previous_move)
-			#end = attack_movement_patterns.enemy_movement_location()
-				
-		
-		# Check if another entity is at destination
-		#hit_area.set_position(end)
-		#hit_area.set_deferred("monitoring", true)
-		#
-		#if hit_area.has_overlapping_bodies():
-			#velocity = Vector2.ZERO
-			#print("HIT")
-			#hit_area.set_deferred("monitoring", false)
-		
-		#move_list.append(end)
-	
-	#print(move_list)
+
 func enemy_move():
 	$Enemy_overlap.set_deferred("monitoring",false)
 	$Enemy_overlap.set_deferred("monitorable",false)
@@ -167,6 +136,7 @@ func enemy_move():
 		var move = move_list[movei]
 		movei+=1
 		if move in Global.spots and !(move in Global.occupied):
+			$EnemySprite.frame = 0
 			$EnemySprite.play("Move")
 			await get_tree().create_timer(.35).timeout
 			if (move.x - position.x < 0):

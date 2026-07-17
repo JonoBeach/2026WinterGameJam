@@ -17,11 +17,11 @@ func _ready() -> void:
 		if x < len(f)-1:
 			descriptions[1].append(f[x+1])
 	assignMoves()
-	Global.tama_move.connect(_on_move_finish)
+	Global.spell_finished.connect(_on_move_finish)
 
 func _process(delta: float) -> void:
 	$Energy/EnergyLabel.text = str(energy)+"/3"
-	#print(moves)
+
 	$Spells/SpellLabel.text = str(moves.size())+"/"+str(Global.Moves.size())
 	$Coins/CoinLabel.text = str(Global.coins)
 
@@ -57,7 +57,7 @@ func assignMoves():
 		get_node(str(i)+"/AnimatedSprite2D").play(moves[index])
 		avaiMoves.append(moves[index])
 		moves.remove_at(index)
-	#print(moves, avaiMoves, discards)
+
 
 func _on_button_pressed() -> void:
 	if !actioning:
@@ -109,6 +109,7 @@ func movechoose(move):
 				hide = true
 				energy -=1
 				get_parent().get_node("Player").move = ""
+				get_parent().get_node("Player").bewilder()
 		"fireball":
 			if energy > 1:
 				actioning = true
@@ -131,7 +132,6 @@ func movechoose(move):
 
 
 func _on_move_finish():
-	await get_tree().create_timer(1.8).timeout
 	actioning = false
 
 

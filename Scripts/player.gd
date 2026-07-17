@@ -158,7 +158,7 @@ func killed(area):
 	if area == Vector2(0,0):
 		$death.play()
 	else:
-		print(area,position, Global.shields)
+
 		if (area.x < position.x and Vector2(-120,0) in Global.shields) or (area.x>position.x and Vector2(120,0) in Global.shields) or(area.y < position.y and Vector2(0,-120) in Global.shields) or (area.y>position.y and Vector2(0,120) in Global.shields):
 			$shieldblock.play()
 		else:
@@ -171,6 +171,10 @@ func defend():
 		if (node.get_position()+get_position()) in spots and !(node.get_position() in Global.shields):
 			node.show()
 
+func bewilder():
+	await  get_tree().create_timer(.5).timeout
+	Global.spell_finished.emit()
+
 func _on_right_pressed() -> void:
 	var scene = preload("res://Scenes/Shield.tscn")
 	var instance = scene.instantiate()
@@ -179,6 +183,7 @@ func _on_right_pressed() -> void:
 	instance.origin = "tama"
 	add_child(instance)
 	Global.tama_move.emit()
+	bewilder()
 
 
 
@@ -190,6 +195,7 @@ func _on_left_pressed() -> void:
 	instance.origin = "tama"
 	add_child(instance)
 	Global.tama_move.emit()
+	bewilder()
 
 
 
@@ -201,6 +207,7 @@ func _on_up_pressed() -> void:
 	instance.origin = "tama"
 	add_child(instance)
 	Global.tama_move.emit()
+	bewilder()
 
 
 
@@ -212,6 +219,7 @@ func _on_down_pressed() -> void:
 	instance.origin = "tama"
 	add_child(instance)
 	Global.tama_move.emit()
+	bewilder()
 
 func Gust():
 	$Gust.show()
@@ -226,8 +234,6 @@ func _on_move_finish():
 	$Horizon.hide()
 	$Tamadachi.play("Action")
 	$Spell.play()
-	await get_tree().create_timer(0.85).timeout
-	$Tamadachi.play("Idle")
 
 func Spike():
 	$Spike.show()
@@ -251,6 +257,7 @@ func Bulwark():
 			instance.direction = dir[x]
 			instance.origin = "tama"
 			add_child(instance)
+	bewilder()
 	
 
 func Horizon():
@@ -266,3 +273,7 @@ func _on_player_anim_animation_finished() -> void:
 func _on_death_finished() -> void:
 	get_parent().dead = true
 	hide()
+
+
+func _on_tamadachi_animation_finished() -> void:
+	$Tamadachi.play("Idle")

@@ -32,3 +32,4 @@ func _on_pressed() -> void:
 	await get_tree().create_timer(1).timeout
 	$Area2D.monitoring = false
 	$Area2D.monitorable = false
+	Global.spell_finished.emit()

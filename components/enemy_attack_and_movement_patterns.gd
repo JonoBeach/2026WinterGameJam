@@ -18,9 +18,6 @@ const TILE_SIZE = 120
 
 ## Returns the location that the enemy will move to, based on its current position.
 func enemy_movement_location(posit):
-	#print("POS" + tilemap_dimensions.position)
-	#print("END" + tilemap_dimensions.end)
-	#print(Global.spots)
 	
 	# Need to check if enemy is out of bounds OR there is another entity there
 	var new_position = [posit + Vector2(TILE_SIZE, 0),posit - Vector2(TILE_SIZE, 0),posit + Vector2(0, TILE_SIZE),posit - Vector2(0, TILE_SIZE)]
@@ -80,7 +77,7 @@ func enemy_attack_pattern():
 			return []
 
 func attack_up():
-	#print(tilemap_dimensions.position.y)
+
 	var new_move
 	var attack_tiles = []
 	for current_attack in range(1, attack_size+1):
@@ -119,7 +116,7 @@ func attack_down():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#print(tilemap_dimensions)
+
 	pass # Replace with function body.
 
 

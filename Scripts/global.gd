@@ -1,6 +1,7 @@
 extends Node
 signal gust_check() #for both gust and spike buttons visibility setting
 signal tama_move() #for when player chooses where they're doing their move
+signal spell_finished()
 signal player_move_finish()
 signal enemy_move_finish()
 signal enemy_dead()

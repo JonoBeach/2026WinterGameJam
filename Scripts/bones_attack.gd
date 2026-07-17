@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 var direction
 
 func _ready() -> void:
@@ -14,14 +13,19 @@ func _ready() -> void:
 		"right":
 			velocity.x = 120
 	await get_tree().create_timer(3).timeout
-	queue_free()
+	kill()
 
 func _physics_process(delta: float) -> void:
 	if position.x < 180 or position.x > 1620 or position.y<180 or position.y>780:
-		queue_free()
+		kill()
 	move_and_slide()
 
+func kill():
+	var enem = get_parent()
+	if enem != null:
+		enem.done()
+	queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	body.killed(get_position())
-	queue_free()
+	kill()

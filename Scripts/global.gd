@@ -8,12 +8,12 @@ signal enemy_move()
 signal enemy_calculate_move()
 signal enemy_attack_finish()
 signal enemy_walk_start()
-var Moves = ["defend","defend","gust","gust","gust","spike"]
+var Moves = ["defend","defend","horizon","gust","gust","spike"]
 var spots
 var playerpos
 var occupied = []
 var spikes = [] #stores current positions of spikes
 var shields = [] #stores current positions of shields
 var coins = 0
-var enemy_count = 10
+var enemy_count = 4
 var enemies_alive = 0

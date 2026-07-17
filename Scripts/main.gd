@@ -40,7 +40,7 @@ func _ready() -> void:
 	for x in range(0,Global.enemy_count):
 		if spots.size()>0:
 			Global.enemies_alive+=1
-			match rng.randi_range(4,4):#1,rand_range):
+			match rng.randi_range(1,rand_range):
 				1:
 					var scene = preload("res://Scenes/enemy.tscn")
 					var instance = scene.instantiate()
@@ -73,10 +73,10 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(enemies_attacked,enemies_finished, Global.enemies_alive,Global.occupied)
 	if (enemies_finished >= Global.enemies_alive) and enemies_finished>0 and !dead:
 		$Mainhud.reset()
 		$Player.movedecide()
+		enemies_attacked=0
 		enemies_finished = 0
 		Global.enemy_calculate_move.emit()
 	if (enemies_attacked >= Global.enemies_alive) and enemies_attacked > 0 and !dead:

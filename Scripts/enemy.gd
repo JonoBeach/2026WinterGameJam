@@ -19,6 +19,7 @@ func _ready():
 	Global.enemy_move.connect(do_attack)
 	Global.enemy_calculate_move.connect(calculate_enemy_move)
 	Global.enemy_walk_start.connect(enemy_move)
+	Global.occupied.append(position)
 
 func _physics_process(_delta):
 	if !player == null:
@@ -36,7 +37,7 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 		pushdirection = ""
 		set_position(pushend)
-	if velocity == Vector2.ZERO and $Enemy_overlap.get_overlapping_areas().size()>0:
+	if $Enemy_overlap.get_overlapping_areas().size()>0:
 		$Enemy_overlap.get_overlapping_areas()[0].get_parent().killed(Vector2(0,0))
 		$Enemy_overlap/CollisionShape2D.disabled = true
 	move_and_slide()
@@ -46,6 +47,7 @@ func attack_indicate():
 	pass
 	
 func do_attack():
+	$Move_indicator.hide()
 	if (attackpos in Global.spots):
 		$EnemySprite.play("Attack")
 		await get_tree().create_timer(.35).timeout
@@ -135,7 +137,8 @@ func calculate_enemy_move():
 	
 	#print(move_list)
 func enemy_move():
-	$Move_indicator.hide()
+	$Enemy_overlap.set_deferred("monitoring",false)
+	$Enemy_overlap.set_deferred("monitorable",false)
 	if movei < move_list.size():
 		var move = move_list[movei]
 		movei+=1
@@ -153,12 +156,14 @@ func enemy_move():
 			end = move
 			velocity = end - position
 		else:
+			movei = 100
 			enemy_move()
 		#previous_move = end
 	else:
 		Global.occupied.append(position)
 		Global.enemy_move_finish.emit()
-			
+		$Enemy_overlap.set_deferred("monitoring",true)
+		$Enemy_overlap.set_deferred("monitorable",true)
 		#previous_move = end
 		#hit_area.set_deferred("monitoring", false)
 
@@ -188,8 +193,7 @@ func push(finalPos,value):
 
 func killed(area):
 	$CollisionShape2D.disabled = true
-	Global.enemies_alive-=1
-	Global.coins+=1
+	
 	Global.occupied.erase(position)
 	$death.play()
 
@@ -198,4 +202,6 @@ func _on_enemy_sprite_animation_finished() -> void:
 
 
 func _on_death_finished() -> void:
+	Global.enemies_alive-=1
+	Global.coins+=1
 	queue_free()

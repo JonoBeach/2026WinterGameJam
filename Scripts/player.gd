@@ -223,6 +223,7 @@ func _on_move_finish():
 	$Gust.hide()
 	$Spike.hide()
 	$Fireball.hide()
+	$Horizon.hide()
 	$Tamadachi.play("Action")
 	$Spell.play()
 	await get_tree().create_timer(0.85).timeout

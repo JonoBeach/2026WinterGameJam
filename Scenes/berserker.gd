@@ -20,6 +20,7 @@ func _ready():
 	Global.enemy_move.connect(do_attack)
 	Global.enemy_calculate_move.connect(calculate_enemy_move)
 	Global.enemy_walk_start.connect(enemy_move)
+	Global.occupied.append(position)
 
 func _physics_process(_delta):
 	if !player == null:
@@ -37,7 +38,7 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 		pushdirection = ""
 		set_position(pushend)
-	if velocity == Vector2.ZERO and $Enemy_overlap.get_overlapping_areas().size()>0:
+	if $Enemy_overlap.get_overlapping_areas().size()>0:
 		$Enemy_overlap.get_overlapping_areas()[0].get_parent().killed(Vector2(0,0))
 		$Enemy_overlap/CollisionShape2D.disabled = true
 	move_and_slide()
@@ -47,6 +48,7 @@ func attack_indicate():
 	return attacking_tiles
 	
 func do_attack():
+	$Move_indicator.hide()
 	for attack_num in range(len(attacking_tiles)):
 		attackpos = attacking_tiles[attack_num]
 		if (attackpos in Global.spots):
@@ -65,6 +67,7 @@ func do_attack():
 					attack_indicators[attack_num].rotation_degrees = 90
 			
 	await get_tree().create_timer(1).timeout
+	$HitArea.hide()
 	hit_area.set_deferred("monitoring", false)
 	#attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
 	#for tile_location in attacking_tiles:
@@ -93,7 +96,7 @@ func calculate_enemy_move():
 		
 		$HitArea.show()
 		attack_indicators[attack_num].play("indicator")
-		attack_indicators[attack_num].set_position(attacking_tiles[attack_num] + Vector2(180, 60))
+		attack_indicators[attack_num].set_position(attacking_tiles[attack_num]-position + Vector2(180, 60))
 	
 	move_list = []
 	movei =0
@@ -138,8 +141,8 @@ func calculate_enemy_move():
 	
 	#print(move_list)
 func enemy_move():
-	$Move_indicator.hide()
-	$HitArea.hide()
+	$Enemy_overlap.set_deferred("monitoring",false)
+	$Enemy_overlap.set_deferred("monitorable",false)
 	if movei < move_list.size():
 		var move = move_list[movei]
 		movei+=1
@@ -157,11 +160,14 @@ func enemy_move():
 			end = move
 			velocity = end - position
 		else:
+			movei = 100
 			enemy_move()
 		#previous_move = end
 	else:
 		Global.occupied.append(position)
 		Global.enemy_move_finish.emit()
+		$Enemy_overlap.set_deferred("monitoring",true)
+		$Enemy_overlap.set_deferred("monitorable",true)
 			
 		#previous_move = end
 		#hit_area.set_deferred("monitoring", false)
@@ -169,7 +175,6 @@ func enemy_move():
 
 func _on_hit_area_body_entered(body):
 	body.killed(get_position())
-	$Swordhit.play()
 
 
 func push(finalPos,value):
@@ -192,8 +197,6 @@ func push(finalPos,value):
 
 func killed(area):
 	$CollisionShape2D.disabled = true
-	Global.enemies_alive-=1
-	Global.coins+=1
 	Global.occupied.erase(position)
 	$death.play()
 
@@ -203,4 +206,6 @@ func _on_enemy_sprite_animation_finished() -> void:
 
 
 func _on_death_finished() -> void:
+	Global.enemies_alive-=1
+	Global.coins+=1
 	queue_free()

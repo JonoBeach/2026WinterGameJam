@@ -11,6 +11,7 @@ func _on_pressed() -> void:
 	instance.set_position(get_position()+Global.playerpos+Vector2(60,60))
 	get_parent().get_parent().get_parent().add_child(instance)
 	await get_tree().create_timer(.3).timeout
+	$GustDown/gust.play()
 	for node in get_children():
 		node.get_node("CollisionShape2D").set_deferred("disabled",false)
 	await get_tree().create_timer(.5).timeout

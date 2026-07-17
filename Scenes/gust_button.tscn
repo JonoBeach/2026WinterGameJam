@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://catg7nmy281l6" path="res://Art/gust rect.png" id="1_deilk"]
 [ext_resource type="Script" uid="uid://bkkifxv8xlksa" path="res://Scripts/gust_button.gd" id="2_gb68b"]
+[ext_resource type="AudioStream" uid="uid://dwod1akr5b3xj" path="res://Music/wind.mp3" id="3_gb68b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
 size = Vector2(120, 120)
@@ -53,6 +54,9 @@ disabled = true
 [node name="GustDown" type="Area2D" parent="." unique_id=861880463]
 visible = false
 collision_layer = 4
+
+[node name="gust" type="AudioStreamPlayer" parent="GustDown" unique_id=910799586]
+stream = ExtResource("3_gb68b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GustDown" unique_id=1104017007]
 position = Vector2(60, 180)

@@ -18,6 +18,7 @@ var attacking_tiles
 func _ready():
 	Global.enemy_move.connect(do_attack)
 	Global.enemy_calculate_move.connect(calculate_enemy_move)
+	Global.enemy_walk_start.connect(enemy_move)
 
 func _physics_process(_delta):
 	if !player == null:
@@ -58,8 +59,10 @@ func do_attack():
 				$HitArea/EnemAttack.rotation_degrees = -90
 			Vector2(120,0):
 				$HitArea/EnemAttack.rotation_degrees = 90
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(1).timeout
 		hit_area.set_deferred("monitoring", false)
+		$HitArea.hide()
+	Global.enemy_attack_finish.emit()
 	
 	#attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
 	#for tile_location in attacking_tiles:
@@ -71,7 +74,7 @@ func do_attack():
 					#
 	
 	Global.occupied.erase(position)
-	enemy_move()
+	#enemy_move()
 	
 func move_indicate():
 	pass
@@ -131,7 +134,6 @@ func calculate_enemy_move():
 	#print(move_list)
 func enemy_move():
 	$Move_indicator.hide()
-	$HitArea.hide()
 	if movei < move_list.size():
 		var move = move_list[movei]
 		movei+=1
@@ -185,6 +187,7 @@ func push(finalPos,value):
 func killed(area):
 	Global.enemies_alive-=1
 	Global.coins+=1
+	Global.occupied.erase(position)
 	$death.play()
 
 func _on_enemy_sprite_animation_finished() -> void:

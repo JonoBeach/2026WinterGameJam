@@ -6,6 +6,7 @@ var rng = RandomNumberGenerator.new()
 var enemies_finished = 0
 var enemcount = 4
 var dead = false
+var enemies_attacked = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,6 +32,7 @@ func _ready() -> void:
 	$Dialogue/Body.text = dialogue[1][diai]
 	Global.player_move_finish.connect(_on_player_finished)
 	Global.enemy_move_finish.connect(_on_enemy_finished)
+	Global.enemy_attack_finish.connect(_on_enemy_attack_finished)
 	var rand_range = 3
 	if Global.enemy_count >4:
 		rand_range+=1
@@ -75,12 +77,17 @@ func _process(delta: float) -> void:
 		$Player.movedecide()
 		enemies_finished = 0
 		Global.enemy_calculate_move.emit()
+	if (enemies_attacked == Global.enemies_alive) and enemies_attacked > 0 and !dead:
+		enemies_attacked=0
+		Global.enemy_walk_start.emit()
 	if Global.enemies_alive == 0:
 		await get_tree().create_timer(1).timeout
 		get_tree().change_scene_to_file("res://Scenes/Shop.tscn")
-	if dead:
+	if dead and !$lose.playing:
 		$Dialogue.show()
 		$Dialogue/Next.hide()
+		$lose.play()
+		$theme.stop()
 		$Dialogue/Body.text = "I'm sorry, I let you down :( now the world is doomed. If only I'd learnt more spells"
 		$Dialogue/Title.text = "You"
 		await get_tree().create_timer(2).timeout
@@ -108,7 +115,8 @@ func _on_player_finished():
 func _on_enemy_finished():
 	enemies_finished+=1
 
-
+func _on_enemy_attack_finished():
+	enemies_attacked+=1
 
 func _on_theme_finished() -> void:
 	$theme.play()

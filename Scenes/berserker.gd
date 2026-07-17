@@ -19,6 +19,7 @@ var attacking_tiles
 func _ready():
 	Global.enemy_move.connect(do_attack)
 	Global.enemy_calculate_move.connect(calculate_enemy_move)
+	Global.enemy_walk_start.connect(enemy_move)
 
 func _physics_process(_delta):
 	if !player == null:
@@ -73,7 +74,7 @@ func do_attack():
 					#
 	
 	Global.occupied.erase(position)
-	enemy_move()
+	Global.enemy_attack_finish.emit()
 	
 func move_indicate():
 	pass
@@ -190,6 +191,7 @@ func push(finalPos,value):
 func killed(area):
 	Global.enemies_alive-=1
 	Global.coins+=1
+	Global.occupied.erase(position)
 	$death.play()
 
 

@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b1w0d8mxg8n8i" path="res://Art/decorations.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://d34alusg2ba13" path="res://Art/decorations_bot.png" id="8_344ge"]
 [ext_resource type="AudioStream" uid="uid://ivcnxvxl0co7" path="res://Music/main theme.mp3" id="10_hptm8"]
+[ext_resource type="AudioStream" uid="uid://dgic0kqfr05wx" path="res://Music/lose.mp3" id="11_6iyac"]
 [ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="11_d1ilt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
@@ -108,6 +109,9 @@ tile_set = SubResource("TileSet_8upip")
 stream = ExtResource("10_hptm8")
 volume_db = -2.5
 autoplay = true
+
+[node name="lose" type="AudioStreamPlayer" parent="." unique_id=1489307942]
+stream = ExtResource("11_6iyac")
 
 [connection signal="pressed" from="Dialogue/Next" to="." method="_on_next_pressed"]
 [connection signal="finished" from="theme" to="." method="_on_theme_finished"]

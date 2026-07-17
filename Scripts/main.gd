@@ -30,7 +30,7 @@ func _ready() -> void:
 	$Dialogue/Body.text = dialogue[1][diai]
 	Global.player_move_finish.connect(_on_player_finished)
 	Global.enemy_move_finish.connect(_on_enemy_finished)
-	var rand_range = 4
+	var rand_range = 3
 	if Global.enemy_count >4:
 		rand_range+=1
 	for x in range(0,Global.enemy_count):

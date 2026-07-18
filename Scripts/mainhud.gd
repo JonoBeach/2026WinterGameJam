@@ -128,6 +128,12 @@ func movechoose(move):
 				hide = true
 				energy -=3
 				get_parent().get_node("Player").Bulwark()
+		"teleport":
+			if energy >2:
+				actioning = true
+				hide = true
+				energy -=3
+				get_parent().get_node("Player").Teleport()
 	return hide
 
 
@@ -152,6 +158,8 @@ func DescSet(spell):
 			ind = 5
 		"bulwark":
 			ind = 6
+		"teleport":
+			ind = 7
 	$Description/Body.text = descriptions[1][ind]
 	$Description/Title.text = descriptions[0][ind]
 

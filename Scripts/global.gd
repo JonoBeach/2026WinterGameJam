@@ -9,7 +9,7 @@ signal enemy_move()
 signal enemy_calculate_move()
 signal enemy_attack_finish()
 signal enemy_walk_start()
-var Moves = ["defend","defend","horizon","gust","gust","spike"]
+var Moves = ["defend","gust","horizon","gust","spike","teleport"]
 var spots
 var playerpos
 var occupied = []

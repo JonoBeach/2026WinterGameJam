@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c78ju006y818d" path="res://Art/gust_ui.png" id="5_epcx1"]
 [ext_resource type="Texture2D" uid="uid://dg71q5ogcrsqo" path="res://Art/event_horizon_ui.png" id="6_tidt6"]
 [ext_resource type="Texture2D" uid="uid://lduoakd01xha" path="res://Art/spike_ui.png" id="7_0fs5b"]
+[ext_resource type="Texture2D" uid="uid://b5pdpahcjgtd6" path="res://Art/teleportrect.png" id="8_q4bmd"]
 
 [resource]
 animations = [{
@@ -64,5 +65,13 @@ animations = [{
 }],
 "loop": 1,
 "name": &"spike",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_q4bmd")
+}],
+"loop": 1,
+"name": &"teleport",
 "speed": 5.0
 }]

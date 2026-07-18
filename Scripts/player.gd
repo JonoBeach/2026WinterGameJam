@@ -227,6 +227,7 @@ func Gust():
 	Global.gust_check.emit()
 
 func _on_move_finish():
+	$Teleport.hide()
 	$Defend.hide()
 	$Gust.hide()
 	$Spike.hide()
@@ -265,6 +266,11 @@ func Horizon():
 	Global.playerpos = get_position()
 	Global.gust_check.emit()
 
+func Teleport():
+	$Teleport.show()
+	Global.playerpos = get_position()
+	Global.gust_check.emit()
+
 
 func _on_player_anim_animation_finished() -> void:
 	$PlayerAnim.play("Face")
@@ -277,3 +283,13 @@ func _on_death_finished() -> void:
 
 func _on_tamadachi_animation_finished() -> void:
 	$Tamadachi.play("Idle")
+
+func tp(pos):
+	var scene = preload("res://Scenes/Gust.tscn")
+	var instance = scene.instantiate()
+	instance.set_position(get_position()+Vector2(60,60))
+	get_parent().add_child(instance)
+	end -= get_position()
+	set_position(pos)
+	end += get_position()
+	bewilder()

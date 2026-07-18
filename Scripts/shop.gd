@@ -12,11 +12,11 @@ func _ready() -> void:
 	else:
 		$MainButtons.show()
 		$Dialogue.hide()
-	var oneArr = ["defend","defend","gust","spike"]
-	var twoArr = ["gust","spike","bewilder","horizon"]
-	var threeArr = ["bulwark","fireball","horizon"]
+	var oneArr = ["gust","defend","gust","spike"]
+	var twoArr = ["spike","bewilder","horizon"]
+	var threeArr = ["bulwark","fireball","teleport"]
 	$"NewSpells/0/AnimatedSprite2D".play(oneArr[rng.randi_range(0,3)])
-	$"NewSpells/1/AnimatedSprite2D".play(twoArr[rng.randi_range(0,3)])
+	$"NewSpells/1/AnimatedSprite2D".play(twoArr[rng.randi_range(0,2)])
 	$"NewSpells/2/AnimatedSprite2D".play(threeArr[rng.randi_range(0,2)])
 	var f = FileAccess.open("res://Dialogue/Spells.txt",FileAccess.READ).get_as_text()
 	f = f.replace("\n","|").split("|")
@@ -112,6 +112,8 @@ func DescSet(spell):
 			ind = 5
 		"bulwark":
 			ind = 6
+		"teleport":
+			ind = 7
 	$Description/Body.text = descriptions[1][ind]
 	$Description/Title.text = descriptions[0][ind]
 

@@ -119,4 +119,5 @@ stream = ExtResource("12_6iyac")
 
 [connection signal="pressed" from="Dialogue/Next" to="." method="_on_next_pressed"]
 [connection signal="finished" from="theme" to="." method="_on_theme_finished"]
+[connection signal="finished" from="lose" to="." method="_on_lose_finished"]
 [connection signal="finished" from="win" to="." method="_on_win_finished"]

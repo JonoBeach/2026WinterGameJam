@@ -24,7 +24,6 @@ texture_normal = ExtResource("1_akg1f")
 script = ExtResource("2_uh7sm")
 
 [node name="HoriLeft" type="Area2D" parent="." unique_id=1853509819]
-visible = false
 collision_layer = 4
 monitoring = false
 
@@ -33,7 +32,6 @@ position = Vector2(-60, 60)
 shape = SubResource("RectangleShape2D_3owqy")
 
 [node name="HoriRight" type="Area2D" parent="." unique_id=108355985]
-visible = false
 collision_layer = 4
 monitoring = false
 
@@ -42,7 +40,6 @@ position = Vector2(180, 60)
 shape = SubResource("RectangleShape2D_8upip")
 
 [node name="HoriUp" type="Area2D" parent="." unique_id=590013011]
-visible = false
 collision_layer = 4
 monitoring = false
 
@@ -51,7 +48,6 @@ position = Vector2(60, -60)
 shape = SubResource("RectangleShape2D_drsw1")
 
 [node name="HoriDown" type="Area2D" parent="." unique_id=2096698442]
-visible = false
 collision_layer = 4
 monitoring = false
 

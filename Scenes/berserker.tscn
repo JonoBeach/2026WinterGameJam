@@ -441,6 +441,7 @@ autoplay = "indicator"
 
 [node name="Move_indicator" type="Sprite2D" parent="." unique_id=790671053]
 visible = false
+z_index = -1
 texture = ExtResource("4_6045b")
 
 [node name="enemy_attack_and_movement_patterns" type="Node" parent="." unique_id=1557476662]

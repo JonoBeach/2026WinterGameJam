@@ -345,6 +345,7 @@ frame_progress = 1.0
 
 [node name="Move_indicator" type="Sprite2D" parent="." unique_id=1306482521]
 visible = false
+z_index = -1
 texture = ExtResource("4_0830c")
 
 [node name="enemy_attack_and_movement_patterns" type="Node" parent="." unique_id=1487008254 node_paths=PackedStringArray("enemy")]

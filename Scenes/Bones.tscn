@@ -362,6 +362,7 @@ texture = ExtResource("5_eh0eh")
 
 [node name="Move_indicator" type="Sprite2D" parent="." unique_id=54817415]
 visible = false
+z_index = -1
 texture = ExtResource("6_p8e1q")
 
 [node name="enemy_attack_and_movement_patterns" type="Node" parent="." unique_id=1590508129 node_paths=PackedStringArray("enemy")]

@@ -123,3 +123,4 @@ autoplay = "leftknight"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=53007239]
 stream = ExtResource("3_f84if")
+bus = &"SFX"

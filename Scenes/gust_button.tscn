@@ -57,6 +57,7 @@ collision_layer = 4
 
 [node name="gust" type="AudioStreamPlayer" parent="GustDown" unique_id=910799586]
 stream = ExtResource("3_gb68b")
+bus = &"SFX"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GustDown" unique_id=1104017007]
 position = Vector2(60, 180)

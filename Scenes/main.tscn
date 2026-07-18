@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://81g043i6l1hq" path="res://Art/background.png" id="2_6bp64"]
 [ext_resource type="Texture2D" uid="uid://bll7bd124q80g" path="res://Art/tileholder.png" id="2_8gbba"]
 [ext_resource type="PackedScene" uid="uid://jn7c5bnom0n1" path="res://Scenes/player.tscn" id="3_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://csu5mmmnyrx88" path="res://Scenes/pause_menu.tscn" id="3_jkdf5"]
 [ext_resource type="PackedScene" uid="uid://y6qkru5k5j7f" path="res://Scenes/Mainhud.tscn" id="5_kry3j"]
 [ext_resource type="Texture2D" uid="uid://b1w0d8mxg8n8i" path="res://Art/decorations.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://d34alusg2ba13" path="res://Art/decorations_bot.png" id="8_344ge"]
@@ -12,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://dgic0kqfr05wx" path="res://Music/lose.mp3" id="11_6iyac"]
 [ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="11_d1ilt"]
 [ext_resource type="AudioStream" uid="uid://dcavesg6iradi" path="res://Music/victory.mp3" id="12_6iyac"]
+[ext_resource type="Texture2D" uid="uid://b5pdpahcjgtd6" path="res://Art/teleportrect.png" id="13_fdnlq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kry3j"]
 texture = ExtResource("2_8gbba")
@@ -110,13 +112,32 @@ tile_set = SubResource("TileSet_8upip")
 stream = ExtResource("10_hptm8")
 volume_db = -2.5
 autoplay = true
+bus = &"BGM"
 
 [node name="lose" type="AudioStreamPlayer" parent="." unique_id=1489307942]
 stream = ExtResource("11_6iyac")
+bus = &"SFX"
 
 [node name="win" type="AudioStreamPlayer" parent="." unique_id=254120090]
 stream = ExtResource("12_6iyac")
+bus = &"SFX"
+
+[node name="PauseButtonCanvasLayer" type="CanvasLayer" parent="." unique_id=1077380027]
+layer = 5
+
+[node name="PauseButton" type="Button" parent="PauseButtonCanvasLayer" unique_id=556476548]
+z_index = 5
+offset_left = 14.0
+offset_top = 185.0
+offset_right = 134.0
+offset_bottom = 305.0
+icon = ExtResource("13_fdnlq")
+
+[node name="PauseMenu" parent="." unique_id=873618423 instance=ExtResource("3_jkdf5")]
+layer = 4
+visible = false
 
 [connection signal="pressed" from="Dialogue/Next" to="." method="_on_next_pressed"]
 [connection signal="finished" from="theme" to="." method="_on_theme_finished"]
 [connection signal="finished" from="win" to="." method="_on_win_finished"]
+[connection signal="pressed" from="PauseButtonCanvasLayer/PauseButton" to="." method="_on_pause_button_pressed"]

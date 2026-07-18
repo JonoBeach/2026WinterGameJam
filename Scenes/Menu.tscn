@@ -30,6 +30,7 @@ texture_normal = ExtResource("3_ma218")
 [node name="Theme" type="AudioStreamPlayer" parent="." unique_id=834464832]
 stream = ExtResource("4_s2c3o")
 autoplay = true
+bus = &"BGM"
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

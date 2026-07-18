@@ -9,6 +9,10 @@ var dead = false
 var enemies_attacked = 0
 var finish = false
 
+# Pause menu stuff
+var paused = false
+@onready var pause_menu = $PauseMenu
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.enemies_alive = 0
@@ -128,6 +132,17 @@ func _on_win_finished() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Shop.tscn")
 
 
+func _on_pause_button_pressed():
+	print("PAUSED")
+	if paused:
+		Engine.time_scale = 1
+		pause_menu.hide()
+		
+	if !paused:
+		pause_menu.show()
+		Engine.time_scale = 0
+	
+	paused = !paused
 func _on_lose_finished() -> void:
 	await get_tree().create_timer(.5).timeout
 	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")

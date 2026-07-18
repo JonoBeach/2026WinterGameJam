@@ -12,7 +12,7 @@ var pushdirection = ""
 func _ready() -> void:
 	for x in range(0,len(spots)):
 		spots[x] *=120
-	set_position(spots[6])
+	set_position(spots[27])
 	Global.occupied.append(get_position())
 	Global.spots = spots
 	Global.tama_move.connect(_on_move_finish)

@@ -74,12 +74,17 @@ position = Vector2(-74, 87)
 texture = ExtResource("9_ct2yw")
 
 [node name="Label" type="Label" parent="MainButtons/Win/description" unique_id=2146545425]
+anchors_preset = -1
+anchor_top = -0.022222223
 offset_left = -68.0
-offset_top = -88.0
+offset_top = -77.0
 offset_right = 69.0
-offset_bottom = 89.0
+offset_bottom = 100.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/paragraph_spacing = -10
+theme_override_font_sizes/font_size = 20
 text = "Grow
+
 
 Costs 20G
 Grow Tamadachi and escape from the dungeon"
@@ -103,11 +108,12 @@ texture = ExtResource("9_ct2yw")
 anchors_preset = -1
 anchor_bottom = 0.011111111
 offset_left = -68.0
-offset_top = -88.0
+offset_top = -79.0
 offset_right = 69.0
-offset_bottom = 89.0
+offset_bottom = 98.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = -5
+theme_override_constants/paragraph_spacing = -10
+theme_override_font_sizes/font_size = 20
 text = "Feed
 
 
@@ -131,11 +137,12 @@ texture = ExtResource("9_ct2yw")
 
 [node name="Label" type="Label" parent="MainButtons/RemoveSpell/description" unique_id=1956984485]
 offset_left = -68.0
-offset_top = -88.0
+offset_top = -80.0
 offset_right = 69.0
-offset_bottom = 89.0
+offset_bottom = 97.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = -5
+theme_override_constants/paragraph_spacing = -10
+theme_override_font_sizes/font_size = 20
 text = "Bathe
 
 
@@ -159,11 +166,14 @@ texture = ExtResource("9_ct2yw")
 
 [node name="Label" type="Label" parent="MainButtons/Continue/description" unique_id=519360916]
 offset_left = -68.0
-offset_top = -88.0
+offset_top = -80.0
 offset_right = 69.0
-offset_bottom = 89.0
+offset_bottom = 97.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/paragraph_spacing = -10
+theme_override_font_sizes/font_size = 20
 text = "Continue
+
 
 Delve deeper into the dungeon for greater riches"
 horizontal_alignment = 1
@@ -341,39 +351,6 @@ animation = &"defend"
 layout_mode = 2
 texture_normal = ExtResource("5_ccd4q")
 
-[node name="Description" type="Sprite2D" parent="." unique_id=1994858251]
-visible = false
-position = Vector2(1850, 90)
-texture = ExtResource("9_ct2yw")
-
-[node name="Title" type="Label" parent="Description" unique_id=108166702]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.1
-anchor_right = 0.5
-anchor_bottom = 0.1
-offset_left = -140.0
-offset_top = -102.0
-offset_bottom = -78.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Bewilder"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="Body" type="Label" parent="Description" unique_id=872032744]
-offset_left = -66.0
-offset_top = -54.0
-offset_right = 66.0
-offset_bottom = 86.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = 0
-theme_override_font_sizes/font_size = 14
-text = "lm"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
 [node name="Spells" type="Sprite2D" parent="." unique_id=1240620953]
 position = Vector2(60, 60)
 texture = ExtResource("11_1mgah")
@@ -420,14 +397,49 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="Description" type="Sprite2D" parent="." unique_id=1865016650]
+visible = false
+position = Vector2(1850, 90)
+texture = ExtResource("9_ct2yw")
+
+[node name="Title" type="Label" parent="Description" unique_id=1790014406]
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.11100001
+anchor_right = 0.48900002
+anchor_bottom = 0.11100001
+offset_left = -125.46001
+offset_top = -105.98
+offset_right = -14.460007
+offset_bottom = -73.98
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 17
+text = "Bewilder"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Body" type="Label" parent="Description" unique_id=1903174795]
+offset_left = -69.0
+offset_top = -54.0
+offset_right = 69.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Muster all your power to teleport the knight to a nearby tile."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="Dialogue" type="Sprite2D" parent="." unique_id=1353882886]
+visible = false
 z_index = 5
 position = Vector2(960, 930)
 texture = ExtResource("13_m1c0q")
 
 [node name="Title" type="Label" parent="Dialogue" unique_id=100348714]
 offset_left = -447.0
-offset_top = 23.0
+offset_top = 32.0
 offset_right = -228.0
 offset_bottom = 100.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -442,7 +454,7 @@ offset_top = -114.0
 offset_right = 468.0
 offset_bottom = 112.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 40
 text = "Hey there, it seems you hit your head on the way down, fingers crossed that won't have any lasting effects :). Anyway, we're stranded down here with no way out :(. I could get us out of here if I were only a bit stronger :(. but that'll have to wait, first we should take care of these enemies, do what you do best and I'll back you up :)"
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b1w0d8mxg8n8i" path="res://Art/decorations.png" id="7_344ge"]
 [ext_resource type="Texture2D" uid="uid://d34alusg2ba13" path="res://Art/decorations_bot.png" id="8_344ge"]
 [ext_resource type="AudioStream" uid="uid://ivcnxvxl0co7" path="res://Music/main theme.mp3" id="10_hptm8"]
+[ext_resource type="Texture2D" uid="uid://cwsks0nkgeno0" path="res://Art/continue.png" id="10_wsu2k"]
 [ext_resource type="AudioStream" uid="uid://dgic0kqfr05wx" path="res://Music/lose.mp3" id="11_6iyac"]
 [ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="11_d1ilt"]
 [ext_resource type="AudioStream" uid="uid://dcavesg6iradi" path="res://Music/victory.mp3" id="12_6iyac"]
@@ -101,7 +102,7 @@ offset_left = 491.0
 offset_top = -60.0
 offset_right = 611.0
 offset_bottom = 60.0
-texture_normal = ExtResource("2_8gbba")
+texture_normal = ExtResource("10_wsu2k")
 
 [node name="enemypositions" type="TileMapLayer" parent="." unique_id=831590137]
 visible = false

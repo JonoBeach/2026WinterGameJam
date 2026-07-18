@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://8pggkfrg3r5v"]
 
 [ext_resource type="Script" uid="uid://bqlwvynd3c7qs" path="res://Scripts/shop.gd" id="1_wndna"]
-[ext_resource type="Texture2D" uid="uid://bfm8ouaqy0bhb" path="res://Art/tamaIdle.png" id="2_ckylj"]
-[ext_resource type="Texture2D" uid="uid://bll7bd124q80g" path="res://Art/tileholder.png" id="3_2aaoe"]
+[ext_resource type="Texture2D" uid="uid://bxnpf10ysh4x3" path="res://Art/shop.png" id="2_mk6g2"]
+[ext_resource type="Texture2D" uid="uid://b5a2v2xxrrpc3" path="res://Art/tama_shop_idle.png" id="3_kgt2b"]
 [ext_resource type="Texture2D" uid="uid://catg7nmy281l6" path="res://Art/gust rect.png" id="4_ct2yw"]
+[ext_resource type="Texture2D" uid="uid://5hv86sp6s326" path="res://Art/level_up.png" id="4_k8g64"]
 [ext_resource type="Texture2D" uid="uid://r237fsrks8yf" path="res://Art/spike rect.png" id="5_ccd4q"]
-[ext_resource type="Texture2D" uid="uid://cuaec2dolf5wj" path="res://Art/defend rect.png" id="6_1mgah"]
 [ext_resource type="Script" uid="uid://b5afp6gybthxp" path="res://Scripts/removespellsbuttons.gd" id="7_2aaoe"]
 [ext_resource type="SpriteFrames" uid="uid://c4whn8g1p3nkl" path="res://Scenes/new_sprite_frames.tres" id="7_ckylj"]
+[ext_resource type="Texture2D" uid="uid://cu62lxodjq1t6" path="res://Art/shower.png" id="7_dcoym"]
+[ext_resource type="Texture2D" uid="uid://cwsks0nkgeno0" path="res://Art/continue.png" id="8_3ro81"]
 [ext_resource type="Theme" uid="uid://bofyggykeefln" path="res://Scenes/button theme.tres" id="8_ccd4q"]
 [ext_resource type="Texture2D" uid="uid://b0iqonnhycy6u" path="res://Art/description.png" id="9_ct2yw"]
 [ext_resource type="Texture2D" uid="uid://bd6guscxqyvar" path="res://Art/spells_ui.png" id="11_1mgah"]
@@ -17,47 +19,38 @@
 [ext_resource type="AudioStream" uid="uid://cenass2q1o8ye" path="res://Music/eating.mp3" id="15_gufdo"]
 [ext_resource type="AudioStream" uid="uid://dsfxfna3n3m2e" path="res://Music/shower.mp3" id="16_ox0pj"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r8bg4"]
-atlas = ExtResource("2_ckylj")
-region = Rect2(0, 0, 70, 88)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvfaq"]
+atlas = ExtResource("3_kgt2b")
+region = Rect2(0, 0, 280, 390)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m1c0q"]
-atlas = ExtResource("2_ckylj")
-region = Rect2(70, 0, 70, 88)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dael7"]
-atlas = ExtResource("2_ckylj")
-region = Rect2(140, 0, 70, 88)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gufdo"]
-atlas = ExtResource("2_ckylj")
-region = Rect2(210, 0, 70, 88)
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5t61"]
+atlas = ExtResource("3_kgt2b")
+region = Rect2(280, 0, 280, 390)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3owqy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r8bg4")
+"texture": SubResource("AtlasTexture_tvfaq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m1c0q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dael7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gufdo")
+"texture": SubResource("AtlasTexture_d5t61")
 }],
 "loop": 1,
 "name": &"Idle",
-"speed": 5.0
+"speed": 2.0
 }]
 
 [node name="Shop" type="Node" unique_id=379497009]
 script = ExtResource("1_wndna")
 
+[node name="background" type="TextureRect" parent="." unique_id=1342280547]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_mk6g2")
+
 [node name="Tamadachi" type="AnimatedSprite2D" parent="." unique_id=1963264563]
-position = Vector2(960, 540)
+position = Vector2(990, 530)
 sprite_frames = SubResource("SpriteFrames_3owqy")
 animation = &"Idle"
 autoplay = "Idle"
@@ -65,15 +58,15 @@ autoplay = "Idle"
 [node name="MainButtons" type="Node2D" parent="." unique_id=352367023]
 
 [node name="Win" type="TextureButton" parent="MainButtons" unique_id=1246146607]
-offset_left = 911.0
-offset_top = 10.0
-offset_right = 1031.0
-offset_bottom = 130.0
-texture_normal = ExtResource("3_2aaoe")
+offset_left = 930.0
+offset_top = 85.0
+offset_right = 1050.0
+offset_bottom = 205.0
+texture_normal = ExtResource("4_k8g64")
 
 [node name="description" type="Sprite2D" parent="MainButtons/Win" unique_id=457913571]
 visible = false
-position = Vector2(-74, 87)
+position = Vector2(-73, 60)
 texture = ExtResource("9_ct2yw")
 
 [node name="Label" type="Label" parent="MainButtons/Win/description" unique_id=2146545425]
@@ -96,15 +89,15 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="GainSpell" type="TextureButton" parent="MainButtons" unique_id=1443613484]
-offset_left = 344.0
-offset_top = 464.0
-offset_right = 464.0
-offset_bottom = 584.0
+offset_left = 563.0
+offset_top = 470.0
+offset_right = 683.0
+offset_bottom = 590.0
 texture_normal = ExtResource("4_ct2yw")
 
 [node name="description" type="Sprite2D" parent="MainButtons/GainSpell" unique_id=1179086719]
 visible = false
-position = Vector2(-74, 87)
+position = Vector2(-74, 60)
 texture = ExtResource("9_ct2yw")
 
 [node name="Label" type="Label" parent="MainButtons/GainSpell/description" unique_id=195719581]
@@ -127,15 +120,15 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="RemoveSpell" type="TextureButton" parent="MainButtons" unique_id=1701816210]
-offset_left = 895.0
-offset_top = 822.0
-offset_right = 1015.0
-offset_bottom = 942.0
-texture_normal = ExtResource("5_ccd4q")
+offset_left = 930.0
+offset_top = 855.0
+offset_right = 1050.0
+offset_bottom = 984.0
+texture_normal = ExtResource("7_dcoym")
 
 [node name="description" type="Sprite2D" parent="MainButtons/RemoveSpell" unique_id=673424099]
 visible = false
-position = Vector2(-74, 87)
+position = Vector2(-73, 60)
 texture = ExtResource("9_ct2yw")
 
 [node name="Label" type="Label" parent="MainButtons/RemoveSpell/description" unique_id=1956984485]
@@ -156,15 +149,15 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Continue" type="TextureButton" parent="MainButtons" unique_id=1724799662]
-offset_left = 1530.0
-offset_top = 474.0
-offset_right = 1650.0
-offset_bottom = 594.0
-texture_normal = ExtResource("6_1mgah")
+offset_left = 1313.0
+offset_top = 470.0
+offset_right = 1433.0
+offset_bottom = 599.0
+texture_normal = ExtResource("8_3ro81")
 
 [node name="description" type="Sprite2D" parent="MainButtons/Continue" unique_id=1296425292]
 visible = false
-position = Vector2(-74, 87)
+position = Vector2(193, 60)
 texture = ExtResource("9_ct2yw")
 
 [node name="Label" type="Label" parent="MainButtons/Continue/description" unique_id=519360916]
@@ -467,8 +460,8 @@ autowrap_mode = 3
 offset_left = 491.0
 offset_top = -60.0
 offset_right = 611.0
-offset_bottom = 60.0
-texture_normal = ExtResource("3_2aaoe")
+offset_bottom = 69.0
+texture_normal = ExtResource("8_3ro81")
 
 [node name="theme" type="AudioStreamPlayer" parent="." unique_id=574098978]
 stream = ExtResource("14_dael7")

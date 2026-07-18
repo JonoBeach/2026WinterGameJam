@@ -1,15 +1,14 @@
-You|helloooooo... ... HELLOOOOO?????
+You|Helloooooo... ... HELLOOOOO?????
 You|OMG! You're finally awake :D
-Chosen One|Ow... my head is killing me...
-You|You hit your head pretty bad on your way down :V
-Chosen One|...what did you say?
-You|oh god :C
-You|Seems like you're concussed, but don't worry, TAMADACHI is here to help :D
-You|I can get you out of here using a teleport spell, but I need to charge up a lot of energy to use it :(
-Chosen One|Okay!
-Chosen One|wait WHAT ARE THOSE...THINGS???
-You|Those are 'enemies', I suggest fighting them using your sword and shield >:)
-You|Don't worry! Tamadachi will cast spells to help you!
+Chosen One|Ugh... My head is killing me...
+You|You hit your head pretty bad on the way down :V
+Chosen One|Um, what? Who are you?
+You|Oh no :C Seems like you're concussed, but don't worry, Tamadachi is here to help :D
+You|I can get us out of here but I'll need quite a bit of energy to do so:(
+Chosen One|Sure…
+Chosen One|Real quick, what are those things!?!??
+You|O.O Those are 'enemies', I suggest fighting them using your sword and shield >:)
+You|Don't worry! I can cast some spells to help you!
 You|You just tell me what you're going to do and I'll give you the "ok!!" when it's time to do what you want.
-Chosen One|swag
+Chosen One|Got it... I think?
 You|We'll make it out together :D

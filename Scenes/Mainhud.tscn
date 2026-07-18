@@ -123,7 +123,6 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Description" type="Sprite2D" parent="." unique_id=1790448682]
-visible = false
 position = Vector2(680, 100)
 texture = ExtResource("5_kl6qe")
 
@@ -138,6 +137,7 @@ offset_top = -105.98
 offset_right = -14.460007
 offset_bottom = -73.98
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 17
 text = "Bewilder"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -149,6 +149,8 @@ offset_top = -54.0
 offset_right = 69.0
 offset_bottom = 89.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Muster all your power to teleport the knight to a nearby tile."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3

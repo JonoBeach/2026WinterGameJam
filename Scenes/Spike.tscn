@@ -103,7 +103,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
-size = Vector2(100, 100)
+size = Vector2(11, 8)
 
 [node name="Spike" type="Area2D" unique_id=648554836]
 collision_layer = 2
@@ -118,6 +118,7 @@ frame = 12
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1914029834]
+position = Vector2(-1.5, 8)
 shape = SubResource("RectangleShape2D_3owqy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

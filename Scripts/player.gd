@@ -6,6 +6,7 @@ var move = ""
 var end = Vector2.ZERO
 var pushend = Vector2.ZERO
 var pushdirection = ""
+var dead = false
 
 # Called when the node enters the scene tree for the first time.
 ##gets available tiles and prepares array of them
@@ -20,19 +21,22 @@ func _ready() -> void:
 
 ##move if need to
 func _physics_process(_delta):
-	if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
-		velocity = Vector2.ZERO
-		direction = ""
-		set_position(end)
-		Global.player_move_finish.emit()
-	if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
-		velocity = Vector2.ZERO
-		pushdirection = ""
-		set_position(pushend)
-	if move == "":
-		$MoveChoice.play("empty")
-		$Direction.play("empty")
-	move_and_slide()
+	if !dead:
+		if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
+			velocity = Vector2.ZERO
+			direction = ""
+			set_position(end)
+			Global.player_move_finish.emit()
+			$CollisionShape2D.set_deferred("disabled",false)
+		if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
+			velocity = Vector2.ZERO
+			pushdirection = ""
+			set_position(pushend)
+			$CollisionShape2D.set_deferred("disabled",false)
+		if move == "":
+			$MoveChoice.play("empty")
+			$Direction.play("empty")
+		move_and_slide()
 	
 
 
@@ -91,7 +95,7 @@ func movedo():
 				Global.occupied.append(end)
 				velocity = end-get_position() #sets velocity
 				$PlayerAnim.play("move")
-				
+				$CollisionShape2D.set_deferred("disabled",true)
 		"attack":
 			#turns on and then off the sword hitbox
 			$PlayerAnim.play("use")
@@ -141,6 +145,7 @@ func movedo():
 func push(finalPos,value):
 	pushend = get_position() + finalPos
 	if pushend in spots:
+		$CollisionShape2D.set_deferred("disabled",true)
 		Global.occupied.erase(get_position())
 		Global.occupied.append(pushend)
 		$PlayerAnim.play("move")
@@ -155,13 +160,24 @@ func _on_sword_body_entered(body: Node2D) -> void:
 	$swordhit.play()
 
 func killed(area):
-	if area == Vector2(0,0):
-		$death.play()
-	else:
-		if (area.x < position.x and Vector2(-120,0) in Global.shields) or (area.x>position.x and Vector2(120,0) in Global.shields) or(area.y < position.y and Vector2(0,-120) in Global.shields) or (area.y>position.y and Vector2(0,120) in Global.shields):
-			$shieldblock.play()
+	if !dead:
+		if area == Vector2(0,0):
+			die()
 		else:
-			$death.play()
+			if (area.x < position.x and Vector2(-120,0) in Global.shields) or (area.x>position.x and Vector2(120,0) in Global.shields) or(area.y < position.y and Vector2(0,-120) in Global.shields) or (area.y>position.y and Vector2(0,120) in Global.shields):
+				$shieldblock.play()
+			else:
+				die()
+
+func die():
+	dead = true
+	$death.play()
+	$PlayerAnim.play("die")
+	$Direction.hide()
+	$MoveChoice.hide()
+	velocity = Vector2.ZERO
+	
+
 
 func defend():
 	$Defend.show()

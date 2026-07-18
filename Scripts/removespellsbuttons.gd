@@ -7,7 +7,8 @@ func _on__pressed() -> void:
 		var x = str($AnimatedSprite2D.get_animation())
 		Global.Moves.erase(x)
 		get_parent().get_parent().done()
-		get_parent().get_parent().get_node("eat").play()
+		get_parent().get_parent().get_node("shower").play()
+		get_parent().get_parent().get_node("Tamadachi").play("shower")
 
 
 func _on_mouse_entered() -> void:

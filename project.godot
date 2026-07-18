@@ -13,7 +13,7 @@ config_version=5
 config/name="WinterGameJamProject"
 run/main_scene="uid://bg5irdkibkb3h"
 config/features=PackedStringArray("4.7", "Mobile")
-config/icon="res://icon.svg"
+config/icon="uid://b4j5qjsjyrtkn"
 
 [autoload]
 

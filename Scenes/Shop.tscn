@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://bqlwvynd3c7qs" path="res://Scripts/shop.gd" id="1_wndna"]
 [ext_resource type="Texture2D" uid="uid://bxnpf10ysh4x3" path="res://Art/shop.png" id="2_mk6g2"]
 [ext_resource type="Texture2D" uid="uid://b5a2v2xxrrpc3" path="res://Art/tama_shop_idle.png" id="3_kgt2b"]
-[ext_resource type="Texture2D" uid="uid://catg7nmy281l6" path="res://Art/gust rect.png" id="4_ct2yw"]
 [ext_resource type="Texture2D" uid="uid://5hv86sp6s326" path="res://Art/level_up.png" id="4_k8g64"]
-[ext_resource type="Texture2D" uid="uid://r237fsrks8yf" path="res://Art/spike rect.png" id="5_ccd4q"]
+[ext_resource type="Texture2D" uid="uid://bgf4y7w42crsp" path="res://Art/tama_munching.png" id="4_kgt2b"]
+[ext_resource type="Texture2D" uid="uid://bhjbiv8qrpy8r" path="res://Art/tama_shower.png" id="5_k8g64"]
+[ext_resource type="Texture2D" uid="uid://bnhs8id7mwpl0" path="res://Art/feed.png" id="6_estnu"]
 [ext_resource type="Script" uid="uid://b5afp6gybthxp" path="res://Scripts/removespellsbuttons.gd" id="7_2aaoe"]
 [ext_resource type="SpriteFrames" uid="uid://c4whn8g1p3nkl" path="res://Scenes/new_sprite_frames.tres" id="7_ckylj"]
 [ext_resource type="Texture2D" uid="uid://cu62lxodjq1t6" path="res://Art/shower.png" id="7_dcoym"]
@@ -13,6 +14,7 @@
 [ext_resource type="Theme" uid="uid://bofyggykeefln" path="res://Scenes/button theme.tres" id="8_ccd4q"]
 [ext_resource type="Texture2D" uid="uid://b0iqonnhycy6u" path="res://Art/description.png" id="9_ct2yw"]
 [ext_resource type="Texture2D" uid="uid://bd6guscxqyvar" path="res://Art/spells_ui.png" id="11_1mgah"]
+[ext_resource type="Texture2D" uid="uid://b0rfc354vaffn" path="res://Art/exit.png" id="12_mk6g2"]
 [ext_resource type="Texture2D" uid="uid://n0xvlorbkbd6" path="res://Art/money_ui.png" id="12_r8bg4"]
 [ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="13_m1c0q"]
 [ext_resource type="AudioStream" uid="uid://mcwckd61yd6b" path="res://Music/shop theme.mp3" id="14_dael7"]
@@ -27,6 +29,22 @@ region = Rect2(0, 0, 280, 390)
 atlas = ExtResource("3_kgt2b")
 region = Rect2(280, 0, 280, 390)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcoym"]
+atlas = ExtResource("4_kgt2b")
+region = Rect2(0, 0, 280, 390)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ro81"]
+atlas = ExtResource("4_kgt2b")
+region = Rect2(280, 0, 280, 390)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7ov5"]
+atlas = ExtResource("5_k8g64")
+region = Rect2(0, 0, 280, 390)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tx2d"]
+atlas = ExtResource("5_k8g64")
+region = Rect2(280, 0, 280, 390)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_3owqy"]
 animations = [{
 "frames": [{
@@ -38,6 +56,28 @@ animations = [{
 }],
 "loop": 1,
 "name": &"Idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcoym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ro81")
+}],
+"loop": 0,
+"name": &"eat",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7ov5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tx2d")
+}],
+"loop": 0,
+"name": &"shower",
 "speed": 2.0
 }]
 
@@ -59,9 +99,9 @@ autoplay = "Idle"
 
 [node name="Win" type="TextureButton" parent="MainButtons" unique_id=1246146607]
 offset_left = 930.0
-offset_top = 85.0
+offset_top = 149.0
 offset_right = 1050.0
-offset_bottom = 205.0
+offset_bottom = 278.0
 texture_normal = ExtResource("4_k8g64")
 
 [node name="description" type="Sprite2D" parent="MainButtons/Win" unique_id=457913571]
@@ -89,11 +129,11 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="GainSpell" type="TextureButton" parent="MainButtons" unique_id=1443613484]
-offset_left = 563.0
+offset_left = 631.0
 offset_top = 470.0
-offset_right = 683.0
-offset_bottom = 590.0
-texture_normal = ExtResource("4_ct2yw")
+offset_right = 751.0
+offset_bottom = 599.0
+texture_normal = ExtResource("6_estnu")
 
 [node name="description" type="Sprite2D" parent="MainButtons/GainSpell" unique_id=1179086719]
 visible = false
@@ -121,9 +161,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RemoveSpell" type="TextureButton" parent="MainButtons" unique_id=1701816210]
 offset_left = 930.0
-offset_top = 855.0
+offset_top = 786.0
 offset_right = 1050.0
-offset_bottom = 984.0
+offset_bottom = 915.0
 texture_normal = ExtResource("7_dcoym")
 
 [node name="description" type="Sprite2D" parent="MainButtons/RemoveSpell" unique_id=673424099]
@@ -149,9 +189,9 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="Continue" type="TextureButton" parent="MainButtons" unique_id=1724799662]
-offset_left = 1313.0
+offset_left = 1238.0
 offset_top = 470.0
-offset_right = 1433.0
+offset_right = 1358.0
 offset_bottom = 599.0
 texture_normal = ExtResource("8_3ro81")
 
@@ -300,12 +340,14 @@ sprite_frames = ExtResource("7_ckylj")
 animation = &"defend"
 
 [node name="Exit" type="Button" parent="CurrentSpells" unique_id=176721495]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(150, 78)
+custom_maximum_size = Vector2(-1, 78)
 layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="CurrentSpells/Exit" unique_id=668600941]
-position = Vector2(60, 60)
-texture = ExtResource("5_ccd4q")
+position = Vector2(80, 40)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_mk6g2")
 
 [node name="NewSpells" type="HBoxContainer" parent="." unique_id=744256933]
 visible = false
@@ -343,9 +385,15 @@ position = Vector2(60, 60)
 sprite_frames = ExtResource("7_ckylj")
 animation = &"defend"
 
-[node name="Exit" type="TextureButton" parent="NewSpells" unique_id=981837787]
+[node name="Exit" type="Button" parent="NewSpells" unique_id=591655601]
+custom_minimum_size = Vector2(150, 78)
+custom_maximum_size = Vector2(-1, 78)
 layout_mode = 2
-texture_normal = ExtResource("5_ccd4q")
+
+[node name="Sprite2D" type="Sprite2D" parent="NewSpells/Exit" unique_id=1920138195]
+position = Vector2(80, 40)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("12_mk6g2")
 
 [node name="Spells" type="Sprite2D" parent="." unique_id=1240620953]
 position = Vector2(60, 60)
@@ -476,6 +524,7 @@ bus = &"SFX"
 stream = ExtResource("16_ox0pj")
 bus = &"SFX"
 
+[connection signal="animation_finished" from="Tamadachi" to="." method="_on_tamadachi_animation_finished"]
 [connection signal="mouse_entered" from="MainButtons/Win" to="." method="_on_win_mouse_entered"]
 [connection signal="mouse_exited" from="MainButtons/Win" to="." method="_on_continue_mouse_exited"]
 [connection signal="pressed" from="MainButtons/Win" to="." method="_on_win_pressed"]

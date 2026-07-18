@@ -18,6 +18,11 @@ func _on_exit_pressed() -> void:
 func _on_play_pressed() -> void:
 	Global.Moves = ["defend","gust","horizon","gust","spike","teleport"]
 	Global.coins = -1
+	Global.enemy_count = 4
+	Global.enemies_alive = 0
+	Global.occupied = []
+	Global.spikes = []
+	Global.shields = [] 
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 

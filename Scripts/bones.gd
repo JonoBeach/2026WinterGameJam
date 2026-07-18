@@ -14,6 +14,7 @@ var end = Vector2.ZERO
 var pushend = Vector2.ZERO
 var pushdirection = ""
 var attacking_tiles
+var dead = false
 
 func _ready():
 	Global.enemy_move.connect(do_attack)
@@ -22,30 +23,33 @@ func _ready():
 	Global.occupied.append(position)
 
 func _physics_process(_delta):
-	if !player == null:
-		if position.y < player.position.y:
-			z_index = -1
-		else:
-			z_index = 1
-	if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
-		velocity = Vector2.ZERO
-		direction = ""
-		set_position(end)
-		enemy_move()
-	if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
-		velocity = Vector2.ZERO
-		pushdirection = ""
-		set_position(pushend)
-		hitIndic()
-	if $Enemy_overlap.monitoring:
-		if $Enemy_overlap.get_overlapping_areas().size()>0:
-			$Enemy_overlap.get_overlapping_areas()[0].get_parent().killed(Vector2(0,0))
-			$Enemy_overlap/CollisionShape2D.disabled = true
-	move_and_slide()
+	if !dead:
+		if !player == null:
+			if position.y < player.position.y:
+				z_index = -1
+			else:
+				z_index = 1
+		if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
+			velocity = Vector2.ZERO
+			direction = ""
+			set_position(end)
+			$CollisionShape2D.set_deferred("disabled",false)
+			enemy_move()
+		if (pushdirection == "lesser" and get_position()<=pushend) or (pushdirection == "greater" and get_position()>=pushend):
+			velocity = Vector2.ZERO
+			pushdirection = ""
+			set_position(pushend)
+			hitIndic()
+			$CollisionShape2D.set_deferred("disabled",false)
+		if $Enemy_overlap.monitoring:
+			if $Enemy_overlap.get_overlapping_areas().size()>0:
+				$Enemy_overlap.get_overlapping_areas()[0].get_parent().killed(Vector2(0,0))
+				$Enemy_overlap/CollisionShape2D.disabled = true
+		move_and_slide()
 
 func attack_indicate():
 	attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
-	pass
+
 
 
 func hitIndic():
@@ -137,6 +141,7 @@ func enemy_move():
 		var move = move_list[movei]
 		movei+=1
 		if move in Global.spots and !(move in Global.occupied):
+			$CollisionShape2D.set_deferred("disabled",true)
 			$EnemySprite.frame = 0
 			$EnemySprite.play("Move")
 			await get_tree().create_timer(.35).timeout
@@ -168,6 +173,7 @@ func enemy_move():
 func push(finalPos,value):
 	pushend = get_position() + finalPos
 	if pushend in Global.spots:
+		$CollisionShape2D.set_deferred("disabled",true)
 		$DownIndicate.hide()
 		$UpIndicate.hide()
 		$LeftIndicate.hide()
@@ -184,10 +190,14 @@ func push(finalPos,value):
 		end += finalPos
 
 func killed(area):
-	$CollisionShape2D.disabled = true
-	
-	Global.occupied.erase(position)
-	$death.play()
+	if !dead:
+		dead = true
+		$CollisionShape2D.disabled = true
+		$EnemySprite.play("die")
+		$EnemySprite.set_position(Vector2(60,0))
+		velocity = Vector2.ZERO
+		Global.occupied.erase(position)
+		$death.play()
 
 
 func _on_enemy_sprite_animation_finished() -> void:

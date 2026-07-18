@@ -47,6 +47,10 @@ func _on_win_pressed() -> void:
 func _on_continue_pressed() -> void:
 	Global.Moves.sort()
 	Global.enemy_count+=3
+	Global.enemies_alive = 0
+	Global.occupied = []
+	Global.spikes = []
+	Global.shields = [] 
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
 
 
@@ -76,14 +80,16 @@ func _on__pressed() -> void:
 		Global.coins-=1
 		Global.Moves.append(str($"NewSpells/0/AnimatedSprite2D".animation))
 		$"NewSpells/0".hide()
-		$shower.play()
+		$eat.play()
+		$Tamadachi.play("eat")
 
 func _on_one_pressed() -> void:
 	if Global.coins>=2 and Global.Moves.size()<10:
 		Global.coins-=2
 		Global.Moves.append(str($"NewSpells/1/AnimatedSprite2D".animation))
 		$"NewSpells/1".hide()
-		$shower.play()
+		$eat.play()
+		$Tamadachi.play("eat")
 
 
 func _on_two_pressed() -> void:
@@ -91,7 +97,8 @@ func _on_two_pressed() -> void:
 		Global.coins-=3
 		Global.Moves.append(str($"NewSpells/2/AnimatedSprite2D".animation))
 		$"NewSpells/2".hide()
-		$shower.play()
+		$eat.play()
+		$Tamadachi.play("eat")
 
 
 func _on_gain_spell_pressed() -> void:
@@ -177,3 +184,7 @@ func _on_next_pressed() -> void:
 
 func _on_theme_finished() -> void:
 	$theme.play()
+
+
+func _on_tamadachi_animation_finished() -> void:
+	$Tamadachi.play("Idle")

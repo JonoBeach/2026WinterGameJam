@@ -1,3 +1,20 @@
 [gd_scene format=3 uid="uid://bb2oyi7tlfbv1"]
 
+[ext_resource type="Script" uid="uid://dn2e12ds3vro2" path="res://Scripts/win_screen.gd" id="1_82r0j"]
+[ext_resource type="Texture2D" uid="uid://mv3ilnvs4w2q" path="res://Art/win_screen.png" id="2_fy21p"]
+[ext_resource type="AudioStream" uid="uid://dcavesg6iradi" path="res://Music/victory.mp3" id="3_douls"]
+
 [node name="WinScreen" type="Node" unique_id=1712305450]
+script = ExtResource("1_82r0j")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1855626221]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_fy21p")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=639867009]
+stream = ExtResource("3_douls")
+autoplay = true
+bus = &"SFX"
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

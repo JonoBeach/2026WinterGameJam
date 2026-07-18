@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bo6xi7jrl6q5b" path="res://Art/enemy_move_indicator.png" id="4_0830c"]
 [ext_resource type="Texture2D" uid="uid://4sfw8whwlik1" path="res://Art/gob_move.png" id="4_auwsv"]
 [ext_resource type="Texture2D" uid="uid://d26n3g6rhl10d" path="res://Art/attack_indicator.png" id="5_1dp5w"]
+[ext_resource type="Texture2D" uid="uid://bsg3hy1ybdy8g" path="res://Art/DEATH_BOOM.png" id="5_56vhr"]
 [ext_resource type="Script" uid="uid://we4fyn7jki2m" path="res://components/enemy_attack_and_movement_patterns.gd" id="5_0830c"]
 [ext_resource type="Texture2D" uid="uid://cvk7daa0ox0n0" path="res://Art/gob_spear.png" id="5_auwsv"]
 [ext_resource type="AudioStream" uid="uid://d3cltwgwftrx2" path="res://Music/Sword Woosh.mp3" id="9_8uf12"]
@@ -100,6 +101,34 @@ region = Rect2(960, 0, 120, 240)
 atlas = ExtResource("4_auwsv")
 region = Rect2(1080, 0, 120, 240)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0iv8"]
+atlas = ExtResource("5_56vhr")
+region = Rect2(0, 0, 120, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1gwg"]
+atlas = ExtResource("5_56vhr")
+region = Rect2(120, 0, 120, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mxp7"]
+atlas = ExtResource("5_56vhr")
+region = Rect2(240, 0, 120, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5a56t"]
+atlas = ExtResource("5_56vhr")
+region = Rect2(360, 0, 120, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6sir"]
+atlas = ExtResource("5_56vhr")
+region = Rect2(480, 0, 120, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ej4m"]
+atlas = ExtResource("5_56vhr")
+region = Rect2(600, 0, 120, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwheg"]
+atlas = ExtResource("5_56vhr")
+region = Rect2(720, 0, 120, 240)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_0yxg5"]
 animations = [{
 "frames": [{
@@ -182,6 +211,32 @@ animations = [{
 "loop": 0,
 "name": &"Move",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0iv8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1gwg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mxp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5a56t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6sir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ej4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwheg")
+}],
+"loop": 0,
+"name": &"die",
+"speed": 6.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0yxg5"]
@@ -262,7 +317,7 @@ script = ExtResource("1_afpow")
 position = Vector2(60, 0)
 scale = Vector2(0.99999994, 0.99999994)
 sprite_frames = SubResource("SpriteFrames_0yxg5")
-animation = &"Attack"
+animation = &"die"
 autoplay = "Face"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1461082367]

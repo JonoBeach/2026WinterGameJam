@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://catg7nmy281l6" path="res://Art/gust rect.png" id="1_akg1f"]
 [ext_resource type="Script" uid="uid://bdkbsf0e17850" path="res://Scripts/horizon_button.gd" id="2_uh7sm"]
+[ext_resource type="AudioStream" uid="uid://q8y8k57n4b72" path="res://Music/black hole.mp3" id="3_uh7sm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
 size = Vector2(100, 100)
@@ -54,6 +55,10 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HoriDown" unique_id=167925236]
 position = Vector2(60, 180)
 shape = SubResource("RectangleShape2D_dpga7")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HoriDown" unique_id=1137462132]
+stream = ExtResource("3_uh7sm")
+bus = &"SFX"
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
 [connection signal="body_entered" from="HoriLeft" to="." method="_on_hori_left_body_entered"]

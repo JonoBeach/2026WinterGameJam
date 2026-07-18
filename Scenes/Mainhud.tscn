@@ -123,6 +123,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Description" type="Sprite2D" parent="." unique_id=1790448682]
+visible = false
 position = Vector2(680, 100)
 texture = ExtResource("5_kl6qe")
 

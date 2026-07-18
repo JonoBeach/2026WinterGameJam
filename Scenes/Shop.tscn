@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://bd6guscxqyvar" path="res://Art/spells_ui.png" id="11_1mgah"]
 [ext_resource type="Texture2D" uid="uid://n0xvlorbkbd6" path="res://Art/money_ui.png" id="12_r8bg4"]
 [ext_resource type="Texture2D" uid="uid://c1fimkve363a7" path="res://Art/dialoguebox.png" id="13_m1c0q"]
+[ext_resource type="AudioStream" uid="uid://mcwckd61yd6b" path="res://Music/shop theme.mp3" id="14_dael7"]
+[ext_resource type="AudioStream" uid="uid://cenass2q1o8ye" path="res://Music/eating.mp3" id="15_gufdo"]
+[ext_resource type="AudioStream" uid="uid://dsfxfna3n3m2e" path="res://Music/shower.mp3" id="16_ox0pj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r8bg4"]
 atlas = ExtResource("2_ckylj")
@@ -213,7 +216,7 @@ script = ExtResource("7_2aaoe")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CurrentSpells/1" unique_id=1617439829]
 position = Vector2(60, 60)
 sprite_frames = ExtResource("7_ckylj")
-animation = &"gust"
+animation = &"teleport"
 
 [node name="2" type="Button" parent="CurrentSpells" unique_id=1322372164]
 visible = false
@@ -398,6 +401,7 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Description" type="Sprite2D" parent="." unique_id=1865016650]
+visible = false
 position = Vector2(1850, 90)
 texture = ExtResource("9_ct2yw")
 
@@ -466,6 +470,19 @@ offset_right = 611.0
 offset_bottom = 60.0
 texture_normal = ExtResource("3_2aaoe")
 
+[node name="theme" type="AudioStreamPlayer" parent="." unique_id=574098978]
+stream = ExtResource("14_dael7")
+autoplay = true
+bus = &"BGM"
+
+[node name="eat" type="AudioStreamPlayer" parent="." unique_id=162477230]
+stream = ExtResource("15_gufdo")
+bus = &"SFX"
+
+[node name="shower" type="AudioStreamPlayer" parent="." unique_id=504939437]
+stream = ExtResource("16_ox0pj")
+bus = &"SFX"
+
 [connection signal="mouse_entered" from="MainButtons/Win" to="." method="_on_win_mouse_entered"]
 [connection signal="mouse_exited" from="MainButtons/Win" to="." method="_on_continue_mouse_exited"]
 [connection signal="pressed" from="MainButtons/Win" to="." method="_on_win_pressed"]
@@ -520,3 +537,4 @@ texture_normal = ExtResource("3_2aaoe")
 [connection signal="pressed" from="NewSpells/2" to="." method="_on_two_pressed"]
 [connection signal="pressed" from="NewSpells/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Dialogue/Next" to="." method="_on_next_pressed"]
+[connection signal="finished" from="theme" to="." method="_on_theme_finished"]

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://bfk12ul16b5hb"]
 
 [ext_resource type="Script" uid="uid://b6ymsos0jycuv" path="res://Scripts/menu.gd" id="1_syfuq"]
-[ext_resource type="Texture2D" uid="uid://evsnckr60pka" path="res://Art/menubackground.png" id="2_s2c3o"]
+[ext_resource type="Texture2D" uid="uid://j7kg3shv3seu" path="res://Art/title_screen.png" id="2_ma218"]
+[ext_resource type="Texture2D" uid="uid://c6r7t7fdpj1f3" path="res://Art/start_game.png" id="3_idohh"]
 [ext_resource type="Texture2D" uid="uid://i32wcyjchk1w" path="res://Art/button.png" id="3_ma218"]
 [ext_resource type="AudioStream" uid="uid://bbxjgth6dj1nf" path="res://Music/Game Jam MENU THEME Export 2.mp3" id="4_s2c3o"]
 
@@ -11,20 +12,20 @@ script = ExtResource("1_syfuq")
 [node name="Background" type="TextureRect" parent="." unique_id=261152958]
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("2_s2c3o")
+texture = ExtResource("2_ma218")
 
 [node name="Play" type="TextureButton" parent="." unique_id=518026078]
-offset_left = 859.0
-offset_top = 633.0
-offset_right = 979.0
-offset_bottom = 753.0
-texture_normal = ExtResource("3_ma218")
+offset_left = 1228.0
+offset_top = 768.0
+offset_right = 1919.0
+offset_bottom = 1079.0
+texture_normal = ExtResource("3_idohh")
 
 [node name="Exit" type="TextureButton" parent="." unique_id=2046399060]
-offset_left = 834.0
-offset_top = 840.0
-offset_right = 954.0
-offset_bottom = 960.0
+offset_left = 21.0
+offset_top = 927.0
+offset_right = 141.0
+offset_bottom = 1047.0
 texture_normal = ExtResource("3_ma218")
 
 [node name="Theme" type="AudioStreamPlayer" parent="." unique_id=834464832]

@@ -16,7 +16,9 @@ func _on_pressed() -> void:
 	instance.set_position(get_position()+Global.playerpos+Vector2(60,60))
 	get_parent().get_parent().get_parent().add_child(instance)
 	Global.tama_move.emit()
+	$HoriDown/AudioStreamPlayer.play()
 	await get_tree().create_timer(1.4).timeout
+	
 	for node in get_children():
 		node.monitoring = true
 	await get_tree().create_timer(.5).timeout

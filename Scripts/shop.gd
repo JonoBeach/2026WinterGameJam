@@ -76,12 +76,14 @@ func _on__pressed() -> void:
 		Global.coins-=1
 		Global.Moves.append(str($"NewSpells/0/AnimatedSprite2D".animation))
 		$"NewSpells/0".hide()
+		$shower.play()
 
 func _on_one_pressed() -> void:
 	if Global.coins>=2 and Global.Moves.size()<10:
 		Global.coins-=2
 		Global.Moves.append(str($"NewSpells/1/AnimatedSprite2D".animation))
 		$"NewSpells/1".hide()
+		$shower.play()
 
 
 func _on_two_pressed() -> void:
@@ -89,6 +91,7 @@ func _on_two_pressed() -> void:
 		Global.coins-=3
 		Global.Moves.append(str($"NewSpells/2/AnimatedSprite2D".animation))
 		$"NewSpells/2".hide()
+		$shower.play()
 
 
 func _on_gain_spell_pressed() -> void:
@@ -170,3 +173,7 @@ func _on_next_pressed() -> void:
 	else:
 		$Dialogue.hide()
 		$MainButtons.show()
+
+
+func _on_theme_finished() -> void:
+	$theme.play()

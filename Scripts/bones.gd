@@ -192,7 +192,7 @@ func push(finalPos,value):
 func killed(area):
 	if !dead:
 		dead = true
-		$CollisionShape2D.disabled = true
+		$CollisionShape2D.set_deferred("disabled",true)
 		$EnemySprite.play("die")
 		$EnemySprite.set_position(Vector2(60,0))
 		velocity = Vector2.ZERO

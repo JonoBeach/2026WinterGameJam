@@ -97,6 +97,10 @@ func _process(delta: float) -> void:
 		$theme.stop()
 		$Dialogue/Body.text = "I'm sorry, I let you down :( now the world is doomed. If only I'd learnt more spells"
 		$Dialogue/Title.text = "You"
+		$Dialogue/profile.play("You")
+	if paused and Input.is_action_pressed("unpause"):
+		Engine.time_scale = 1
+		pause_menu.hide()
 ##called when end turn button pressed
 func endturn():
 	$Player.movedo()
@@ -109,6 +113,7 @@ func _on_next_pressed() -> void:
 	if diai < len(dialogue[0]):
 		$Dialogue/Title.text = dialogue[0][diai]
 		$Dialogue/Body.text = dialogue[1][diai]
+		$Dialogue/profile.play(dialogue[0][diai])
 	else:
 		$Dialogue.hide()
 		$Mainhud.show()
@@ -133,11 +138,9 @@ func _on_win_finished() -> void:
 
 
 func _on_pause_button_pressed():
-	print("PAUSED")
 	if paused:
 		Engine.time_scale = 1
 		pause_menu.hide()
-		
 	if !paused:
 		pause_menu.show()
 		Engine.time_scale = 0

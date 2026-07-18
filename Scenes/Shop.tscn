@@ -20,6 +20,8 @@
 [ext_resource type="AudioStream" uid="uid://mcwckd61yd6b" path="res://Music/shop theme.mp3" id="14_dael7"]
 [ext_resource type="AudioStream" uid="uid://cenass2q1o8ye" path="res://Music/eating.mp3" id="15_gufdo"]
 [ext_resource type="AudioStream" uid="uid://dsfxfna3n3m2e" path="res://Music/shower.mp3" id="16_ox0pj"]
+[ext_resource type="Texture2D" uid="uid://bu0o15rgvjw0b" path="res://Art/playerprofile.png" id="18_dcoym"]
+[ext_resource type="Texture2D" uid="uid://c4q25r54asnge" path="res://Art/tamaprofile.png" id="19_3ro81"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tvfaq"]
 atlas = ExtResource("3_kgt2b")
@@ -79,6 +81,25 @@ animations = [{
 "loop": 0,
 "name": &"shower",
 "speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tvfaq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_dcoym")
+}],
+"loop": 1,
+"name": &"Chosen One",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_3ro81")
+}],
+"loop": 1,
+"name": &"Tamadachi",
+"speed": 5.0
 }]
 
 [node name="Shop" type="Node" unique_id=379497009]
@@ -476,7 +497,6 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Dialogue" type="Sprite2D" parent="." unique_id=1353882886]
-visible = false
 z_index = 5
 position = Vector2(960, 930)
 texture = ExtResource("13_m1c0q")
@@ -510,6 +530,14 @@ offset_top = -60.0
 offset_right = 611.0
 offset_bottom = 69.0
 texture_normal = ExtResource("8_3ro81")
+
+[node name="profile" type="AnimatedSprite2D" parent="Dialogue" unique_id=825907682]
+z_index = -1
+position = Vector2(-337, -59)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_tvfaq")
+animation = &"Tamadachi"
+autoplay = "Tamadachi"
 
 [node name="theme" type="AudioStreamPlayer" parent="." unique_id=574098978]
 stream = ExtResource("14_dael7")

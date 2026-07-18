@@ -97,8 +97,6 @@ func _process(delta: float) -> void:
 		$theme.stop()
 		$Dialogue/Body.text = "I'm sorry, I let you down :( now the world is doomed. If only I'd learnt more spells"
 		$Dialogue/Title.text = "You"
-		await get_tree().create_timer(2).timeout
-		get_tree().change_scene_to_file("res://Scenes/Menu.tscn")
 ##called when end turn button pressed
 func endturn():
 	$Player.movedo()
@@ -130,6 +128,7 @@ func _on_theme_finished() -> void:
 
 
 func _on_win_finished() -> void:
+	await get_tree().create_timer(.3).timeout
 	get_tree().change_scene_to_file("res://Scenes/Shop.tscn")
 
 
@@ -144,3 +143,6 @@ func _on_pause_button_pressed():
 		Engine.time_scale = 0
 	
 	paused = !paused
+func _on_lose_finished() -> void:
+	await get_tree().create_timer(.5).timeout
+	get_tree().change_scene_to_file("res://Scenes/Menu.tscn")

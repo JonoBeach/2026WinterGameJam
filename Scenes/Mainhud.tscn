@@ -144,10 +144,10 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Body" type="Label" parent="Description" unique_id=1277361038]
-offset_left = -69.0
+offset_left = -66.0
 offset_top = -54.0
-offset_right = 69.0
-offset_bottom = 89.0
+offset_right = 66.0
+offset_bottom = 86.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "Muster all your power to teleport the knight to a nearby tile."

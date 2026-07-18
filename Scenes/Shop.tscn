@@ -398,7 +398,6 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Description" type="Sprite2D" parent="." unique_id=1865016650]
-visible = false
 position = Vector2(1850, 90)
 texture = ExtResource("9_ct2yw")
 
@@ -420,9 +419,9 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Body" type="Label" parent="Description" unique_id=1903174795]
-offset_left = -69.0
+offset_left = -66.0
 offset_top = -54.0
-offset_right = 69.0
+offset_right = 66.0
 offset_bottom = 89.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20

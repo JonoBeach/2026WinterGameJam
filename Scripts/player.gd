@@ -158,7 +158,6 @@ func killed(area):
 	if area == Vector2(0,0):
 		$death.play()
 	else:
-
 		if (area.x < position.x and Vector2(-120,0) in Global.shields) or (area.x>position.x and Vector2(120,0) in Global.shields) or(area.y < position.y and Vector2(0,-120) in Global.shields) or (area.y>position.y and Vector2(0,120) in Global.shields):
 			$shieldblock.play()
 		else:

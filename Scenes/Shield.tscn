@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dueim7yvoa2l4" path="res://Scripts/shield.gd" id="1_g6qfg"]
 [ext_resource type="Texture2D" uid="uid://brc3glfxhyvsu" path="res://Art/shield.png" id="2_g6qfg"]
 [ext_resource type="Texture2D" uid="uid://chg1w4sp3kss8" path="res://Art/tama_shield.png" id="3_1vnn7"]
-[ext_resource type="AudioStream" uid="uid://cmh2772d61uh4" path="res://Music/Shield Deflect.mp3" id="3_f84if"]
+[ext_resource type="AudioStream" uid="uid://o6io60383wc7" path="res://Music/Game Jam SHIELD PLACE Edit 1 Export 1.mp3" id="4_1vnn7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
 size = Vector2(100, 100)
@@ -121,6 +121,6 @@ sprite_frames = SubResource("SpriteFrames_3owqy")
 animation = &"uptama"
 autoplay = "leftknight"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=53007239]
-stream = ExtResource("3_f84if")
+[node name="place" type="AudioStreamPlayer" parent="." unique_id=569376477]
+stream = ExtResource("4_1vnn7")
 bus = &"SFX"

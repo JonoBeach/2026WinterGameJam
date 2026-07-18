@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://o6io60383wc7"
+path="res://.godot/imported/Game Jam SHIELD PLACE Edit 1 Export 1.mp3-cd7ce7a47637ca0bf844021398e803af.mp3str"
+
+[deps]
+
+source_file="res://Music/Game Jam SHIELD PLACE Edit 1 Export 1.mp3"
+dest_files=["res://.godot/imported/Game Jam SHIELD PLACE Edit 1 Export 1.mp3-cd7ce7a47637ca0bf844021398e803af.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

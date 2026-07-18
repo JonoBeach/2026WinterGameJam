@@ -37,9 +37,10 @@ func _physics_process(_delta):
 		pushdirection = ""
 		set_position(pushend)
 		hitIndic()
-	if $Enemy_overlap.get_overlapping_areas().size()>0:
-		$Enemy_overlap.get_overlapping_areas()[0].get_parent().killed(Vector2(0,0))
-		$Enemy_overlap/CollisionShape2D.disabled = true
+	if $Enemy_overlap.monitoring:
+		if $Enemy_overlap.get_overlapping_areas().size()>0:
+			$Enemy_overlap.get_overlapping_areas()[0].get_parent().killed(Vector2(0,0))
+			$Enemy_overlap/CollisionShape2D.disabled = true
 	move_and_slide()
 
 func attack_indicate():

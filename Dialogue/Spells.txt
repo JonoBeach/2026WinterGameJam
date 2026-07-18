@@ -5,3 +5,4 @@ Bewilder|Distract the knight and prevent him from doing his next action.
 Event Horizon|Pulls all entities in surrounding tiles towards it.
 Fireball|Kills everything in its tile and surrounding tiles.
 Bulwark|Places a shield in every direction of the knight.
+Phase|Muster all your power to teleport the knight to a nearby tile.

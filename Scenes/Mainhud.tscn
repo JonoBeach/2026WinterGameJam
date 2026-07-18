@@ -81,7 +81,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_6j2hq")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="1" unique_id=519097795]
 position = Vector2(60, 60)
 sprite_frames = ExtResource("4_s710e")
-animation = &"fireball"
+animation = &"teleport"
 
 [node name="2" type="Button" parent="." unique_id=528059288]
 offset_left = 1050.0

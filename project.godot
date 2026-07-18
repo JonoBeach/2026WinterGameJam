@@ -28,6 +28,7 @@ window/size/mode=3
 [gui]
 
 theme/custom="uid://bofyggykeefln"
+theme/custom_font="uid://cooolb5oxmxx0"
 
 [layer_names]
 

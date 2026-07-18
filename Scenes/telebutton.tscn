@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://beyglm4t1rtxc"]
+
+[ext_resource type="Texture2D" uid="uid://b5pdpahcjgtd6" path="res://Art/teleportrect.png" id="1_k4m1f"]
+[ext_resource type="Script" uid="uid://bw03g8e0hhm4a" path="res://Scripts/telebutton.gd" id="2_5iv0o"]
+[ext_resource type="AudioStream" uid="uid://3sia6r3kkqpi" path="res://Music/tp sound.mp3" id="3_5iv0o"]
+
+[node name="Telebutton" type="TextureButton" unique_id=1874365842]
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+texture_normal = ExtResource("1_k4m1f")
+script = ExtResource("2_5iv0o")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1637919447]
+stream = ExtResource("3_5iv0o")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

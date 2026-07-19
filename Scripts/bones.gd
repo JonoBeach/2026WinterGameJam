@@ -96,6 +96,8 @@ func do_attack():
 			instance.direction = attackdirection
 			add_child(instance)
 			#await get_tree().create_timer(4).timeout
+		else:
+			done()
 
 	
 

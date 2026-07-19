@@ -533,8 +533,6 @@ texture_normal = ExtResource("8_3ro81")
 
 [node name="profile" type="AnimatedSprite2D" parent="Dialogue" unique_id=825907682]
 z_index = -1
-position = Vector2(-337, -59)
-scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_tvfaq")
 animation = &"Tamadachi"
 autoplay = "Tamadachi"

@@ -22,7 +22,6 @@ offset_bottom = 923.0
 texture_normal = ExtResource("3_idohh")
 
 [node name="Exit" type="TextureButton" parent="." unique_id=2046399060]
-visible = false
 offset_left = 1564.0
 offset_top = 923.0
 offset_right = 1920.0

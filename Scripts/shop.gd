@@ -1,7 +1,7 @@
 extends Node
 var rng = RandomNumberGenerator.new()
-var descriptions = [[],[]]
-var dialogue = [[],[]]
+var dialogue = [["Tamadachi", "Tamadachi", "Tamadachi", "Tamadachi", "Tamadachi", "Tamadachi"], ["We took care of those guys, now we need to take care of me :)", "If you feed me I\'ll have enough energy to learn a new spell :) But I can only learn a total of 10 spells :(", "And every time you bathe me I feel so refreshed that I forget whatever spell you tell me to ^.^", "Although, I can\'t face my mum if I don\'t know at least 3 spells :( so I won\'t forget any past that point >:(", "If you make enough money I can grow big and strong and have enough power to burst us out of here :)", "And of course once you\'ve properly cared for me we can continue deeper into the dungeon"]]
+var descriptions = [["Defend", "Gust", "Spike Trap", "Bewilder", "Event Horizon", "Fireball", "Bulwark", "Phase"], ["Place a shield in a cardinal direction of the knight.", "Pushes all entities in surrounding tiles away from it.", "Place down a spike trap that kills anything that touches it.", "Distract the knight and prevent him from doing his next action.", "Pulls all entities in surrounding tiles towards it.", "Kills everything in its tile and surrounding tiles.", "Places a shield in every direction of the knight.", "Muster all your power to teleport the knight to a nearby tile."]]
 var diai = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -18,18 +18,18 @@ func _ready() -> void:
 	$"NewSpells/0/AnimatedSprite2D".play(oneArr[rng.randi_range(0,3)])
 	$"NewSpells/1/AnimatedSprite2D".play(twoArr[rng.randi_range(0,2)])
 	$"NewSpells/2/AnimatedSprite2D".play(threeArr[rng.randi_range(0,2)])
-	var f = FileAccess.open("res://Dialogue/Spells.txt",FileAccess.READ).get_as_text()
-	f = f.replace("\n","|").split("|")
-	for x in range(0,len(f),2):
-		descriptions[0].append(f[x])
-		if x < len(f)-1:
-			descriptions[1].append(f[x+1])
-	f = FileAccess.open("res://Dialogue/Shop.txt",FileAccess.READ).get_as_text()
-	f = f.replace("\n","|").split("|")
-	for x in range(0,len(f),2):
-		dialogue[0].append(f[x])
-		if x < len(f)-1:
-			dialogue[1].append(f[x+1])
+	#var f = FileAccess.open("res://Dialogue/Spells.txt",FileAccess.READ).get_as_text()
+	#f = f.replace("\n","|").split("|")
+	#for x in range(0,len(f),2):
+		#descriptions[0].append(f[x])
+		#if x < len(f)-1:
+			#descriptions[1].append(f[x+1])
+	#f = FileAccess.open("res://Dialogue/Shop.txt",FileAccess.READ).get_as_text()
+	#f = f.replace("\n","|").split("|")
+	#for x in range(0,len(f),2):
+		#dialogue[0].append(f[x])
+		#if x < len(f)-1:
+			#dialogue[1].append(f[x+1])
 	$Dialogue/Title.text = dialogue[0][diai]
 	$Dialogue/Body.text = dialogue[1][diai]
 

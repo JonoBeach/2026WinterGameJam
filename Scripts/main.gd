@@ -1,6 +1,6 @@
 extends Node
 var diai = 0
-var dialogue = [[],[]]
+var dialogue = [["You", "You", "Chosen One", "You", "Chosen One", "You", "You", "Chosen One", "Chosen One", "You", "You", "You", "Chosen One", "You"], ["Helloooooo... ... HELLOOOOO?????", "OMG! You\'re finally awake :D", "Ugh... My head is killing me...", "You hit your head pretty bad on the way down :V", "Um, what? Who are you?", "Oh no :C Seems like you\'re concussed, but don\'t worry, Tamadachi is here to help :D", "I can get us out of here but I\'ll need quite a bit of energy to do so :(", "Sure…", "Real quick, what are those things!?!??", "O.O Those are \'enemies\', I suggest fighting them using your sword and shield >:)", "Don\'t worry! I can cast some spells to help you! ^.^", "You just tell me what you\'re going to do and I\'ll give you the \"ok!!\" when it\'s time to do what you want.", "Got it... I think?", "We\'ll make it out together :D"]]
 var rng = RandomNumberGenerator.new()
 @onready var spots = $enemypositions.get_used_cells()
 var enemies_finished = 0
@@ -27,12 +27,12 @@ func _ready() -> void:
 	$Player.movedecide()
 	Global.shields = []
 	Global.spikes = []
-	var f = FileAccess.open("res://Dialogue/Tutorial.txt",FileAccess.READ).get_as_text()
-	f = f.replace("\n","|").split("|")
-	for x in range(0,len(f),2):
-		dialogue[0].append(f[x])
-		if x < len(f)-1:
-			dialogue[1].append(f[x+1])
+	#var f = FileAccess.open("res://Dialogue/Tutorial.txt",FileAccess.READ).get_as_text()
+	#f = f.replace("\n","|").split("|")
+	#for x in range(0,len(f),2):
+		#dialogue[0].append(f[x])
+		#if x < len(f)-1:
+			#dialogue[1].append(f[x+1])
 	$Dialogue/Title.text = dialogue[0][diai]
 	$Dialogue/Body.text = dialogue[1][diai]
 	Global.player_move_finish.connect(_on_player_finished)
@@ -89,6 +89,7 @@ func _process(delta: float) -> void:
 	if Global.enemies_alive == 0 and !finish:
 		finish = true
 		$win.play()
+		$theme.stop()
 	if dead and !finish:
 		finish = true
 		$Dialogue.show()

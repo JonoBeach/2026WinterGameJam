@@ -6,18 +6,21 @@ var avaiMoves = []
 var discards = []
 var actioning = false
 var energy = 3
-var descriptions = [[],[]]
+var descriptions = [["Defend", "Gust", "Spike Trap", "Bewilder", "Event Horizon", "Fireball", "Bulwark", "Phase"], ["Place a shield in a cardinal direction of the knight.", "Pushes all entities in surrounding tiles away from it.", "Place down a spike trap that kills anything that touches it.", "Distract the knight and prevent him from doing his next action.", "Pulls all entities in surrounding tiles towards it.", "Kills everything in its tile and surrounding tiles.", "Places a shield in every direction of the knight.", "Muster all your power to teleport the knight to a nearby tile."]]
+var usedenergy = 0
+var usedbutton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var f = FileAccess.open("res://Dialogue/Spells.txt",FileAccess.READ).get_as_text()
-	f = f.replace("\n","|").split("|")
-	for x in range(0,len(f),2):
-		descriptions[0].append(f[x])
-		if x < len(f)-1:
-			descriptions[1].append(f[x+1])
+	#var f = FileAccess.open("res://Dialogue/Spells.txt",FileAccess.READ).get_as_text()
+	#f = f.replace("\n","|").split("|")
+	#for x in range(0,len(f),2):
+		#descriptions[0].append(f[x])
+		#if x < len(f)-1:
+			#descriptions[1].append(f[x+1])
 	assignMoves()
 	Global.spell_finished.connect(_on_move_finish)
+	Global.exit_hide.connect(exit_hide)
 
 func _process(delta: float) -> void:
 	$Energy/EnergyLabel.text = str(energy)+"/3"
@@ -57,6 +60,7 @@ func assignMoves():
 		get_node(str(i)+"/AnimatedSprite2D").play(moves[index])
 		avaiMoves.append(moves[index])
 		moves.remove_at(index)
+		
 
 
 func _on_button_pressed() -> void:
@@ -64,6 +68,8 @@ func _on_button_pressed() -> void:
 		var hide = movechoose($"0/AnimatedSprite2D".animation)
 		if hide:
 			$"0".hide()
+			
+			usedbutton = $"0"
 
 
 func _on_one_pressed() -> void:
@@ -71,6 +77,8 @@ func _on_one_pressed() -> void:
 		var hide = movechoose($"1/AnimatedSprite2D".animation)
 		if hide:
 			$"1".hide()
+			
+			usedbutton = $"1"
 
 
 func _on_two_pressed() -> void:
@@ -78,6 +86,8 @@ func _on_two_pressed() -> void:
 		var hide = movechoose($"2/AnimatedSprite2D".animation)
 		if hide:
 			$"2".hide()
+			
+			usedbutton = $"2"
 
 
 ##universal code for the three move buttons
@@ -89,19 +99,25 @@ func movechoose(move):
 				actioning = true
 				get_parent().get_node("Player").defend()
 				hide = true
+				$Exit.show()
+				usedenergy = 1
 				energy -=1
 		"spike":
 			if energy > 0:
 				actioning = true
 				hide = true
 				energy -=1
+				usedenergy = 1
 				get_parent().get_node("Player").Spike()
+				$Exit.show()
 		"gust":
 			if energy > 0:
 				actioning = true
 				hide = true
 				energy -=1
+				usedenergy = 1
 				get_parent().get_node("Player").Gust()
+				$Exit.show()
 		"bewilder":
 			if energy > 0 and get_parent().get_node("Player").move != "":
 				actioning = true
@@ -115,13 +131,17 @@ func movechoose(move):
 				actioning = true
 				hide = true
 				energy -=2
+				usedenergy = 2
 				get_parent().get_node("Player").Fireball()
+				$Exit.show()
 		"horizon":
 			if energy >1:
 				hide = true
 				actioning = true
 				energy -=2
+				usedenergy = 2
 				get_parent().get_node("Player").Horizon()
+				$Exit.show()
 		"bulwark":
 			if energy >2:
 				actioning = true
@@ -133,13 +153,18 @@ func movechoose(move):
 				actioning = true
 				hide = true
 				energy -=3
+				usedenergy = 3
 				get_parent().get_node("Player").Teleport()
+				$Exit.show()
 	return hide
 
 
 func _on_move_finish():
 	actioning = false
+	$Exit.hide()
 
+func exit_hide():
+	$Exit.hide()
 
 func DescSet(spell):
 	var ind = 0
@@ -184,3 +209,11 @@ func _on__mouse_entered() -> void:
 	$Description.show()
 	$Description.position.x = 980
 	DescSet($"2/AnimatedSprite2D".animation)
+
+
+func _on_exit_pressed() -> void:
+	energy+=usedenergy
+	usedenergy = 0
+	usedbutton.show()
+	get_parent().get_node("Player").done()
+	_on_move_finish()

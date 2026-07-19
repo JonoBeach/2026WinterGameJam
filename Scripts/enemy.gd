@@ -25,7 +25,7 @@ func _ready():
 func _physics_process(_delta):
 	if !dead:
 		if !player == null:
-			if position.y < player.position.y:
+			if position.y <= player.position.y:
 				z_index = -1
 			else:
 				z_index = 1
@@ -51,29 +51,30 @@ func attack_indicate():
 	pass
 	
 func do_attack():
-	$Move_indicator.hide()
-	if (attackpos in Global.spots):
-		$EnemySprite.play("Attack")
-		await get_tree().create_timer(.35).timeout
-		$Swordslash.play()
-		hit_area.set_deferred("monitoring", true)
-		$HitArea/EnemAttack.play("attack")
-		match attackpos-get_position():
-			Vector2(0,120):
-				$HitArea/EnemAttack.flip_v = true
-			Vector2(-120,0):
-				$HitArea/EnemAttack.flip_h = true
-				$HitArea/EnemAttack.rotation_degrees = -90
-			Vector2(120,0):
-				$HitArea/EnemAttack.rotation_degrees = 90
-		await get_tree().create_timer(1).timeout
-		hit_area.set_deferred("monitoring", false)
-		$HitArea.hide()
-	Global.enemy_attack_finish.emit()
+	if !dead:
+		$Move_indicator.hide()
+		if (attackpos in Global.spots):
+			$EnemySprite.play("Attack")
+			await get_tree().create_timer(.35).timeout
+			$Swordslash.play()
+			hit_area.set_deferred("monitoring", true)
+			$HitArea/EnemAttack.play("attack")
+			match attackpos-get_position():
+				Vector2(0,120):
+					$HitArea/EnemAttack.flip_v = true
+				Vector2(-120,0):
+					$HitArea/EnemAttack.flip_h = true
+					$HitArea/EnemAttack.rotation_degrees = -90
+				Vector2(120,0):
+					$HitArea/EnemAttack.rotation_degrees = 90
+			await get_tree().create_timer(1).timeout
+			hit_area.set_deferred("monitoring", false)
+			$HitArea.hide()
+		Global.enemy_attack_finish.emit()
 
-	
-	Global.occupied.erase(position)
-	#enemy_move()
+		
+		Global.occupied.erase(position)
+		#enemy_move()
 	
 func move_indicate():
 	pass
@@ -113,37 +114,38 @@ func calculate_enemy_move():
 
 
 func enemy_move():
-	$Enemy_overlap.set_deferred("monitoring",false)
-	$Enemy_overlap.set_deferred("monitorable",false)
-	if movei < move_list.size():
-		var move = move_list[movei]
-		movei+=1
-		if move in Global.spots and !(move in Global.occupied):
-			$EnemySprite.frame = 0
-			$EnemySprite.play("Move")
-			$CollisionShape2D.set_deferred("disabled",true)
-			await get_tree().create_timer(.35).timeout
-			if (move.x - position.x < 0):
-				direction = "left"
-			if (move.x - position.x > 0):
-				direction = "right"
-			if (move.y - position.y < 0):
-				direction = "up"
-			if (move.y - position.y > 0):
-				direction = "down"
-			end = move
-			velocity = end - position
+	if !dead:
+		$Enemy_overlap.set_deferred("monitoring",false)
+		$Enemy_overlap.set_deferred("monitorable",false)
+		if movei < move_list.size():
+			var move = move_list[movei]
+			movei+=1
+			if move in Global.spots and !(move in Global.occupied):
+				$EnemySprite.frame = 0
+				$EnemySprite.play("Move")
+				$CollisionShape2D.set_deferred("disabled",true)
+				await get_tree().create_timer(.35).timeout
+				if (move.x - position.x < 0):
+					direction = "left"
+				if (move.x - position.x > 0):
+					direction = "right"
+				if (move.y - position.y < 0):
+					direction = "up"
+				if (move.y - position.y > 0):
+					direction = "down"
+				end = move
+				velocity = end - position
+			else:
+				movei = 100
+				enemy_move()
+			#previous_move = end
 		else:
-			movei = 100
-			enemy_move()
-		#previous_move = end
-	else:
-		Global.occupied.append(position)
-		Global.enemy_move_finish.emit()
-		$Enemy_overlap.set_deferred("monitoring",true)
-		$Enemy_overlap.set_deferred("monitorable",true)
-		#previous_move = end
-		#hit_area.set_deferred("monitoring", false)
+			Global.occupied.append(position)
+			Global.enemy_move_finish.emit()
+			$Enemy_overlap.set_deferred("monitoring",true)
+			$Enemy_overlap.set_deferred("monitorable",true)
+			#previous_move = end
+			#hit_area.set_deferred("monitoring", false)
 
 
 func _on_hit_area_body_entered(body):
@@ -152,23 +154,24 @@ func _on_hit_area_body_entered(body):
 
 
 func push(finalPos,value):
-	pushend = get_position() + finalPos
-	if pushend in Global.spots:
-		$EnemySprite.play("Move")
-		$CollisionShape2D.set_deferred("disabled",true)
-		await get_tree().create_timer(.35).timeout
-		attackpos+=finalPos
-		if !(attackpos in Global.spots):
-			$HitArea.hide()
-		else:
-			$HitArea.set_position(attackpos)
-		for x in range(0,move_list.size()):
-			move_list[x]+=finalPos
-		if !move_list[-1] in Global.spots:
-			$Move_indicator.hide()
-		velocity = pushend-get_position()
-		pushdirection=value
-		end += finalPos
+	if !dead:
+		pushend = get_position() + finalPos
+		if pushend in Global.spots:
+			$EnemySprite.play("Move")
+			$CollisionShape2D.set_deferred("disabled",true)
+			await get_tree().create_timer(.35).timeout
+			attackpos+=finalPos
+			if !(attackpos in Global.spots):
+				$HitArea.hide()
+			else:
+				$HitArea.set_position(attackpos)
+			for x in range(0,move_list.size()):
+				move_list[x]+=finalPos
+			if !move_list[-1] in Global.spots:
+				$Move_indicator.hide()
+			velocity = pushend-get_position()
+			pushdirection=value
+			end += finalPos
 
 func killed(area):
 	if !dead:

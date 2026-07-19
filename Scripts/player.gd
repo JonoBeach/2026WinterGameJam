@@ -242,14 +242,18 @@ func Gust():
 	Global.gust_check.emit()
 
 func _on_move_finish():
+	done()
+	$Tamadachi.play("Action")
+	$Spell.play()
+
+func done():
 	$Teleport.hide()
 	$Defend.hide()
 	$Gust.hide()
 	$Spike.hide()
 	$Fireball.hide()
 	$Horizon.hide()
-	$Tamadachi.play("Action")
-	$Spell.play()
+	Global.exit_hide.emit()
 
 func Spike():
 	$Spike.show()

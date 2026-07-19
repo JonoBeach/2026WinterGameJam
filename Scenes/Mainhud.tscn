@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cve7epwq3d2cy" path="res://Scripts/mainhud.gd" id="1_h7rvc"]
 [ext_resource type="Texture2D" uid="uid://bs2d1b4upivmx" path="res://Art/end_turn_ui.png" id="2_kl6qe"]
+[ext_resource type="Texture2D" uid="uid://b0rfc354vaffn" path="res://Art/exit.png" id="4_rs772"]
 [ext_resource type="SpriteFrames" uid="uid://c4whn8g1p3nkl" path="res://Scenes/new_sprite_frames.tres" id="4_s710e"]
 [ext_resource type="Texture2D" uid="uid://c5plr66jqogkg" path="res://Art/energy_ui.png" id="5_5fv6x"]
 [ext_resource type="Texture2D" uid="uid://b0iqonnhycy6u" path="res://Art/description.png" id="5_kl6qe"]
@@ -98,6 +99,15 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_mjkyw")
 position = Vector2(60, 60)
 sprite_frames = ExtResource("4_s710e")
 animation = &"gust"
+
+[node name="Exit" type="TextureButton" parent="." unique_id=1704397993]
+visible = false
+offset_left = 1200.0
+offset_top = 40.0
+offset_right = 1556.0
+offset_bottom = 197.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("4_rs772")
 
 [node name="Energy" type="Sprite2D" parent="." unique_id=781859365]
 position = Vector2(60, 60)
@@ -211,3 +221,4 @@ metadata/_edit_use_anchors_ = true
 [connection signal="mouse_entered" from="2" to="." method="_on__mouse_entered"]
 [connection signal="mouse_exited" from="2" to="." method="_on__mouse_exited"]
 [connection signal="pressed" from="2" to="." method="_on_two_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

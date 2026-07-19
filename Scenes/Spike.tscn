@@ -111,7 +111,7 @@ monitoring = false
 script = ExtResource("1_nuopa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=428870485]
-z_index = -1
+z_index = -2
 sprite_frames = SubResource("SpriteFrames_3owqy")
 autoplay = "default"
 frame = 12

@@ -12,6 +12,8 @@ func _ready() -> void:
 			velocity.x = -120
 		"right":
 			velocity.x = 120
+	await get_tree().create_timer(.6).timeout
+	$Area2D.set_deferred("monitoring",true)
 	await get_tree().create_timer(3).timeout
 	kill()
 

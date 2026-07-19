@@ -92,7 +92,7 @@ func do_attack():
 			await get_tree().create_timer(.7).timeout
 			var scene = preload("res://Scenes/BonesAttack.tscn")
 			var instance = scene.instantiate()
-			instance.set_position(attackpos)
+			instance.set_position(get_position())
 			instance.direction = attackdirection
 			add_child(instance)
 			#await get_tree().create_timer(4).timeout

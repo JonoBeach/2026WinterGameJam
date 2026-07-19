@@ -97,6 +97,8 @@ func movedo():
 				$PlayerAnim.play("move")
 				$PlayerAnim.frame =0
 				$CollisionShape2D.set_deferred("disabled",true)
+			else:
+				Global.player_move_finish.emit()
 		"attack":
 			#turns on and then off the sword hitbox
 			$PlayerAnim.play("use")

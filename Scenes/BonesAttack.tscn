@@ -40,7 +40,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3owqy"]
-size = Vector2(60, 60)
+size = Vector2(30, 30)
 
 [node name="BonesAttack" type="CharacterBody2D" unique_id=1550269953]
 top_level = true
@@ -55,6 +55,7 @@ frame_progress = 0.0862515
 
 [node name="Area2D" type="Area2D" parent="." unique_id=182020394]
 position = Vector2(60, 60)
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1188534426]
 shape = SubResource("RectangleShape2D_3owqy")

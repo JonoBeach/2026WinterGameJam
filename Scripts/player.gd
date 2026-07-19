@@ -95,6 +95,7 @@ func movedo():
 				Global.occupied.append(end)
 				velocity = end-get_position() #sets velocity
 				$PlayerAnim.play("move")
+				$PlayerAnim.frame =0
 				$CollisionShape2D.set_deferred("disabled",true)
 		"attack":
 			#turns on and then off the sword hitbox
@@ -187,7 +188,7 @@ func defend():
 			node.show()
 
 func bewilder():
-	await  get_tree().create_timer(.5).timeout
+	await  get_tree().create_timer(.8).timeout
 	Global.spell_finished.emit()
 
 func _on_right_pressed() -> void:

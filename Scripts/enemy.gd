@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var enemy_sprite = $EnemySprite
 @onready var hit_area = $HitArea
 @onready var spots = get_parent().get_node("enemypositions").get_used_cells()
+var attacked = false
+var finished = false
 
 var attackpos
 var movei = 0
@@ -25,10 +27,17 @@ func _ready():
 func _physics_process(_delta):
 	if !dead:
 		if !player == null:
-			if position.y <= player.position.y:
-				z_index = -1
-			else:
-				z_index = 1
+			match position.y:
+				240.0:
+					z_index = -1
+				360.0:
+					z_index = 0
+				480.0:
+					z_index = 1
+				600.0:
+					z_index = 2
+				720.0:
+					z_index = 3
 		if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 			velocity = Vector2.ZERO
 			direction = ""
@@ -71,6 +80,7 @@ func do_attack():
 			hit_area.set_deferred("monitoring", false)
 			$HitArea.hide()
 		Global.enemy_attack_finish.emit()
+		attacked = true
 
 		
 		Global.occupied.erase(position)
@@ -80,6 +90,8 @@ func move_indicate():
 	pass
 
 func calculate_enemy_move():
+	finished = false
+	attacked = false
 	var attacks = attack_movement_patterns.enemy_movement_location(position)
 	if attacks.size()>0:
 		attackpos = attacks[rng.randi_range(0,attacks.size()-1)]#-get_position()
@@ -142,6 +154,7 @@ func enemy_move():
 		else:
 			Global.occupied.append(position)
 			Global.enemy_move_finish.emit()
+			finished = true
 			$Enemy_overlap.set_deferred("monitoring",true)
 			$Enemy_overlap.set_deferred("monitorable",true)
 			#previous_move = end
@@ -189,6 +202,10 @@ func _on_enemy_sprite_animation_finished() -> void:
 
 
 func _on_death_finished() -> void:
+	if !finished:
+		Global.enemy_move_finish.emit()
+	if !attacked:
+		Global.enemy_attack_finish.emit()
 	Global.enemies_alive-=1
 	Global.coins+=1
 	queue_free()

@@ -22,6 +22,17 @@ func _ready() -> void:
 ##move if need to
 func _physics_process(_delta):
 	if !dead:
+		match position.y:
+				240.0:
+					z_index = -1
+				360.0:
+					z_index = 0
+				480.0:
+					z_index = 1
+				600.0:
+					z_index = 2
+				720.0:
+					z_index = 3
 		if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 			velocity = Vector2.ZERO
 			direction = ""

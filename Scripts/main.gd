@@ -1,6 +1,6 @@
 extends Node
 var diai = 0
-var dialogue = [["You", "You", "Chosen One", "You", "Chosen One", "You", "You", "Chosen One", "Chosen One", "You", "You", "You", "Chosen One", "You"], ["Helloooooo... ... HELLOOOOO?????", "OMG! You\'re finally awake :D", "Ugh... My head is killing me...", "You hit your head pretty bad on the way down :V", "Um, what? Who are you?", "Oh no :C Seems like you\'re concussed, but don\'t worry, Tamadachi is here to help :D", "I can get us out of here but I\'ll need quite a bit of energy to do so :(", "Sure…", "Real quick, what are those things!?!??", "O.O Those are \'enemies\', I suggest fighting them using your sword and shield >:)", "Don\'t worry! I can cast some spells to help you! ^.^", "You just tell me what you\'re going to do and I\'ll give you the \"ok!!\" when it\'s time to do what you want.", "Got it... I think?", "We\'ll make it out together :D"]]
+var dialogue = [[],[]]
 var rng = RandomNumberGenerator.new()
 @onready var spots = $enemypositions.get_used_cells()
 var enemies_finished = 0
@@ -15,6 +15,7 @@ var paused = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Engine.time_scale = 1
 	Global.enemies_alive = 0
 	enemcount = Global.enemy_count
 	if Global.coins == -1:
@@ -27,24 +28,24 @@ func _ready() -> void:
 	$Player.movedecide()
 	Global.shields = []
 	Global.spikes = []
-	#var f = FileAccess.open("res://Dialogue/Tutorial.txt",FileAccess.READ).get_as_text()
-	#f = f.replace("\n","|").split("|")
-	#for x in range(0,len(f),2):
-		#dialogue[0].append(f[x])
-		#if x < len(f)-1:
-			#dialogue[1].append(f[x+1])
+	var f = FileAccess.open("res://Dialogue/Tutorial.txt",FileAccess.READ).get_as_text()
+	f = f.replace("\n","|").split("|")
+	for x in range(0,len(f),2):
+		dialogue[0].append(f[x])
+		if x < len(f)-1:
+			dialogue[1].append(f[x+1])
 	$Dialogue/Title.text = dialogue[0][diai]
 	$Dialogue/Body.text = dialogue[1][diai]
-	Global.player_move_finish.connect(_on_player_finished)
-	Global.enemy_move_finish.connect(_on_enemy_finished)
-	Global.enemy_attack_finish.connect(_on_enemy_attack_finished)
+	Global.player_move_finish.connect(_on_player_finished,ConnectFlags.CONNECT_DEFERRED)
+	Global.enemy_move_finish.connect(_on_enemy_finished,ConnectFlags.CONNECT_DEFERRED)
+	Global.enemy_attack_finish.connect(_on_enemy_attack_finished,ConnectFlags.CONNECT_DEFERRED)
 	var rand_range = 3
 	if Global.enemy_count >4:
 		rand_range+=1
 	for x in range(0,Global.enemy_count):
 		if spots.size()>0:
 			Global.enemies_alive+=1
-			match rng.randi_range(1,rand_range):
+			match rng.randi_range(4,rand_range):
 				1:
 					var scene = preload("res://Scenes/enemy.tscn")
 					var instance = scene.instantiate()
@@ -77,13 +78,14 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if (enemies_finished >= Global.enemies_alive) and enemies_finished>0 and !dead:
+	if (enemies_finished >= enemcount) and enemies_finished>0 and !dead:
 		$Mainhud.reset()
 		$Player.movedecide()
+		enemcount = Global.enemies_alive
 		enemies_attacked=0
 		enemies_finished = 0
 		Global.enemy_calculate_move.emit()
-	if (enemies_attacked >= Global.enemies_alive) and enemies_attacked > 0 and !dead:
+	if (enemies_attacked >= enemcount) and enemies_attacked > 0 and !dead:
 		enemies_attacked=0
 		Global.enemy_walk_start.emit()
 	if Global.enemies_alive == 0 and !finish:
@@ -120,7 +122,9 @@ func _on_next_pressed() -> void:
 		$Mainhud.show()
 
 func _on_player_finished():
-	
+	enemcount = Global.enemies_alive
+	enemies_attacked=0
+	enemies_finished = 0
 	Global.enemy_move.emit()
 
 func _on_enemy_finished():
@@ -140,11 +144,9 @@ func _on_win_finished() -> void:
 
 func _on_pause_button_pressed():
 	if paused:
-		Engine.time_scale = 1
 		pause_menu.hide()
 	if !paused:
 		pause_menu.show()
-		Engine.time_scale = 0
 	
 	paused = !paused
 func _on_lose_finished() -> void:

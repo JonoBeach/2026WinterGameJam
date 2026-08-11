@@ -4,7 +4,8 @@ extends CharacterBody2D
 @onready var enemy_sprite = $EnemySprite
 @onready var hit_area = $HitArea
 @onready var spots = get_parent().get_node("enemypositions").get_used_cells()
-
+var attacked = false
+var finished = false
 var attackpos
 var attacks
 var movei = 0
@@ -28,10 +29,17 @@ func _ready():
 func _physics_process(_delta):
 	if !dead:
 		if !player == null:
-			if position.y <= player.position.y:
-				z_index = -1
-			else:
-				z_index = 1
+			match position.y:
+				240.0:
+					z_index = -1
+				360.0:
+					z_index = 0
+				480.0:
+					z_index = 1
+				600.0:
+					z_index = 2
+				720.0:
+					z_index = 3
 		if pushdirection == "" and (((direction == "left" or direction == "up") and get_position() <= end) or ((direction == "right" or direction == "down") and get_position() >= end)):
 			velocity = Vector2.ZERO
 			direction = ""
@@ -44,6 +52,12 @@ func _physics_process(_delta):
 			pushdirection = ""
 			set_position(pushend)
 			$HitArea.show()
+			var i = len(move_list)-1
+			while move_list[i] not in Global.spots:
+				i-=1
+			if i > -1:
+				$Move_indicator.set_position(move_list[i]-position+Vector2(60,60))
+				$Move_indicator.show()
 			$CollisionShape2D.set_deferred("disabled",false)
 		if $Enemy_overlap.monitoring:
 			if $Enemy_overlap.get_overlapping_areas().size()>0:
@@ -51,9 +65,6 @@ func _physics_process(_delta):
 				#$Enemy_overlap/CollisionShape2D.disabled = true
 		move_and_slide()
 
-func attack_indicate():
-	attacking_tiles = attack_movement_patterns.enemy_attack_pattern()
-	return attacking_tiles
 	
 func do_attack():
 	if !dead:
@@ -73,22 +84,24 @@ func do_attack():
 		
 		Global.occupied.erase(position)
 		Global.enemy_attack_finish.emit()
+		attacked = true
 	
 func move_indicate():
 	pass
 
 func calculate_enemy_move():
-	attacking_tiles = attack_movement_patterns.enemy_movement_location(position)
+	attacked = false
+	finished = false
+	attacking_tiles = [Vector2(0,120),Vector2(0,-120),Vector2(120,0),Vector2(-120,0)]
 	#attackpos = attacks[rng.randi_range(0,attacks.size()-1)]#-get_position()
 	for attack_indi in attack_indicators:
 		attack_indi.hide()
 	for attack_num in range(len(attacking_tiles)):
 		attackpos = attacking_tiles[attack_num]
-		
-		$HitArea.show()
-		attack_indicators[attack_num].show()
-		attack_indicators[attack_num].play("indicator")
-		attack_indicators[attack_num].set_position(attacking_tiles[attack_num]-position + Vector2(180, 60))
+		if attackpos+position in Global.spots:
+			$HitArea.show()
+			attack_indicators[attack_num].show()
+			attack_indicators[attack_num].set_position(attacking_tiles[attack_num] + Vector2(180, 60))
 	
 	move_list = []
 	movei =0
@@ -141,6 +154,7 @@ func enemy_move():
 		else:
 			Global.occupied.append(position)
 			Global.enemy_move_finish.emit()
+			finished = true
 			$Enemy_overlap.set_deferred("monitoring",true)
 			$Enemy_overlap.set_deferred("monitorable",true)
 				
@@ -160,20 +174,23 @@ func push(finalPos,value):
 			for attack_indi in attack_indicators:
 				attack_indi.hide()
 			for attack_num in range(len(attacking_tiles)):
-				attackpos = attacking_tiles[attack_num]
-				$HitArea.show()
-				attack_indicators[attack_num].show()
-				attack_indicators[attack_num].play("indicator")
-				attack_indicators[attack_num].set_position(attacking_tiles[attack_num]-position + Vector2(180, 60))
+				attackpos = attacking_tiles[attack_num]+finalPos
+				if attackpos+position in Global.spots:
+					$HitArea.show()
+					attack_indicators[attack_num].show()
+					attack_indicators[attack_num].set_position(attacking_tiles[attack_num] + Vector2(180, 60))
 			$EnemySprite.play("Move")
 			$CollisionShape2D.set_deferred("disabled",true)
+			$Move_indicator.hide()
 			$HitArea.hide()
 			await get_tree().create_timer(1).timeout
-			attackpos+=finalPos
+			
+			#attackpos+=finalPos
+			
 			for x in range(0,move_list.size()):
 				move_list[x]+=finalPos
-			if !move_list[-1] in Global.spots:
-				$Move_indicator.hide()
+			#if !move_list[-1] in Global.spots:
+				#$Move_indicator.hide()
 			velocity = pushend-get_position()
 			pushdirection=value
 			end += finalPos
@@ -195,6 +212,10 @@ func _on_enemy_sprite_animation_finished() -> void:
 
 
 func _on_death_finished() -> void:
+	if !finished:
+		Global.enemy_move_finish.emit()
+	if !attacked:
+		Global.enemy_attack_finish.emit()
 	Global.enemies_alive-=1
 	Global.coins+=1
 	queue_free()

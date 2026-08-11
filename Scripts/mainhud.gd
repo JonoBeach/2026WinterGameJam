@@ -6,18 +6,18 @@ var avaiMoves = []
 var discards = []
 var actioning = false
 var energy = 3
-var descriptions = [["Defend", "Gust", "Spike Trap", "Bewilder", "Event Horizon", "Fireball", "Bulwark", "Phase"], ["Place a shield in a cardinal direction of the knight.", "Pushes all entities in surrounding tiles away from it.", "Place down a spike trap that kills anything that touches it.", "Distract the knight and prevent him from doing his next action.", "Pulls all entities in surrounding tiles towards it.", "Kills everything in its tile and surrounding tiles.", "Places a shield in every direction of the knight.", "Muster all your power to teleport the knight to a nearby tile."]]
+var descriptions = [[],[]]
 var usedenergy = 0
 var usedbutton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#var f = FileAccess.open("res://Dialogue/Spells.txt",FileAccess.READ).get_as_text()
-	#f = f.replace("\n","|").split("|")
-	#for x in range(0,len(f),2):
-		#descriptions[0].append(f[x])
-		#if x < len(f)-1:
-			#descriptions[1].append(f[x+1])
+	var f = FileAccess.open("res://Dialogue/Spells.txt",FileAccess.READ).get_as_text()
+	f = f.replace("\n","|").split("|")
+	for x in range(0,len(f),2):
+		descriptions[0].append(f[x])
+		if x < len(f)-1:
+			descriptions[1].append(f[x+1])
 	assignMoves()
 	Global.spell_finished.connect(_on_move_finish)
 	Global.exit_hide.connect(exit_hide)
